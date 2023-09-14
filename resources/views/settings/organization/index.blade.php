@@ -52,19 +52,19 @@
                 @csrf
                 <!-- name -->
                 <div>
-                  <x-input-label for="email"
+                  <x-input-label for="label"
                                  :value="__('What is the name of the organization?')" />
 
                   <x-text-input class="mt-1 block w-full"
-                                id="name"
-                                name="name"
+                                id="label"
+                                name="label"
                                 type="text"
                                 value="{{ $view['name'] }}"
                                 required
                                 autofocus />
 
                   <x-input-error class="mt-2"
-                                 :messages="$errors->get('name')" />
+                                 :messages="$errors->get('label')" />
                 </div>
 
                 <!-- actions -->

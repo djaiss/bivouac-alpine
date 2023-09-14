@@ -6,13 +6,13 @@
       <nav class="flex py-3 text-gray-700">
         <ol class="inline-flex items-center space-x-1 md:space-x-3">
           <li class="inline-flex items-center">
-            <x-link class="text-sm"
+            <x-link wire:navigate class="text-sm"
                     href="{{ route('dashboard') }}">{{ __('Home') }}</x-link>
           </li>
           <li>
             <div class="flex items-center">
               <x-heroicon-s-chevron-right class="mr-2 h-4 w-4 text-gray-400" />
-              <x-link class="text-sm"
+              <x-link wire:navigate class="text-sm"
                       href="{{ route('settings.index') }}">{{ __('Account settings') }}</x-link>
             </div>
           </li>
@@ -52,10 +52,10 @@
 
               <!-- menu -->
               <ul>
-                <li class="mr-2 inline"><x-link class="text-sm"
+                <li class="mr-2 inline"><x-link wire:navigate class="text-sm"
                           href="{{ route('settings.role.edit', ['role' => $role['id']]) }}">{{ __('Edit') }}</x-link>
                 </li>
-                <li class="inline"><x-link class="text-sm"
+                <li class="inline"><x-link wire:navigate class="text-sm"
                           href="{{ route('settings.role.delete', ['role' => $role['id']]) }}">{{ __('Delete') }}</x-link>
                 </li>
               </ul>

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Settings\Office;
+namespace Tests\Feature\Settings\Role;
 
 use App\Models\Role;
 use App\Models\User;

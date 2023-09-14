@@ -1,10 +1,11 @@
 import './bootstrap';
 
 import Alpine from 'alpinejs';
-import ajax from '@imacrayon/alpine-ajax';
-import focus from '@alpinejs/focus'
+//import focus from '@alpinejs/focus'
+//import 'htmx.org/dist/ext/preload.js';
 
 window.Alpine = Alpine;
+//window.htmx = htmx.org;
 
-Alpine.plugin(ajax, focus);
+//Alpine.plugin(focus);
 Alpine.start();

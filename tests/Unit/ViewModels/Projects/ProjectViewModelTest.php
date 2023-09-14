@@ -106,12 +106,12 @@ class ProjectViewModelTest extends TestCase
         ]);
         $projectResource = ProjectResource::factory()->create([
             'project_id' => $project->id,
-            'name' => 'Dunder',
+            'label' => 'Dunder',
             'link' => 'https://slack.com',
         ]);
         $array = ProjectViewModel::show($project);
 
-        $this->assertCount(2, $array);
+        $this->assertCount(3, $array);
 
         $this->assertEquals(
             '<p>Dunder Mifflin</p>
@@ -123,7 +123,7 @@ class ProjectViewModelTest extends TestCase
             [
                 0 => [
                     'id' => $projectResource->id,
-                    'name' => 'Dunder',
+                    'label' => 'Dunder',
                     'link' => 'https://slack.com',
                 ],
             ],
@@ -150,6 +150,26 @@ class ProjectViewModelTest extends TestCase
                 'short_description' => 'Great description',
                 'description' => 'Dunder Mifflin',
                 'is_public' => true,
+            ],
+            $array
+        );
+    }
+
+    /** @test */
+    public function it_gets_the_dto_resource(): void
+    {
+        $projectResource = ProjectResource::factory()->create([
+            'label' => 'Dunder',
+            'link' => 'https://slack.com',
+        ]);
+        $array = ProjectViewModel::dtoResource($projectResource);
+
+        $this->assertCount(3, $array);
+        $this->assertEquals(
+            [
+                'id' => $projectResource->id,
+                'label' => 'Dunder',
+                'link' => 'https://slack.com',
             ],
             $array
         );

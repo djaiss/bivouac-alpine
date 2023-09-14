@@ -18,24 +18,24 @@
           <ul>
             <li class="flex items-center border-b border-gray-200 px-4 py-2 hover:rounded-t-lg hover:bg-slate-50">
               <span class="mr-4 rounded border border-yellow-400 bg-yellow-100 px-1">👥</span>
-              <x-link href="{{ route('settings.user.index') }}">{{ __('Add or remove users') }}</x-link>
+              <x-link wire:navigate href="{{ route('settings.user.index') }}">{{ __('Add or remove users') }}</x-link>
             </li>
             <li class="flex items-center border-b border-gray-200 px-4 py-2 hover:bg-slate-50">
               <span class="mr-4 rounded border border-yellow-400 bg-yellow-100 px-1">🏣</span>
-              <x-link href="{{ route('settings.organization.index') }}">
+              <x-link wire:navigate href="{{ route('settings.organization.index') }}">
                 {{ __("Update organization's name") }}</x-link>
             </li>
             <li class="flex items-center border-b border-gray-200 px-4 py-2 hover:bg-slate-50">
               <span class="mr-4 rounded border border-yellow-400 bg-yellow-100 px-1">🏢</span>
-              <x-link href="{{ route('settings.office.index') }}">{{ __('Manage offices') }}</x-link>
+              <x-link wire:navigate href="{{ route('settings.office.index') }}">{{ __('Manage offices') }}</x-link>
             </li>
             <li class="flex items-center border-b border-gray-200 px-4 py-2 hover:bg-slate-50">
               <span class="mr-4 rounded border border-yellow-400 bg-yellow-100 px-1">👮‍♂️</span>
-              <x-link href="{{ route('settings.role.index') }}">{{ __('Manage roles') }}</x-link>
+              <x-link wire:navigate href="{{ route('settings.role.index') }}">{{ __('Manage roles') }}</x-link>
             </li>
             <li class="flex items-center px-4 py-2 hover:rounded-b-lg hover:bg-slate-50">
               <span class="mr-4 rounded border border-yellow-400 bg-yellow-100 px-1">🗑️</span>
-              <x-link href="{{ route('settings.organization.delete') }}">{{ __('Delete organization') }}</x-link>
+              <x-link wire:navigate href="{{ route('settings.organization.delete') }}">{{ __('Delete organization') }}</x-link>
             </li>
           </ul>
         </div>

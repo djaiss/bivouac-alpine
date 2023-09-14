@@ -6,12 +6,12 @@
       <nav class="flex py-3 text-gray-700">
         <ol class="inline-flex items-center space-x-1 md:space-x-3">
           <li class="inline-flex items-center">
-            <x-link class="text-sm"
+            <x-link wire:navigate class="text-sm"
                     href="{{ route('dashboard') }}">{{ __('Home') }}</x-link>
           </li>
           <li class="inline-flex items-center">
             <x-heroicon-s-chevron-right class="mr-2 h-4 w-4 text-gray-400" />
-            <x-link class="text-sm"
+            <x-link wire:navigate class="text-sm"
                     href="{{ route('project.index') }}">{{ __('List of projects') }}</x-link>
           </li>
           <li>
@@ -111,7 +111,7 @@
 
         <!-- action -->
         <div class="flex items-center justify-between border-t bg-gray-50 px-6 py-4">
-          <x-link href="{{ route('project.index') }}">{{ __('Back') }}</x-link>
+          <x-link wire:navigate href="{{ route('project.index') }}">{{ __('Back') }}</x-link>
 
           <div>
             <x-primary-button class="w-full text-center">

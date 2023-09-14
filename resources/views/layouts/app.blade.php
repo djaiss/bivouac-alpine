@@ -12,6 +12,8 @@
 
   <!-- Scripts -->
   @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+  @livewireStyles
 </head>
 
 <body class="font-sans antialiased">
@@ -74,7 +76,7 @@
               <x-heroicon-s-briefcase
                                       class="h-4 w-4 transition ease-in-out group-hover:fill-current group-hover:text-blue-500" />
               <span class="ml-2">
-                <a href="{{ route('project.index') }}">{{ __('Projects') }}</a>
+                <a href="{{ route('project.index') }}" wire:navigate>{{ __('Projects') }}</a>
               </span>
             </li>
 
@@ -92,7 +94,7 @@
                 <x-heroicon-s-cog-8-tooth
                                           class="h-4 w-4 transition ease-in-out group-hover:fill-current group-hover:text-blue-500" />
                 <span class="ml-2">
-                  <a href="{{ route('settings.index') }}">{{ __('Account settings') }}</a>
+                  <a href="{{ route('settings.index') }}" wire:navigate.hover>{{ __('Account settings') }}</a>
                 </span>
               </li>
             @endif
@@ -144,6 +146,7 @@
       }, 3000);
     }
   </script>
+  @livewireScripts
 </body>
 
 </html>

@@ -4,6 +4,6 @@
   {{ $value ?? $slot }}
 
   @if ($optional)
-    <span class="optional-badge ml-2 rounded px-[3px] py-px text-xs">{{ __('optional') }}</span>
+    <span class="optional-badge ml-1 rounded px-[3px] py-px text-xs">{{ __('optional') }}</span>
   @endif
 </label>

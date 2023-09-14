@@ -3,6 +3,7 @@
 namespace Tests\Unit\Services;
 
 use App\Exceptions\NotEnoughPermissionException;
+use App\Jobs\UpdateProjectLastUpdatedAt;
 use App\Models\Project;
 use App\Models\ProjectResource;
 use App\Models\User;
@@ -10,6 +11,9 @@ use App\Services\CreateProjectResource;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Support\Facades\Bus;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Queue;
 use Illuminate\Validation\ValidationException;
 use Tests\TestCase;
 
@@ -20,12 +24,13 @@ class CreateProjectResourceTest extends TestCase
     /** @test */
     public function it_creates_a_project_resource(): void
     {
-        Carbon::setTestNow(Carbon::create(2018, 1, 1));
+        Queue::fake();
+
         $project = Project::factory()->create();
 
         $projectResource = (new CreateProjectResource)->execute(
-            project: $project,
-            name: 'Dunder',
+            projectId: $project->id,
+            label: 'Dunder',
             link: 'https://laravel-livewire.com/',
         );
 
@@ -37,12 +42,12 @@ class CreateProjectResourceTest extends TestCase
         $this->assertDatabaseHas('project_resources', [
             'id' => $projectResource->id,
             'project_id' => $project->id,
-            'name' => 'Dunder',
+            'label' => 'Dunder',
             'link' => 'https://laravel-livewire.com/',
         ]);
 
-        $this->assertDatabaseHas('projects', [
-            'updated_at' => '2018-01-01 00:00:00',
-        ]);
+        Queue::assertPushed(UpdateProjectLastUpdatedAt::class, function ($event) use ($project) {
+            return $event->projectId === $project->id;
+        });
     }
 }

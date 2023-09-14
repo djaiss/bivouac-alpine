@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Scout\Attributes\SearchUsingFullText;
 use Laravel\Scout\Attributes\SearchUsingPrefix;
 use Laravel\Scout\Searchable;
+use Illuminate\Support\Str;
 
 class Project extends Model
 {
