@@ -22,11 +22,11 @@ class SettingsOrganizationController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
+            'label' => 'required|string|max:255',
         ]);
 
         (new UpdateOrganization)->execute(
-            name: $validated['name']
+            name: $validated['label']
         );
 
         notify()->success(__('Changes saved.'));

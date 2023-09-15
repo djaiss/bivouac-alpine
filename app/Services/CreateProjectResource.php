@@ -2,27 +2,20 @@
 
 namespace App\Services;
 
-use App\Exceptions\NotEnoughPermissionException;
-use App\Models\Project;
+use App\Jobs\UpdateProjectLastUpdatedAt;
 use App\Models\ProjectResource;
-use App\Models\User;
 
 class CreateProjectResource extends BaseService
 {
-    public function execute(
-        Project $project,
-        string $name = null,
-        string $link,
-    ): ProjectResource
+    public function execute(int $projectId, string $label = null, string $link): ProjectResource
     {
         $projectResource = ProjectResource::create([
-            'project_id' => $project->id,
-            'name' => $name,
+            'project_id' => $projectId,
+            'label' => $label,
             'link' => $link,
         ]);
 
-        $project->updated_at = now();
-        $project->save();
+        UpdateProjectLastUpdatedAt::dispatch($projectId);
 
         return $projectResource;
     }

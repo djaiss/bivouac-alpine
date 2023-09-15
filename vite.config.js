@@ -1,3 +1,4 @@
+import inject from '@rollup/plugin-inject';
 import laravel from 'laravel-vite-plugin';
 import { defineConfig } from 'vite';
 
@@ -7,6 +8,9 @@ export default defineConfig({
       input: ['resources/css/app.css', 'resources/js/app.js'],
       refresh: true,
       valetTls: 'alpine.test',
+    }),
+    inject({
+      htmx: 'htmx.org',
     }),
   ],
 });

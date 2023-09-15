@@ -7,13 +7,15 @@
         <ol class="inline-flex items-center space-x-1 md:space-x-3">
           <li class="inline-flex items-center">
             <x-link class="text-sm"
-                    href="{{ route('dashboard') }}">{{ __('Home') }}</x-link>
+                    href="{{ route('dashboard') }}"
+                    wire:navigate>{{ __('Home') }}</x-link>
           </li>
           <li>
             <div class="flex items-center">
               <x-heroicon-s-chevron-right class="mr-2 h-4 w-4 text-gray-400" />
               <x-link class="text-sm"
-                      href="{{ route('settings.index') }}">{{ __('Account settings') }}</x-link>
+                      href="{{ route('settings.index') }}"
+                      wire:navigate>{{ __('Account settings') }}</x-link>
             </div>
           </li>
           <li>
@@ -96,10 +98,12 @@
                       </li>
                     @endif
                     <li class="mr-2 inline"><x-link class="text-sm"
-                              href="{{ $user['url']['edit'] }}">{{ __('Edit') }}</x-link>
+                              href="{{ $user['url']['edit'] }}"
+                              wire:navigate>{{ __('Edit') }}</x-link>
                     </li>
                     <li class="inline"><x-link class="text-sm"
-                              href="{{ $user['url']['delete'] }}">{{ __('Delete') }}</x-link>
+                              href="{{ $user['url']['delete'] }}"
+                              wire:navigate>{{ __('Delete') }}</x-link>
                     </li>
                   </ul>
                 @endif

@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('project_resources', function (Blueprint $table): void {
             $table->id();
             $table->unsignedBigInteger('project_id');
-            $table->string('name')->nullable();
+            $table->string('label')->nullable();
             $table->string('link');
             $table->timestamps();
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');

@@ -4,6 +4,7 @@ namespace Tests\Unit\Models;
 
 use App\Models\Message;
 use App\Models\Project;
+use App\Models\ProjectResource;
 use App\Models\TaskList;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;

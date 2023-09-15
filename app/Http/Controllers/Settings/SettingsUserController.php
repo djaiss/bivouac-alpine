@@ -73,7 +73,7 @@ class SettingsUserController extends Controller
         return redirect()->route('settings.user.index');
     }
 
-    public function delete(User $user): View
+    public function delete(User $user): View|RedirectResponse
     {
         if ($user->organization_id !== auth()->user()->organization_id) {
             return redirect()->to(route('settings.user.index'));

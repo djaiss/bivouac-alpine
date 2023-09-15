@@ -44,7 +44,7 @@ class OrganizationSettingsTest extends TestCase
 
         $this->actingAs($user)
             ->post('/settings/organization', [
-                'name' => 'Microsoft',
+                'label' => 'Microsoft',
             ])
             ->assertStatus(302);
 
@@ -60,7 +60,7 @@ class OrganizationSettingsTest extends TestCase
 
         $this->actingAs($user)
             ->post('/settings/organization', [
-                'name' => 'Microsoft',
+                'label' => 'Microsoft',
             ])
             ->assertStatus(401);
     }

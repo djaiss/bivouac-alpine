@@ -19,7 +19,7 @@ class ProjectResourceFactory extends Factory
     {
         return [
             'project_id' => Project::factory(),
-            'name' => fake()->name(),
+            'label' => fake()->name(),
             'link' => fake()->url(),
         ];
     }

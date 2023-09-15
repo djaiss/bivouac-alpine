@@ -3,7 +3,6 @@
 use App\Http\Controllers\Auth\ValidateInvitationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Projects\ProjectController;
-use App\Http\Controllers\Projects\ProjectResourceController;
 use App\Http\Controllers\Settings\SettingsController;
 use App\Http\Controllers\Settings\SettingsInviteUserController;
 use App\Http\Controllers\Settings\SettingsOfficeController;
@@ -23,7 +22,7 @@ Route::get('dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth', 'verified')->group(function () {
+Route::middleware('auth', 'verified')->group(function (): void {
     Route::get('search', [SearchController::class, 'index'])->name('search.index');
 
     Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -40,11 +39,6 @@ Route::middleware('auth', 'verified')->group(function () {
         Route::get('projects/{project}/edit', [ProjectController::class, 'edit'])->name('project.edit');
         Route::put('projects/{project}', [ProjectController::class, 'update'])->name('project.update');
         Route::delete('projects/{project}', [ProjectController::class, 'destroy'])->name('project.destroy');
-
-        // project resources
-        Route::post('projects/{project}/resources', [ProjectResourceController::class, 'store'])->name('project.resource.store');
-        Route::put('projects/{project}/resources/{projectResource}', [ProjectResourceController::class, 'update'])->name('project.resource.update');
-        Route::delete('projects/{project}/resources/{projectResource}', [ProjectResourceController::class, 'destroy'])->name('project.resource.destroy');
     });
 
     // messages
