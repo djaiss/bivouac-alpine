@@ -12,7 +12,7 @@ use Tests\TestCase;
 class ProjectResourcesTest extends TestCase
 {
     /** @test */
-    public function component_exists_on_the_page()
+    public function component_exists_on_the_page(): void
     {
         $user = User::factory()->create();
         $project = Project::factory()->create([
@@ -26,7 +26,7 @@ class ProjectResourcesTest extends TestCase
     }
 
     /** @test */
-    public function we_can_add_a_resource()
+    public function we_can_add_a_resource(): void
     {
         $user = User::factory()->create();
         $project = Project::factory()->create([
@@ -51,7 +51,7 @@ class ProjectResourcesTest extends TestCase
     }
 
     /** @test */
-    public function we_can_edit_a_resource()
+    public function we_can_edit_a_resource(): void
     {
         $user = User::factory()->create();
         $project = Project::factory()->create([
@@ -81,7 +81,7 @@ class ProjectResourcesTest extends TestCase
     }
 
     /** @test */
-    public function we_can_delete_a_resource()
+    public function we_can_delete_a_resource(): void
     {
         $user = User::factory()->create();
         $project = Project::factory()->create([

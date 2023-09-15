@@ -22,7 +22,7 @@ Route::get('dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth', 'verified')->group(function () {
+Route::middleware('auth', 'verified')->group(function (): void {
     Route::get('search', [SearchController::class, 'index'])->name('search.index');
 
     Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -26,7 +26,7 @@ class ManageKeyResources extends Component
     #[Rule('max:255')]
     public string $label = '';
 
-    public function mount(array $data)
+    public function mount(array $data): void
     {
         $this->projectId = $data['project_id'];
         $this->resources = $data['project_resources'];
@@ -62,7 +62,7 @@ class ManageKeyResources extends Component
         }
     }
 
-    public function save()
+    public function save(): void
     {
         $this->validate();
 
