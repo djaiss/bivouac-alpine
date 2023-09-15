@@ -76,7 +76,7 @@ class SettingsOfficeController extends Controller
         return redirect()->route('settings.office.index');
     }
 
-    public function delete(Office $office): View
+    public function delete(Office $office): View|RedirectResponse
     {
         if ($office->organization_id !== auth()->user()->organization_id) {
             return redirect()->to(route('settings.office.index'));

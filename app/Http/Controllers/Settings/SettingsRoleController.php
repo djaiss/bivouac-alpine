@@ -74,7 +74,7 @@ class SettingsRoleController extends Controller
         return redirect()->route('settings.role.index');
     }
 
-    public function delete(Role $role): View
+    public function delete(Role $role): View|RedirectResponse
     {
         if ($role->organization_id !== auth()->user()->organization_id) {
             return redirect()->to(route('settings.role.index'));
