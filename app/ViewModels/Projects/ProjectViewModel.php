@@ -66,7 +66,7 @@ class ProjectViewModel
             ->map(fn (ProjectResource $projectResource) => self::dtoResource($projectResource));
 
         return [
-            'projectId' => $project->id,
+            'project_id' => $project->id,
             'description' => $description,
             'project_resources' => $projectResources,
         ];

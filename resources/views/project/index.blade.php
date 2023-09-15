@@ -26,7 +26,8 @@
           </ul>
 
           <div>
-            <x-primary-link wire:navigate :href="route('project.create')">{{ __('Create project') }}</x-primary-link>
+            <x-primary-link wire:navigate
+                            :href="route('project.create')">{{ __('Create project') }}</x-primary-link>
           </div>
         </div>
       </div>
@@ -52,7 +53,8 @@
                           <x-icon-lock />
                         @endif
 
-                        <x-link wire:navigate href="{{ route('project.show', ['project' => $project['id']]) }}">
+                        <x-link href="{{ route('project.show', ['project' => $project['id']]) }}"
+                                wire:navigate>
                           {{ $project['name'] }}
                         </x-link>
                       </div>

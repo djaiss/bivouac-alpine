@@ -2,7 +2,7 @@ Design goals
 
 - Fast
 - Almost no dependencies
-- Definitely no JS dependencies
+- When possible, stay out of the ORM for the queries
 - Extremely simple to maintain
 - Simple to install
 - Deployable everywhere in seconds

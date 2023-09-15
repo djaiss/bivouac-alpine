@@ -1,5 +1,5 @@
-import laravel from 'laravel-vite-plugin';
 import inject from '@rollup/plugin-inject';
+import laravel from 'laravel-vite-plugin';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
@@ -10,7 +10,7 @@ export default defineConfig({
       valetTls: 'alpine.test',
     }),
     inject({
-      htmx: 'htmx.org'
+      htmx: 'htmx.org',
     }),
   ],
 });

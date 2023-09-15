@@ -21,44 +21,51 @@
     <div class="text-center text-gray-500 dark:text-gray-400">
       <ul class="-mb-px flex flex-wrap">
         <li class="mr-2">
-          <a wire:navigate class="inline-block rounded-t-lg border-b-2 p-3 hover:border-blue-300 hover:text-blue-600 dark:hover:text-gray-300"
-             href="{{ route('project.show', ['project' => $data['id']]) }}">
+          <a class="inline-block rounded-t-lg border-b-2 p-3 hover:border-blue-300 hover:text-blue-600 dark:hover:text-gray-300"
+             href="{{ route('project.show', ['project' => $data['id']]) }}"
+             wire:navigate>
             {{ __('Summary') }}
           </a>
         </li>
         <li class="mr-2">
-          <a wire:navigate class="inline-block rounded-t-lg border-b-2 p-3 hover:border-blue-300 hover:text-blue-600 dark:hover:text-gray-300"
-             href="menu.url.messages">
+          <a class="inline-block rounded-t-lg border-b-2 p-3 hover:border-blue-300 hover:text-blue-600 dark:hover:text-gray-300"
+             href="menu.url.messages"
+             wire:navigate>
             {{ __('Messages') }}
           </a>
         </li>
         <li class="mr-2">
-          <a wire:navigate class="inline-block rounded-t-lg border-b-2 border-transparent p-3 hover:border-blue-300 hover:text-blue-600 dark:hover:text-gray-300"
-             href="#">
+          <a class="inline-block rounded-t-lg border-b-2 border-transparent p-3 hover:border-blue-300 hover:text-blue-600 dark:hover:text-gray-300"
+             href="#"
+             wire:navigate>
             {{ __('Decisions') }}
           </a>
         </li>
         <li class="mr-2">
-          <a wire:navigate class="inline-block rounded-t-lg border-b-2 p-3 hover:border-blue-300 hover:text-blue-600 dark:hover:text-gray-300"
-             href="menu.url.tasks">
+          <a class="inline-block rounded-t-lg border-b-2 p-3 hover:border-blue-300 hover:text-blue-600 dark:hover:text-gray-300"
+             href="menu.url.tasks"
+             wire:navigate>
             {{ __('Tasks') }}
           </a>
         </li>
         <li class="mr-2">
-          <a wire:navigate class="inline-block rounded-t-lg border-b-2 border-transparent p-3 hover:border-blue-300 hover:text-blue-600 dark:hover:text-gray-300"
-             href="#">
+          <a class="inline-block rounded-t-lg border-b-2 border-transparent p-3 hover:border-blue-300 hover:text-blue-600 dark:hover:text-gray-300"
+             href="#"
+             wire:navigate>
             {{ __('Files') }}
           </a>
         </li>
         <li class="mr-2">
-          <a wire:navigate class="inline-block rounded-t-lg border-b-2 p-3 hover:border-blue-300 hover:text-blue-600 dark:hover:text-gray-300"
-             href="menu.url.members">
+          <a class="inline-block rounded-t-lg border-b-2 p-3 hover:border-blue-300 hover:text-blue-600 dark:hover:text-gray-300"
+             href="menu.url.members"
+             wire:navigate>
             {{ __('Members') }}
           </a>
         </li>
         <li class="mr-2">
-          <a wire:navigate.hover class="inline-block rounded-t-lg border-b-2 p-3 hover:border-blue-300 hover:text-blue-600 dark:hover:text-gray-300"
-             href="{{ route('project.edit', ['project' => $data['id']]) }}">
+          <a class="inline-block rounded-t-lg border-b-2 p-3 hover:border-blue-300 hover:text-blue-600 dark:hover:text-gray-300"
+             href="{{ route('project.edit', ['project' => $data['id']]) }}"
+             wire:navigate.hover>
             {{ __('Settings') }}
           </a>
         </li>

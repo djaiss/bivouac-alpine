@@ -139,9 +139,11 @@
                  x-data="{ modalOpen: false }"
                  @keydown.escape.window="modalOpen = false"
                  :class="{ 'z-40': modalOpen }">
-              <x-danger-button @click.prevent="modalOpen=true">
+
+              <x-danger-button @click.prevent="modalOpen = true">
                 {{ __('Delete project') }}
               </x-danger-button>
+
               <template x-teleport="body">
                 <div class="fixed left-0 top-0 z-[99] flex h-screen w-screen items-center justify-center"
                      x-show="modalOpen"
@@ -154,7 +156,7 @@
                        x-transition:leave="ease-in duration-300"
                        x-transition:leave-start="opacity-100"
                        x-transition:leave-end="opacity-0"
-                       @click="modalOpen=false"></div>
+                       @click="modalOpen = false"></div>
                   <div class="relative w-full border border-neutral-200 bg-white px-7 py-6 shadow-lg sm:max-w-lg sm:rounded-lg"
                        x-show="modalOpen"
                        x-trap.inert.noscroll="modalOpen"
@@ -177,7 +179,7 @@
                           action="{{ route('project.destroy', ['project' => $view['id']]) }}">
                       @csrf
                       @method('delete')
-                      <x-secondary-button @click="modalOpen=false">
+                      <x-secondary-button @click="modalOpen = false">
                         {{ __('Cancel') }}
                       </x-secondary-button>
 
