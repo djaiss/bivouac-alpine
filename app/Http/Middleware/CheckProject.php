@@ -31,7 +31,9 @@ class CheckProject
                 throw new ModelNotFoundException;
             }
 
-            //$request->attributes->add(['project' => $project]);
+            // adding the current project to the request object so we can
+            // access it in the controller by using $request->project
+            $request->merge(['project' => $project]);
 
             return $next($request);
         } catch (ModelNotFoundException) {

@@ -1,7 +1,7 @@
 @props(['data'])
 
 @foreach ($data as $projectResource)
-  <li class="group mb-3 flex items-center justify-between rounded-lg px-2 py-1 hover:bg-gray-100">
+  <li wire:key="{{ $projectResource['id'] }}" class="group mb-3 flex items-center justify-between rounded-lg px-2 py-1 hover:bg-gray-100">
     <div class="flex items-center">
       <x-heroicon-s-link class="mr-2 h-4 w-4 text-blue-400" />
       <a class="text-blue-700 underline hover:rounded-sm hover:bg-blue-700 hover:text-white"
