@@ -30,7 +30,7 @@ class SetupDummyAccount extends Command
      *
      * @var string
      */
-    protected $signature = 'bivouac:dummy
+    protected $signature = 'shelter:dummy
                             {--migrate : Use migrate command instead of migrate:fresh.}
                             {--force : Force the operation to run.}';
 

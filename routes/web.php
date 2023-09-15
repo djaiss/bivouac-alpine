@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\ValidateInvitationController;
+use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Projects\ProjectController;
 use App\Http\Controllers\Settings\SettingsController;
@@ -14,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('locale/{locale}', [LocaleController::class, 'update'])->name('locale.update');
 
 Route::get('invitation/{code}', [ValidateInvitationController::class, 'show'])->name('invitation.validate.show');
 Route::post('invitation/{code}', [ValidateInvitationController::class, 'update'])->name('invitation.validate.update');
