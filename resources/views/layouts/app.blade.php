@@ -135,6 +135,9 @@
               </span>
             </li>
           </ul>
+
+          <!-- language selector -->
+          @include('layouts.language-selector')
         </div>
       </nav>
     </div>
