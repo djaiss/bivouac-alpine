@@ -7,11 +7,9 @@
     <div class="mx-auto flex max-w-2xl bg-white px-4 py-2 text-sm shadow sm:rounded-lg">
       <x-heroicon-o-question-mark-circle class="h-6 w-6 shrink-0 pe-2 text-gray-600" />
       <p>
-        {{
-          __(
+        {{ __(
             'If the project is public, anyone can take part without having to be a formal member. On the other hand, private projects are only accessible and open to members.',
-          )
-        }}
+        ) }}
       </p>
     </div>
 
@@ -62,25 +60,28 @@
       <!-- list of users -->
       <ul class="w-full">
         @foreach ($view['members'] as $member)
-        <li wire:key="{{ $member['id'] }}"
-          class="flex items-center justify-between py-4 pl-4 pr-6 hover:bg-slate-50 last:hover:rounded-b-lg">
-          <div class="group mr-4 flex items-center">
-            <x-avatar class="mr-2 h-6 w-6 rounded" :data="$member['avatar']" />
+          <li class="flex items-center justify-between border-b py-4 pl-4 pr-6 last:border-b-0 hover:bg-slate-50 last:hover:rounded-b-lg"
+              wire:key="{{ $member['id'] }}">
+            <div class="group mr-4 flex items-center">
+              <x-avatar class="mr-2 h-6 w-6 rounded"
+                        :data="$member['avatar']" />
 
-            <x-link :href="'member.url.show'">
-              {{ $member['name'] }}
-            </x-link>
-          </div>
-        </li>
+              <x-link :href="'member.url.show'">
+                {{ $member['name'] }}
+              </x-link>
+            </div>
+
+            <!-- actions -->
+            @if ($member['id'] !== auth()->user()->id)
+              <div class="">
+                <x-link class="text-sm"
+                        href="{{ route('project.member.delete', ['project' => $header['id'], 'user' => $member['id']]) }}"
+                        wire:navigate>{{ __('Remove from project') }}</x-link>
+              </div>
+            @endif
+          </li>
         @endforeach
       </ul>
-
-      <!-- blank state -->
-      <div v-else class="px-4 py-6 text-center">
-        <h3 class="mb-2 text-lg font-medium text-gray-900">{{ __("You haven't written a message yet.") }}</h3>
-        <p class="mb-5 text-gray-500">{{ __('Get started by adding your first message.') }}</p>
-        <img src="/img/messages.png" class="mx-auto block h-60 w-60" alt="" />
-      </div>
     </div>
   </div>
 </x-app-layout>

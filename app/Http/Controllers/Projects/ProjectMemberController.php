@@ -3,17 +3,14 @@
 namespace App\Http\Controllers\Projects;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Projects\ProjectViewModel;
+use App\Jobs\UpdateProjectLastUpdatedAt;
 use App\Models\Project;
 use App\Models\User;
-use App\Services\RemoveMemberFromProject;
 use App\ViewModels\Projects\ProjectMemberViewModel;
 use App\ViewModels\Projects\ProjectViewModel as ProjectsProjectViewModel;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use Inertia\Inertia;
-use Inertia\Response;
 
 class ProjectMemberController extends Controller
 {
@@ -27,16 +24,32 @@ class ProjectMemberController extends Controller
         ]);
     }
 
-    public function destroy(Request $request, Project $project, User $member): JsonResponse
+    public function delete(Request $request, int $projectId, User $user): View|RedirectResponse
     {
-        (new RemoveMemberFromProject)->execute([
-            'user_id' => auth()->user()->id,
-            'member_id' => $member->id,
-            'project_id' => $project->id,
-        ]);
+        if ($user->organization_id !== auth()->user()->organization_id) {
+            return redirect()->to(route('project.index'));
+        }
 
-        return response()->json([
-            'data' => true,
-        ], 200);
+        $viewModel = ProjectMemberViewModel::delete($user);
+
+        return view('project.member.destroy', [
+            'header' => ProjectsProjectViewModel::header($request->project),
+            'view' => $viewModel,
+        ]);
+    }
+
+    public function destroy(Request $request, Project $project, User $user): RedirectResponse
+    {
+        if ($user->organization_id !== auth()->user()->organization_id) {
+            return redirect()->to(route('project.index'));
+        }
+
+        $user->projects()->detach($project);
+
+        UpdateProjectLastUpdatedAt::dispatch($project->id);
+
+        notify()->success(__('Member has been removed from the project.'));
+
+        return redirect()->route('project.member.index', $project->id);
     }
 }

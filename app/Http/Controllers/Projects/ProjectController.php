@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Projects;
 
 use App\Http\Controllers\Controller;
-use App\Models\Project;
 use App\Services\CreateProject;
 use App\Services\DestroyProject;
 use App\Services\UpdateProject;

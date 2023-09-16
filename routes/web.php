@@ -46,9 +46,11 @@ Route::middleware('auth', 'verified')->group(function (): void {
 
         // members
         Route::get('projects/{project}/members', [ProjectMemberController::class, 'index'])->name('project.member.index');
+        Route::get('projects/{project}/members/{user}/delete', [ProjectMemberController::class, 'delete'])->name('project.member.delete');
+
         Route::get('projects/{project}/users', [ProjectMemberController::class, 'index'])->name('members.user.index');
         Route::post('projects/{project}/members/{member}', [ProjectMemberController::class, 'store'])->name('members.user.store');
-        Route::delete('projects/{project}/members/{member}', [ProjectMemberController::class, 'destroy'])->name('project.member.destroy');
+        Route::delete('projects/{project}/members/{user}', [ProjectMemberController::class, 'destroy'])->name('project.member.destroy');
     });
 
     // messages

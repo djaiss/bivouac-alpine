@@ -2,9 +2,9 @@
 
 namespace Tests\Unit\ViewModels\Projects;
 
-use App\ViewModels\Projects\ProjectMemberViewModel;
 use App\Models\Project;
 use App\Models\User;
+use App\ViewModels\Projects\ProjectMemberViewModel;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
@@ -20,9 +20,20 @@ class ProjectMemberViewModelTest extends TestCase
         $project->users()->attach($user->id);
         $array = ProjectMemberViewModel::index($project);
 
-        $this->assertCount(2, $array);
-        $this->assertArrayHasKey('project', $array);
+        $this->assertCount(1, $array);
         $this->assertArrayHasKey('members', $array);
+    }
+
+    /** @test */
+    public function it_gets_the_data_needed_for_the_delete_view(): void
+    {
+        $user = User::factory()->create();
+        $array = ProjectMemberViewModel::delete($user);
+
+        $this->assertCount(3, $array);
+        $this->assertArrayHasKey('id', $array);
+        $this->assertArrayHasKey('name', $array);
+        $this->assertArrayHasKey('avatar', $array);
     }
 
     /** @test */

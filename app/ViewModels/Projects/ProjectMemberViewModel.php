@@ -15,14 +15,16 @@ class ProjectMemberViewModel
             ->map(fn (User $user) => self::dto($user, $project));
 
         return [
-            'project' => [
-                'id' => $project->id,
-                'name' => $project->name,
-                'short_description' => $project->short_description,
-                'description' => $project->description,
-                'is_public' => $project->is_public,
-            ],
             'members' => $members,
+        ];
+    }
+
+    public static function delete(User $user): array
+    {
+        return [
+            'id' => $user->id,
+            'name' => $user->name,
+            'avatar' => $user->avatar,
         ];
     }
 
