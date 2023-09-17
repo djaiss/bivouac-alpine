@@ -13,7 +13,7 @@ class ProjectMemberViewModel
         $members = $project->users()
             ->orderBy('last_name')
             ->get()
-            ->map(fn (User $user) => self::dto($user, $project));
+            ->map(fn (User $user) => self::dto($user));
 
         return [
             'project_id' => $project->id,
