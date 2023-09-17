@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Project;
 
+use App\Livewire\Projects\ManageProjectMembers;
 use App\Models\Organization;
 use App\Models\Project;
 use App\Models\User;
@@ -66,5 +67,19 @@ class ProjectMembersTest extends TestCase
             'project_id' => $project->id,
             'user_id' => $member->id,
         ]);
+    }
+
+    /** @test */
+    public function component_exists_on_the_page(): void
+    {
+        $user = User::factory()->create();
+        $project = Project::factory()->create([
+            'organization_id' => $user->organization_id,
+            'is_public' => true,
+        ]);
+
+        $this->actingAs($user)
+            ->get('/projects/' . $project->id . '/members')
+            ->assertSeeLivewire(ManageProjectMembers::class);
     }
 }

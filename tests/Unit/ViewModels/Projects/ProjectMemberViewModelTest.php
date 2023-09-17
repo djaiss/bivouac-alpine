@@ -20,8 +20,13 @@ class ProjectMemberViewModelTest extends TestCase
         $project->users()->attach($user->id);
         $array = ProjectMemberViewModel::index($project);
 
-        $this->assertCount(1, $array);
+        $this->assertCount(2, $array);
         $this->assertArrayHasKey('members', $array);
+        $this->assertArrayHasKey('project_id', $array);
+        $this->assertEquals(
+            $project->id,
+            $array['project_id']
+        );
     }
 
     /** @test */
@@ -62,12 +67,9 @@ class ProjectMemberViewModelTest extends TestCase
     {
         $user = User::factory()->create();
         $project = Project::factory()->create();
-        $array = ProjectMemberViewModel::listUsers($user, $project);
+        $collection = ProjectMemberViewModel::listUsers($user, $project);
 
-        $this->assertCount(1, $array);
-        $this->assertArrayHasKey('users', $array);
-
-        $this->assertCount(0, $array['users']);
+        $this->assertEquals(0, $collection->count());
     }
 
     /** @test */
@@ -77,15 +79,21 @@ class ProjectMemberViewModelTest extends TestCase
         $project = Project::factory()->create([
             'organization_id' => $user->organization_id,
         ]);
-        User::factory()->create([
+        $notYetUser = User::factory()->create([
             'organization_id' => $user->organization_id,
         ]);
         $project->users()->attach($user->id);
-        $array = ProjectMemberViewModel::listUsers($user, $project);
+        $collection = ProjectMemberViewModel::listUsers($user, $project);
 
-        $this->assertCount(1, $array);
-        $this->assertArrayHasKey('users', $array);
-
-        $this->assertCount(1, $array['users']);
+        $this->assertEquals(
+            [
+                0 => [
+                    'id' => $notYetUser->id,
+                    'name' => $notYetUser->name,
+                    'avatar' => $notYetUser->avatar,
+                ],
+            ],
+            $collection->toArray()
+        );
     }
 }
