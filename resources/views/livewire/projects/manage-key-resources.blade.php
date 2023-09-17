@@ -4,7 +4,7 @@
     @foreach ($resources as $projectResource)
       <!-- not in edit mode -->
       @if ($editedResourceId !== $projectResource['id'])
-        <li class="group mb-3 flex items-center justify-between rounded-lg px-2 py-1 hover:bg-sky-50"
+        <li class="group mb-1 flex items-center justify-between rounded-lg border border-transparent px-2 py-1 hover:border-sky-300 hover:bg-sky-50"
             wire:key="{{ $projectResource['id'] }}">
           <div class="flex items-center">
             <x-heroicon-s-link class="mr-2 h-4 w-4 text-blue-400 group-hover:text-blue-700" />

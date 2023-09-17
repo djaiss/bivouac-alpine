@@ -162,6 +162,7 @@ class User extends Authenticatable implements MustVerifyEmail
                 return [
                     'type' => $type,
                     'content' => $avatar,
+                    'name' => $this->name,
                 ];
             }
         );

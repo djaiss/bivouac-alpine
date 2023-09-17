@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Projects;
 
 use App\Http\Controllers\Controller;
-use App\Models\Project;
 use App\Services\CreateProject;
 use App\Services\DestroyProject;
 use App\Services\UpdateProject;
@@ -45,25 +44,25 @@ class ProjectController extends Controller
         return redirect()->route('project.show', $project->id);
     }
 
-    public function show(Request $request, Project $project): View
+    public function show(Request $request): View
     {
         return view('project.show', [
-            'header' => ProjectViewModel::header($project),
-            'view' => ProjectViewModel::show($project),
+            'header' => ProjectViewModel::header($request->project),
+            'view' => ProjectViewModel::show($request->project),
         ]);
     }
 
-    public function edit(Request $request, Project $project): View
+    public function edit(Request $request): View
     {
-        $viewModel = ProjectViewModel::edit($project);
+        $viewModel = ProjectViewModel::edit($request->project);
 
         return view('project.edit', [
-            'header' => ProjectViewModel::header($project),
+            'header' => ProjectViewModel::header($request->project),
             'view' => $viewModel,
         ]);
     }
 
-    public function update(Request $request, Project $project): RedirectResponse
+    public function update(Request $request): RedirectResponse
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
@@ -73,7 +72,7 @@ class ProjectController extends Controller
         ]);
 
         $project = (new UpdateProject)->execute(
-            project: $project,
+            project: $request->project,
             name: $validated['title'],
             description: $validated['description'] ?? null,
             shortDescription: $validated['short_description'] ?? null,
@@ -85,9 +84,9 @@ class ProjectController extends Controller
         return redirect()->route('project.edit', $project->id);
     }
 
-    public function destroy(Request $request, Project $project): RedirectResponse
+    public function destroy(Request $request): RedirectResponse
     {
-        (new DestroyProject)->execute($project);
+        (new DestroyProject)->execute($request->project);
 
         notify()->success(__('Project successfully deleted.'));
 

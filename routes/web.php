@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\ValidateInvitationController;
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Projects\ProjectController;
+use App\Http\Controllers\Projects\ProjectMemberController;
 use App\Http\Controllers\Settings\SettingsController;
 use App\Http\Controllers\Settings\SettingsInviteUserController;
 use App\Http\Controllers\Settings\SettingsOfficeController;
@@ -42,6 +43,14 @@ Route::middleware('auth', 'verified')->group(function (): void {
         Route::get('projects/{project}/edit', [ProjectController::class, 'edit'])->name('project.edit');
         Route::put('projects/{project}', [ProjectController::class, 'update'])->name('project.update');
         Route::delete('projects/{project}', [ProjectController::class, 'destroy'])->name('project.destroy');
+
+        // members
+        Route::get('projects/{project}/members', [ProjectMemberController::class, 'index'])->name('project.member.index');
+        Route::get('projects/{project}/members/{user}/delete', [ProjectMemberController::class, 'delete'])->name('project.member.delete');
+
+        Route::get('projects/{project}/users', [ProjectMemberController::class, 'index'])->name('members.user.index');
+        Route::post('projects/{project}/members/{member}', [ProjectMemberController::class, 'store'])->name('members.user.store');
+        Route::delete('projects/{project}/members/{user}', [ProjectMemberController::class, 'destroy'])->name('project.member.destroy');
     });
 
     // messages
@@ -50,6 +59,7 @@ Route::middleware('auth', 'verified')->group(function (): void {
     // tasklists
     Route::get('{project}/taskLists', [ProjectTaskListController::class, 'index'])->name('tasks.index');
 
+    // settings
     Route::middleware(['administrator'])->group(function (): void {
         Route::get('settings', [SettingsController::class, 'index'])->name('settings.index');
 
