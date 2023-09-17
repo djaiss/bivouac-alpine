@@ -51,7 +51,7 @@ class ManageProjectMembers extends Component
 
     public function add(int $userId): void
     {
-        $this->project->users()->syncWithoutDetaching($userId);
+        $this->project->users()->syncWithoutDetaching([$userId]);
 
         $user = User::findOrFail($userId);
         $this->members->push([

@@ -40,6 +40,6 @@ class CreateProject extends BaseService
 
     private function associateUser(): void
     {
-        $this->project->users()->syncWithoutDetaching(auth()->user());
+        $this->project->users()->syncWithoutDetaching([auth()->user()]);
     }
 }
