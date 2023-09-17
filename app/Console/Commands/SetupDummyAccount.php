@@ -181,10 +181,7 @@ class SetupDummyAccount extends Command
         $this->info('☐ Add members to project ' . $project->name);
 
         User::get()
-            ->map(fn (User $user) => (new AddProjectMember)->execute([
-                'user_id' => $user->id,
-                'project_id' => $project->id,
-            ]));
+            ->map(fn (User $user) => $project->users()->syncWithoutDetaching($user));
     }
 
     private function addMessages(Project $project): void
