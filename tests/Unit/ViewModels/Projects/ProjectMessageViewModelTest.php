@@ -2,12 +2,8 @@
 
 namespace Tests\Unit\ViewModels\Projects;
 
-use App\Http\Controllers\Projects\Messages\MessageViewModel;
-use App\Models\Comment;
 use App\Models\Message;
 use App\Models\Project;
-use App\Models\Reaction;
-use App\Models\TaskList;
 use App\Models\User;
 use App\ViewModels\Projects\ProjectMessageViewModel;
 use Carbon\Carbon;
@@ -64,7 +60,7 @@ class ProjectMessageViewModelTest extends TestCase
                         'name' => $oldAndUnreadMessage->authorName,
                         'avatar' => $oldAndUnreadMessage?->creator?->avatar,
                     ],
-                ]
+                ],
             ],
             $array['messages']->toArray()
         );

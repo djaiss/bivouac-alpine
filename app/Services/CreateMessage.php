@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Exceptions\NotEnoughPermissionException;
 use App\Models\Message;
 use App\Models\Project;
 use App\Models\User;

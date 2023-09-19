@@ -8,7 +8,6 @@ use App\ViewModels\Projects\ProjectMessageViewModel;
 use App\ViewModels\Projects\ProjectViewModel;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
 class ProjectMessageController extends Controller

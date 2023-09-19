@@ -3,12 +3,7 @@
 namespace App\Livewire;
 
 use App\Helpers\StringHelper;
-use App\Jobs\UpdateProjectLastUpdatedAt;
-use App\Models\ProjectResource;
-use App\Services\CreateProjectResource;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Collection;
-use Livewire\Attributes\Locked;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 

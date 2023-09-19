@@ -2,14 +2,11 @@
 
 namespace Tests\Unit\Services;
 
-use App\Exceptions\NotEnoughPermissionException;
 use App\Models\Message;
 use App\Models\Project;
 use App\Models\User;
 use App\Services\MarkMessageAsRead;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Validation\ValidationException;
 use Tests\TestCase;
 
 class MarkMessageAsReadTest extends TestCase

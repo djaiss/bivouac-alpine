@@ -4,7 +4,6 @@ namespace App\ViewModels\Projects;
 
 use App\Models\Message;
 use App\Models\Project;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ProjectMessageViewModel
