@@ -5,6 +5,7 @@ use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Projects\ProjectController;
 use App\Http\Controllers\Projects\ProjectMemberController;
+use App\Http\Controllers\Projects\ProjectMessageController;
 use App\Http\Controllers\Settings\SettingsController;
 use App\Http\Controllers\Settings\SettingsInviteUserController;
 use App\Http\Controllers\Settings\SettingsOfficeController;
@@ -51,10 +52,12 @@ Route::middleware('auth', 'verified')->group(function (): void {
         Route::get('projects/{project}/users', [ProjectMemberController::class, 'index'])->name('members.user.index');
         Route::post('projects/{project}/members/{member}', [ProjectMemberController::class, 'store'])->name('members.user.store');
         Route::delete('projects/{project}/members/{user}', [ProjectMemberController::class, 'destroy'])->name('project.member.destroy');
-    });
 
-    // messages
-    Route::get('{project}/messages', [MessageController::class, 'index'])->name('messages.index');
+        // messages
+        Route::get('projects/{project}/messages', [ProjectMessageController::class, 'index'])->name('project.message.index');
+        Route::get('projects/{project}/messages/create', [ProjectMessageController::class, 'create'])->name('project.message.create');
+        Route::post('projects/{project}/messages', [ProjectMessageController::class, 'store'])->name('project.message.store');
+    });
 
     // tasklists
     Route::get('{project}/taskLists', [ProjectTaskListController::class, 'index'])->name('tasks.index');

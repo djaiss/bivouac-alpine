@@ -11,44 +11,11 @@ use Illuminate\Support\Facades\DB;
 
 class MarkMessageAsRead extends BaseService
 {
-    private array $data;
-
-    public function rules(): array
-    {
-        return [
-            'user_id' => 'required|integer|exists:users,id',
-            'message_id' => 'required|integer|exists:messages,id',
-        ];
-    }
-
-    public function execute(array $data): void
-    {
-        $this->data = $data;
-        $this->validate();
-        $this->read();
-    }
-
-    private function validate(): void
-    {
-        $this->validateRules($this->data);
-
-        $user = User::findOrFail($this->data['user_id']);
-
-        $message = Message::findOrFail($this->data['message_id']);
-
-        $project = Project::where('organization_id', $user->organization_id)
-            ->findOrFail($message->project_id);
-
-        if ($project->users()->where('user_id', $user->id)->doesntExist() && ! $project->is_public) {
-            throw new NotEnoughPermissionException;
-        }
-    }
-
-    private function read(): void
+    public function execute(int $messageId): void
     {
         $count = DB::table('message_read_status')
-            ->where('message_id', $this->data['message_id'])
-            ->where('user_id', $this->data['user_id'])
+            ->where('message_id', $messageId)
+            ->where('user_id', auth()->user()->id)
             ->count();
 
         if ($count > 0) {
@@ -56,8 +23,8 @@ class MarkMessageAsRead extends BaseService
         }
 
         DB::table('message_read_status')->insert([
-            'message_id' => $this->data['message_id'],
-            'user_id' => $this->data['user_id'],
+            'message_id' => $messageId,
+            'user_id' => auth()->user()->id,
             'created_at' => Carbon::now(),
         ]);
     }

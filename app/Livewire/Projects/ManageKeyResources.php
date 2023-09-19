@@ -17,7 +17,9 @@ class ManageKeyResources extends Component
     public int $projectId;
 
     public Collection $resources;
+
     public bool $showAddModal = false;
+
     public int $editedResourceId = 0;
 
     #[Rule('required|min:1|max:255')]
