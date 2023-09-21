@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -19,8 +18,7 @@ class Message extends Model
 
     protected $fillable = [
         'project_id',
-        'author_id',
-        'author_name',
+        'user_id',
         'title',
         'body',
     ];
@@ -46,9 +44,9 @@ class Message extends Model
         return $this->belongsTo(Project::class);
     }
 
-    public function creator(): BelongsTo
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'author_id');
+        return $this->belongsTo(User::class);
     }
 
     public function comments(): MorphMany
@@ -64,21 +62,5 @@ class Message extends Model
     public function taskLists(): MorphMany
     {
         return $this->morphMany(TaskList::class, 'tasklistable');
-    }
-
-    /**
-     * @return Attribute<string,never>
-     */
-    protected function authorName(): Attribute
-    {
-        return Attribute::make(
-            get: function ($value, $attributes) {
-                if (is_null($attributes['author_id'])) {
-                    return $attributes['author_name'];
-                }
-
-                return $this->creator->name;
-            }
-        );
     }
 }

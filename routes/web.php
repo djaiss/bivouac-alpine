@@ -34,6 +34,9 @@ Route::middleware('auth', 'verified')->group(function (): void {
     Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    // users
+    Route::get('users/{user}', [UserController::class, 'show'])->name('user.show');
+
     // projects
     Route::get('projects', [ProjectController::class, 'index'])->name('project.index');
     Route::get('projects/create', [ProjectController::class, 'create'])->name('project.create');
@@ -58,7 +61,13 @@ Route::middleware('auth', 'verified')->group(function (): void {
         Route::get('projects/{project}/messages/create', [ProjectMessageController::class, 'create'])->name('project.message.create');
         Route::post('projects/{project}/messages', [ProjectMessageController::class, 'store'])->name('project.message.store');
 
-        Route::get('projects/{project}/messages/{message}', [ProjectMessageController::class, 'show'])->name('project.message.show');
+        Route::middleware(['message'])->group(function (): void {
+            Route::get('projects/{project}/messages/{message}', [ProjectMessageController::class, 'show'])->name('project.message.show');
+            Route::get('projects/{project}/messages/{message}/delete', [ProjectMessageController::class, 'delete'])->name('project.message.delete');
+            Route::get('projects/{project}/messages/{message}/edit', [ProjectMessageController::class, 'edit'])->name('project.message.edit');
+            Route::put('projects/{project}/messages/{message}', [ProjectMessageController::class, 'update'])->name('project.message.update');
+            Route::delete('projects/{project}/messages/{message}', [ProjectMessageController::class, 'destroy'])->name('project.message.destroy');
+        });
     });
 
     // tasklists

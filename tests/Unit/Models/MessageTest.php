@@ -27,36 +27,10 @@ class MessageTest extends TestCase
     {
         $user = User::factory()->create();
         $message = Message::factory()->create([
-            'author_id' => $user->id,
+            'user_id' => $user->id,
         ]);
 
-        $this->assertTrue($message->creator()->exists());
-    }
-
-    /** @test */
-    public function it_gets_the_author(): void
-    {
-        $user = User::factory()->create([
-            'first_name' => 'John',
-            'last_name' => 'Doe',
-        ]);
-        $message = Message::factory()->create([
-            'author_id' => null,
-            'author_name' => 'Henri Troyat',
-        ]);
-
-        $this->assertEquals(
-            'Henri Troyat',
-            $message->authorName
-        );
-
-        $message->author_id = $user->id;
-        $message->save();
-
-        $this->assertEquals(
-            'John Doe',
-            $message->authorName
-        );
+        $this->assertTrue($message->user()->exists());
     }
 
     /** @test */

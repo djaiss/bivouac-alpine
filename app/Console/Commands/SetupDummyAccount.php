@@ -188,12 +188,11 @@ class SetupDummyAccount extends Command
         $this->info('☐ Add messages to project ' . $project->name);
 
         for ($i = 0; $i < rand(3, 5); $i++) {
-            $message = (new CreateMessage)->execute([
-                'user_id' => $this->user->id,
-                'project_id' => $project->id,
-                'title' => $this->faker->sentence(),
-                'body' => $this->faker->paragraph(15),
-            ]);
+            $message = (new CreateMessage)->execute(
+                projectId: $project->id,
+                title: $this->faker->sentence(),
+                body: $this->faker->paragraph(15),
+            );
 
             $this->addComments($message);
         }

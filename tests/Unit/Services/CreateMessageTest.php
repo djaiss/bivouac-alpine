@@ -24,13 +24,6 @@ class CreateMessageTest extends TestCase
         ]);
         $user->projects()->attach($project->id);
 
-        $request = [
-            'user_id' => $user->id,
-            'project_id' => $project->id,
-            'title' => 'Dunder',
-            'body' => 'this is a description',
-        ];
-
         $message = (new CreateMessage)->execute(
             projectId: $project->id,
             title: 'Dunder',
@@ -44,6 +37,7 @@ class CreateMessageTest extends TestCase
 
         $this->assertDatabaseHas('messages', [
             'id' => $message->id,
+            'user_id' => $user->id,
             'project_id' => $project->id,
             'title' => 'Dunder',
             'body' => 'this is a description',

@@ -39,7 +39,7 @@ class ProjectMessagesTest extends TestCase
     }
 
     /** @test */
-    public function we_can_create_a_message(): void
+    public function message_can_be_created(): void
     {
         $organization = Organization::factory()->create();
         $user = User::factory()->create([
@@ -65,5 +65,68 @@ class ProjectMessagesTest extends TestCase
             'title' => 'Microsoft',
             'body' => 'this is my best friend',
         ]);
+    }
+
+    /** @test */
+    public function message_can_be_edited(): void
+    {
+        $organization = Organization::factory()->create();
+        $user = User::factory()->create([
+            'organization_id' => $organization->id,
+            'first_name' => 'Regis',
+        ]);
+        $project = Project::factory()->create([
+            'name' => 'Paper',
+            'organization_id' => $organization->id,
+            'is_public' => true,
+        ]);
+        $user->projects()->attach($project);
+        $message = Message::factory()->create([
+            'project_id' => $project->id,
+        ]);
+
+        $this->actingAs($user)
+            ->put('/projects/' . $project->id . '/messages/' . $message->id, [
+                'title' => 'test',
+                'body' => 'test',
+            ])
+            ->assertStatus(302)
+            ->assertRedirectToRoute('project.message.show', [
+                'project' => $project,
+                'message' => $message,
+            ]);
+
+        $this->assertDatabaseHas('messages', [
+            'id' => $message->id,
+            'project_id' => $project->id,
+            'title' => 'test',
+            'body' => 'test',
+        ]);
+    }
+
+    /** @test */
+    public function message_can_be_deleted(): void
+    {
+        $organization = Organization::factory()->create();
+        $user = User::factory()->create([
+            'organization_id' => $organization->id,
+            'first_name' => 'Regis',
+        ]);
+        $project = Project::factory()->create([
+            'name' => 'Paper',
+            'organization_id' => $organization->id,
+            'is_public' => true,
+        ]);
+        $user->projects()->attach($project);
+        $message = Message::factory()->create([
+            'project_id' => $project->id,
+        ]);
+
+        $this->actingAs($user)
+            ->delete('/projects/' . $project->id . '/messages/' . $message->id)
+            ->assertStatus(302)
+            ->assertRedirectToRoute('project.message.index', [
+                'project' => $project,
+            ]);
     }
 }

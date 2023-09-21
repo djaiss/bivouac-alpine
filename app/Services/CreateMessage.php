@@ -8,7 +8,6 @@ use App\Models\User;
 
 class CreateMessage extends BaseService
 {
-    private array $data;
     private Message $message;
     private int $projectId;
     private string $title;
@@ -31,8 +30,7 @@ class CreateMessage extends BaseService
     {
         $this->message = Message::create([
             'project_id' => $this->projectId,
-            'author_id' => auth()->user()->id,
-            'author_name' => auth()->user()->name,
+            'user_id' => auth()->user()->id,
             'title' => $this->title,
             'body' => $this->body,
         ]);

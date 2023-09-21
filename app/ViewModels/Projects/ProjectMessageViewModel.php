@@ -2,6 +2,8 @@
 
 namespace App\ViewModels\Projects;
 
+use App\Helpers\DateHelper;
+use App\Helpers\StringHelper;
 use App\Models\Message;
 use App\Models\Project;
 use Illuminate\Support\Facades\DB;
@@ -11,7 +13,7 @@ class ProjectMessageViewModel
     public static function index(Project $project): array
     {
         $messages = $project->messages()
-            ->with('creator')
+            ->with('user')
             ->withCount('comments')
             ->orderByDesc('created_at')
             ->get();
@@ -38,8 +40,9 @@ class ProjectMessageViewModel
             'title' => $message->title,
             'read' => $isRead,
             'author' => [
-                'name' => $message->authorName,
-                'avatar' => $message?->creator?->avatar,
+                'id' => $message->user_id,
+                'name' => $message->user->name,
+                'avatar' => $message->user->avatar,
             ],
         ];
     }
@@ -48,6 +51,38 @@ class ProjectMessageViewModel
     {
         return [
             'project_id' => $project->id,
+        ];
+    }
+
+    public static function show(Message $message): array
+    {
+        return [
+            'id' => $message->id,
+            'title' => $message->title,
+            'body' => StringHelper::parse($message->body),
+            'created_at' => DateHelper::parse($message->created_at),
+            'author' => [
+                'name' => $message->user->name,
+                'avatar' => $message->user->avatar,
+            ],
+        ];
+    }
+
+    public static function edit(Message $message): array
+    {
+        return [
+            'id' => $message->id,
+            'title' => $message->title,
+            'body' => StringHelper::parse($message->body),
+            'body_raw' => $message->body,
+        ];
+    }
+
+    public static function delete(Message $message): array
+    {
+        return [
+            'id' => $message->id,
+            'title' => $message->title,
         ];
     }
 }

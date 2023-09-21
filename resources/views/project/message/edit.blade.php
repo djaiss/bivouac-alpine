@@ -31,8 +31,10 @@
     <div class="mx-auto max-w-6xl overflow-hidden">
       <form class="grid grid-cols-[2fr_1fr] gap-4 px-4"
             method="POST"
-            action="{{ route('project.message.store', ['project' => $header['id']]) }}">
+            action="{{ route('project.message.update', ['project' => $header['id'], 'message' => $view['id']]) }}">
         @csrf
+        @method('PUT')
+
         <!-- left -->
         <div>
           <div class="relative bg-white px-6 py-4 shadow sm:rounded-lg">
@@ -46,7 +48,7 @@
                             id="title"
                             name="title"
                             type="text"
-                            :value="old('title')"
+                            :value="old('title', $view['title'])"
                             required
                             autofocus />
 
@@ -56,7 +58,7 @@
 
             <!-- Description -->
             <div class="mb-4">
-              <livewire:textarea-markdown />
+              <livewire:textarea-markdown :body="$view['body_raw']" />
 
               <x-input-error class="mt-2"
                              :messages="$errors->get('body')" />

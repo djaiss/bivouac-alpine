@@ -2,10 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Livewire\Projects\ManageKeyResources;
 use App\Livewire\TextareaMarkdown;
 use App\Models\Project;
-use App\Models\ProjectResource;
 use App\Models\User;
 use Livewire\Livewire;
 use Tests\TestCase;
@@ -22,7 +20,7 @@ class TextareaMarkdownTest extends TestCase
         ]);
 
         $this->actingAs($user)
-            ->get('/projects/' . $project->id.'/messages/create')
+            ->get('/projects/' . $project->id . '/messages/create')
             ->assertSeeLivewire(TextareaMarkdown::class);
     }
 

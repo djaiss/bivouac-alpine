@@ -48,8 +48,9 @@ class ProjectMessageViewModelTest extends TestCase
                     'title' => 'New and read',
                     'read' => true,
                     'author' => [
-                        'name' => $newAndReadMessage->authorName,
-                        'avatar' => $newAndReadMessage?->creator?->avatar,
+                        'name' => $newAndReadMessage->user->name,
+                        'avatar' => $newAndReadMessage->user->avatar,
+                        'id' => $newAndReadMessage->user_id,
                     ],
                 ],
                 1 => [
@@ -57,8 +58,9 @@ class ProjectMessageViewModelTest extends TestCase
                     'title' => 'Old and unread',
                     'read' => false,
                     'author' => [
-                        'name' => $oldAndUnreadMessage->authorName,
-                        'avatar' => $oldAndUnreadMessage?->creator?->avatar,
+                        'name' => $oldAndUnreadMessage->user->name,
+                        'avatar' => $oldAndUnreadMessage->user->avatar,
+                        'id' => $oldAndUnreadMessage->user_id,
                     ],
                 ],
             ],
@@ -76,5 +78,61 @@ class ProjectMessageViewModelTest extends TestCase
         $this->assertCount(1, $array);
         $this->assertArrayHasKey('project_id', $array);
         $this->assertEquals(['project_id' => $project->id], $array);
+    }
+
+    /** @test */
+    public function it_gets_the_show_view(): void
+    {
+        $message = Message::factory()->create([
+            'title' => 'Microsoft',
+            'body' => 'this is my best friend',
+            'created_at' => Carbon::create(2018, 1, 1),
+        ]);
+
+        $array = ProjectMessageViewModel::show($message);
+
+        $this->assertCount(5, $array);
+        $this->assertEquals(
+            $message->id,
+            $array['id']
+        );
+        $this->assertEquals(
+            'Microsoft',
+            $array['title']
+        );
+        $this->assertEquals(
+            '<p>this is my best friend</p>',
+            $array['body']
+        );
+        $this->assertEquals(
+            '01/01/2018 00:00',
+            $array['created_at']
+        );
+        $this->assertEquals(
+            [
+                'name' => $message->user->name,
+                'avatar' => $message->user->avatar,
+            ],
+            $array['author']
+        );
+    }
+
+    /** @test */
+    public function it_gets_the_delete_view(): void
+    {
+        $message = Message::factory()->create([
+            'title' => 'Microsoft',
+        ]);
+
+        $array = ProjectMessageViewModel::delete($message);
+
+        $this->assertCount(2, $array);
+        $this->assertEquals(
+            [
+                'id' => $message->id,
+                'title' => 'Microsoft',
+            ],
+            $array
+        );
     }
 }

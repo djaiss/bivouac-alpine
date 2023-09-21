@@ -30,7 +30,8 @@
 
               <div class="ml-1">
                 <x-link class="mb-2 inline-block text-blue-700 underline hover:rounded-sm hover:bg-blue-700 hover:text-white"
-                        href="'message.url.show'">
+                        href="{{ route('project.message.show', ['project' => $header['id'], 'message' => $message['id']]) }}"
+                        wire:navigate>
                   {{ $message['title'] }}
                 </x-link>
 
@@ -38,10 +39,11 @@
                 <div class="flex text-sm">
                   <!-- user name -->
                   <div class="group mr-4 flex items-center">
-                    <x-avatar class="mr-2 h-4 w-4 rounded"
+                    <x-avatar class="mr-2 h-4 w-4"
                               :data="$message['author']['avatar']" />
-                    <x-link class="text-gray-600 group-hover:text-white group-hover:underline"
-                            href="''">
+
+                    <x-link class="text-gray-600 group-hover:underline"
+                            href="{{ route('user.show', ['user' => $message['author']['id']]) }}">
                       {{ $message['author']['name'] }}
                     </x-link>
                   </div>

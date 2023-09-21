@@ -61,13 +61,13 @@
          x-show="hoverCardHovered"
          x-transition>
       @if ($data['type'] === 'svg')
-        <div {{ $attributes->merge(['class' => 'rounded-full w-20 h-20']) }}>
+        <div class="h-20 w-20 rounded-full">
           {!! $data['content'] !!}
         </div>
       @else
-        <img src="{{ $data['content'] }}"
-             alt="avatar"
-             {{ $attributes->merge(['class' => 'rounded-full w-20 h-20']) }} />
+        <img class="h-20 w-20 rounded-full"
+             src="{{ $data['content'] }}"
+             alt="avatar" />
       @endif
 
       <div class="relative">
