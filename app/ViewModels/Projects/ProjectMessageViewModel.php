@@ -62,6 +62,7 @@ class ProjectMessageViewModel
             'body' => StringHelper::parse($message->body),
             'created_at' => DateHelper::parse($message->created_at),
             'author' => [
+                'id' => $message->user_id,
                 'name' => $message->user->name,
                 'avatar' => $message->user->avatar,
             ],

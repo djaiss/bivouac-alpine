@@ -20,7 +20,7 @@
                         :data="$view['author']['avatar']" />
 
               <x-link class="mr-4 text-blue-700 underline hover:rounded-sm hover:bg-blue-700 hover:text-white"
-                      href="'data.message.author.url'">
+                      href="{{ route('user.show', ['user' => $view['author']['id']]) }}">
                 {{ $view['author']['name'] }}
               </x-link>
               <p>{{ $view['created_at'] }}</p>

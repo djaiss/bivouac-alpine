@@ -110,6 +110,7 @@ class ProjectMessageViewModelTest extends TestCase
         );
         $this->assertEquals(
             [
+                'id' => $message->user_id,
                 'name' => $message->user->name,
                 'avatar' => $message->user->avatar,
             ],
