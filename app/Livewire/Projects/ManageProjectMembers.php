@@ -17,7 +17,9 @@ class ManageProjectMembers extends Component
     public int $projectId;
 
     public Collection $members;
+
     public Collection $potentialMembers;
+
     public Project $project;
 
     public bool $showAddModal = false;

@@ -12,8 +12,8 @@ class StringHelper
      */
     public static function parse(string $content = ''): string
     {
-        return Str::of($content)->markdown([
+        return trim(Str::of($content)->markdown([
             'html_input' => 'strip',
-        ]);
+        ]));
     }
 }

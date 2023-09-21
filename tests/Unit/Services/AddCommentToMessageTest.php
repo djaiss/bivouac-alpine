@@ -87,6 +87,7 @@ class AddCommentToMessageTest extends TestCase
 
     private function executeService(User $user, Message $message): void
     {
+        $this->be($user);
         $request = [
             'user_id' => $user->id,
             'message_id' => $message->id,

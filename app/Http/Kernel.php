@@ -69,5 +69,6 @@ class Kernel extends HttpKernel
         'administrator' => \App\Http\Middleware\CheckAdministratorRole::class,
         'account_manager' => \App\Http\Middleware\CheckAccountManagerRole::class,
         'project' => \App\Http\Middleware\CheckProject::class,
+        'message' => \App\Http\Middleware\CheckMessage::class,
     ];
 }

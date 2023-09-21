@@ -74,9 +74,6 @@ class AddCommentToMessage extends BaseService
             ->where('message_id', $this->message->id)
             ->delete();
 
-        (new MarkMessageAsRead)->execute([
-            'user_id' => $this->user->id,
-            'message_id' => $this->message->id,
-        ]);
+        (new MarkMessageAsRead)->execute($this->message->id);
     }
 }

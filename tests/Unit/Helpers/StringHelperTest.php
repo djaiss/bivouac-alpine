@@ -16,8 +16,7 @@ class StringHelperTest extends TestCase
         $content = '**hi**';
 
         $this->assertEquals(
-            '<p><strong>hi</strong></p>
-',
+            '<p><strong>hi</strong></p>',
             StringHelper::parse($content)
         );
     }

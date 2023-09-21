@@ -20,8 +20,7 @@ class MessageFactory extends Factory
     {
         return [
             'project_id' => Project::factory(),
-            'author_id' => User::factory(),
-            'author_name' => fake()->name(),
+            'user_id' => User::factory(),
             'title' => fake()->name(),
             'body' => fake()->paragraph(),
         ];

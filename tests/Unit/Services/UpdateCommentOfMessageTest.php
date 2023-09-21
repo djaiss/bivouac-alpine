@@ -125,6 +125,7 @@ class UpdateCommentOfMessageTest extends TestCase
 
     private function executeService(User $user, Message $message, Comment $comment): void
     {
+        $this->be($user);
         $request = [
             'user_id' => $user->id,
             'message_id' => $message->id,
