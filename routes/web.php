@@ -57,6 +57,8 @@ Route::middleware('auth', 'verified')->group(function (): void {
         Route::get('projects/{project}/messages', [ProjectMessageController::class, 'index'])->name('project.message.index');
         Route::get('projects/{project}/messages/create', [ProjectMessageController::class, 'create'])->name('project.message.create');
         Route::post('projects/{project}/messages', [ProjectMessageController::class, 'store'])->name('project.message.store');
+
+        Route::get('projects/{project}/messages/{message}', [ProjectMessageController::class, 'show'])->name('project.message.show');
     });
 
     // tasklists

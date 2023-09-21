@@ -37,4 +37,33 @@ class ProjectMessagesTest extends TestCase
             ->assertStatus(200)
             ->assertSee('this is my best friend');
     }
+
+    /** @test */
+    public function we_can_create_a_message(): void
+    {
+        $organization = Organization::factory()->create();
+        $user = User::factory()->create([
+            'organization_id' => $organization->id,
+            'first_name' => 'Regis',
+        ]);
+        $project = Project::factory()->create([
+            'name' => 'Paper',
+            'organization_id' => $organization->id,
+            'is_public' => true,
+        ]);
+        $user->projects()->attach($project);
+
+        $this->actingAs($user)
+            ->post('/projects/' . $project->id . '/messages', [
+                'title' => 'Microsoft',
+                'body' => 'this is my best friend',
+            ])
+            ->assertStatus(302);
+
+        $this->assertDatabaseHas('messages', [
+            'project_id' => $project->id,
+            'title' => 'Microsoft',
+            'body' => 'this is my best friend',
+        ]);
+    }
 }
