@@ -59,7 +59,6 @@ class SettingsRoleController extends Controller
         }
 
         $validated = $request->validate([
-            'role' => $role,
             'label' => 'required|string|max:255',
         ]);
 
