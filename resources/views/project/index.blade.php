@@ -49,7 +49,7 @@
                     <div class="mr-6 flex flex-col">
                       <!-- project name -->
                       <div class="flex items-center">
-                        @if (! $project['is_public'])
+                        @if (!$project['is_public'])
                           <x-icon-lock />
                         @endif
 

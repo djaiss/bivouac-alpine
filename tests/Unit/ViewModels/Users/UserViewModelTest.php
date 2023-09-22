@@ -2,11 +2,7 @@
 
 namespace Tests\Unit\ViewModels\Users;
 
-use App\Models\Organization;
-use App\Models\Project;
-use App\Models\ProjectResource;
 use App\Models\User;
-use App\ViewModels\Projects\ProjectViewModel;
 use App\ViewModels\Users\UserViewModel;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseTransactions;

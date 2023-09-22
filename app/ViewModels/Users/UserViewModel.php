@@ -2,10 +2,7 @@
 
 namespace App\ViewModels\Users;
 
-use App\Models\Project;
-use App\Models\ProjectResource;
 use App\Models\User;
-use Illuminate\Support\Str;
 
 class UserViewModel
 {

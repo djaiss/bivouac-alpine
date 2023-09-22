@@ -2,10 +2,8 @@
 
 namespace Tests\Feature\Settings\User;
 
-use App\Mail\UserInvited;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
 class UserEditTest extends TestCase
@@ -18,7 +16,7 @@ class UserEditTest extends TestCase
         $user = User::factory()->create();
 
         $this->actingAs($user)
-            ->get('/users/'.$user->id.'/edit')
+            ->get('/users/' . $user->id . '/edit')
             ->assertStatus(200);
     }
 
@@ -34,7 +32,7 @@ class UserEditTest extends TestCase
         ]);
 
         $this->actingAs($normalUser)
-            ->get('/users/'. $otherNormalUser->id.'/edit')
+            ->get('/users/' . $otherNormalUser->id . '/edit')
             ->assertStatus(401);
     }
 
@@ -50,7 +48,7 @@ class UserEditTest extends TestCase
         ]);
 
         $this->actingAs($administrator)
-            ->get('/users/'.$otherNormalUser->id.'/edit')
+            ->get('/users/' . $otherNormalUser->id . '/edit')
             ->assertStatus(200);
     }
 
