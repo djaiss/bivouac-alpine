@@ -6,12 +6,13 @@ use App\Models\User;
 
 class UserViewModel
 {
-    public static function header(User $user): array
+    public static function header(User $authenticatedUser, User $user): array
     {
         return [
             'id' => $user->id,
             'name' => $user->name,
             'avatar' => $user->avatar,
+            'can_see_settings' => $authenticatedUser->id === $user->id || $authenticatedUser->permissions !== User::ROLE_USER,
         ];
     }
 

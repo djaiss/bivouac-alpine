@@ -41,12 +41,15 @@
               {{ __('Administration') }}
             </a>
           </li>
+          @if ($data['can_see_settings'])
           <li class="mr-2">
             <a class="inline-block rounded-t-lg border-b-2 border-transparent p-4 hover:border-blue-300 hover:text-blue-600 dark:hover:text-gray-300"
-               href="#">
+               wire:navigate
+               href="{{ route('user.edit', ['user' => $data['id']]) }}">
               {{ __('Settings') }}
             </a>
           </li>
+          @endif
         </ul>
       </div>
     </div>

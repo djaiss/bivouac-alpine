@@ -14,7 +14,7 @@ class UserController extends Controller
     public function edit(Request $request): View
     {
         return view('user.edit', [
-            'header' => UserViewModel::header($request->user),
+            'header' => UserViewModel::header(auth()->user(), $request->user),
             'view' => UserViewModel::edit($request->user),
         ]);
     }

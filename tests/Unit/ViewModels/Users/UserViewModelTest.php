@@ -19,14 +19,18 @@ class UserViewModelTest extends TestCase
             'first_name' => 'Regis',
             'last_name' => 'Philbin',
         ]);
-        $array = UserViewModel::header($user);
+        $authenticatedUser = User::factory()->create([
+            'permissions' => User::ROLE_ADMINISTRATOR,
+        ]);
+        $array = UserViewModel::header($authenticatedUser, $user);
 
-        $this->assertCount(3, $array);
+        $this->assertCount(4, $array);
         $this->assertEquals(
             [
                 'id' => $user->id,
                 'name' => 'Regis Philbin',
                 'avatar' => $user->avatar,
+                'can_see_settings' => true,
             ],
             $array
         );
