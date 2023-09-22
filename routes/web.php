@@ -12,6 +12,8 @@ use App\Http\Controllers\Settings\SettingsOfficeController;
 use App\Http\Controllers\Settings\SettingsOrganizationController;
 use App\Http\Controllers\Settings\SettingsRoleController;
 use App\Http\Controllers\Settings\SettingsUserController;
+use App\Http\Controllers\Users\UserAvatarController;
+use App\Http\Controllers\Users\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -36,6 +38,11 @@ Route::middleware('auth', 'verified')->group(function (): void {
 
     // users
     Route::get('users/{user}', [UserController::class, 'show'])->name('user.show');
+
+    Route::middleware(['user'])->group(function (): void {
+        Route::get('users/{user}/edit', [UserController::class, 'edit'])->name('user.edit');
+        Route::put('users/{user}/avatar', [UserAvatarController::class, 'update'])->name('user.avatar.update');
+    });
 
     // projects
     Route::get('projects', [ProjectController::class, 'index'])->name('project.index');

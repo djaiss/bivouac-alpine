@@ -70,5 +70,6 @@ class Kernel extends HttpKernel
         'account_manager' => \App\Http\Middleware\CheckAccountManagerRole::class,
         'project' => \App\Http\Middleware\CheckProject::class,
         'message' => \App\Http\Middleware\CheckMessage::class,
+        'user' => \App\Http\Middleware\CheckUser::class,
     ];
 }
