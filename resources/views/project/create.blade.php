@@ -61,7 +61,7 @@
                           autofocus />
 
             <x-input-error class="mt-2"
-                           :messages="$errors->get('name')" />
+                           :messages="$errors->get('title')" />
           </div>
 
           <!-- Description -->

@@ -65,4 +65,26 @@ class UserEditTest extends TestCase
 
         $this->assertNotEquals($previousAvatar, $user->fresh()->avatar);
     }
+
+    /** @test */
+    public function a_user_can_change_personal_information(): void
+    {
+        $user = User::factory()->create();
+
+        $this->actingAs($user)
+            ->put('/users/' . $user->id, [
+                'first_name' => 'John',
+                'last_name' => 'Doe',
+                'email' => 'john@doe.com',
+            ])
+            ->assertStatus(302)
+            ->assertRedirect('/users/' . $user->id . '/edit');
+
+        $this->assertDatabaseHas('users', [
+            'id' => $user->id,
+            'first_name' => 'John',
+            'last_name' => 'Doe',
+            'email' => 'john@doe.com',
+        ]);
+    }
 }

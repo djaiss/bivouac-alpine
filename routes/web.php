@@ -41,6 +41,7 @@ Route::middleware('auth', 'verified')->group(function (): void {
 
     Route::middleware(['user'])->group(function (): void {
         Route::get('users/{user}/edit', [UserController::class, 'edit'])->name('user.edit');
+        Route::put('users/{user}', [UserController::class, 'update'])->name('user.update');
         Route::put('users/{user}/avatar', [UserAvatarController::class, 'update'])->name('user.avatar.update');
     });
 

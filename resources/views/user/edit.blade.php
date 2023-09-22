@@ -8,13 +8,12 @@
       <div class="mx-auto flex max-w-7xl sm:px-6 lg:px-8">
         <div class="w-full space-y-6">
           <div class="bg-white shadow sm:rounded-lg">
-            {{-- <UpdateProfileInformationForm :data="data" /> --}}
+            <x-user.update-information :data="$view" />
           </div>
 
           <!-- update avatar -->
           <div class="bg-white shadow sm:rounded-lg">
-            {{-- <UpdateAvatarForm :data="data" /> --}}
-            <x-user.update-avatar :data="$view"></x-user.update-avatar>
+            <x-user.update-avatar :data="$view" />
           </div>
 
           <div class="bg-white shadow sm:rounded-lg">
