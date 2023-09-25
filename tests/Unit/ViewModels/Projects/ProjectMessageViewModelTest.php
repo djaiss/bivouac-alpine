@@ -4,6 +4,7 @@ namespace Tests\Unit\ViewModels\Projects;
 
 use App\Models\Message;
 use App\Models\Project;
+use App\Models\Reaction;
 use App\Models\User;
 use App\ViewModels\Projects\ProjectMessageViewModel;
 use Carbon\Carbon;
@@ -88,10 +89,15 @@ class ProjectMessageViewModelTest extends TestCase
             'body' => 'this is my best friend',
             'created_at' => Carbon::create(2018, 1, 1),
         ]);
+        $reaction = Reaction::factory()->create([
+            'emoji' => '👍',
+            'reactionable_id' => $message->id,
+            'reactionable_type' => Message::class,
+        ]);
 
         $array = ProjectMessageViewModel::show($message);
 
-        $this->assertCount(5, $array);
+        $this->assertCount(6, $array);
         $this->assertEquals(
             $message->id,
             $array['id']
@@ -115,6 +121,20 @@ class ProjectMessageViewModelTest extends TestCase
                 'avatar' => $message->user->avatar,
             ],
             $array['author']
+        );
+        $this->assertEquals(
+            [
+                0 => [
+                    'id' => $reaction->id,
+                    'emoji' => '👍',
+                    'author' => [
+                        'id' => $reaction->user->id,
+                        'name' => $reaction->user->name,
+                        'avatar' => $reaction->user->avatar,
+                    ],
+                ],
+            ],
+            $array['reactions']->toArray()
         );
     }
 

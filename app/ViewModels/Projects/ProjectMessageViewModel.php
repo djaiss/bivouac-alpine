@@ -6,6 +6,7 @@ use App\Helpers\DateHelper;
 use App\Helpers\StringHelper;
 use App\Models\Message;
 use App\Models\Project;
+use App\Models\Reaction;
 use Illuminate\Support\Facades\DB;
 
 class ProjectMessageViewModel
@@ -56,11 +57,25 @@ class ProjectMessageViewModel
 
     public static function show(Message $message): array
     {
+        $reactions = $message->reactions()
+            ->with('user')
+            ->get()
+            ->map(fn (Reaction $reaction) => [
+                'id' => $reaction->id,
+                'emoji' => $reaction->emoji,
+                'author' => [
+                    'id' => $reaction->user->id,
+                    'name' => $reaction->user->name,
+                    'avatar' => $reaction->user->avatar,
+                ],
+            ]);
+
         return [
             'id' => $message->id,
             'title' => $message->title,
             'body' => StringHelper::parse($message->body),
             'created_at' => DateHelper::parse($message->created_at),
+            'reactions' => $reactions,
             'author' => [
                 'id' => $message->user_id,
                 'name' => $message->user->name,
