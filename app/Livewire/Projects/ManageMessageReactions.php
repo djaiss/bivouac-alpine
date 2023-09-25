@@ -27,7 +27,7 @@ class ManageMessageReactions extends Component
         return view('livewire.reaction');
     }
 
-    public function save(string $emoji)
+    public function save(string $emoji): void
     {
         $reaction = (new AddReactionToMessage)->execute($emoji, $this->messageId);
 
@@ -42,7 +42,7 @@ class ManageMessageReactions extends Component
         ]);
     }
 
-    public function destroy(int $reactionId)
+    public function destroy(int $reactionId): void
     {
         (new DestroyReaction)->execute([
             'user_id' => auth()->user()->id,
