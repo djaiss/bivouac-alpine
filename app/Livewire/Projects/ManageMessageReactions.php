@@ -18,8 +18,8 @@ class ManageMessageReactions extends Component
 
     public function mount(int $messageId, Collection $reactions): void
     {
-        $this->reactions = $reactions;
         $this->messageId = $messageId;
+        $this->reactions = $reactions;
     }
 
     public function render(): View

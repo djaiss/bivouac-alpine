@@ -2,11 +2,14 @@
 
 namespace Tests\Feature\Project;
 
+use App\Livewire\Projects\ManageMessageReactions;
 use App\Models\Message;
 use App\Models\Organization;
 use App\Models\Project;
+use App\Models\Reaction;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Livewire\Livewire;
 use Tests\TestCase;
 
 class ProjectMessagesTest extends TestCase
@@ -128,5 +131,75 @@ class ProjectMessagesTest extends TestCase
             ->assertRedirectToRoute('project.message.index', [
                 'project' => $project,
             ]);
+    }
+
+    /** @test */
+    public function reaction_component_exists_on_the_page(): void
+    {
+        $user = User::factory()->create();
+        $project = Project::factory()->create([
+            'organization_id' => $user->organization_id,
+            'is_public' => true,
+        ]);
+        $message = Message::factory()->create([
+            'project_id' => $project->id,
+        ]);
+
+        $this->actingAs($user)
+            ->get('/projects/' . $project->id . '/messages/' . $message->id)
+            ->assertSeeLivewire(ManageMessageReactions::class);
+    }
+
+    /** @test */
+    public function we_can_add_a_reaction(): void
+    {
+        $user = User::factory()->create();
+        $message = Message::factory()->create();
+
+        Livewire::actingAs($user)
+            ->test(ManageMessageReactions::class, [
+                'messageId' => $message->id,
+                'reactions' => collect(),
+            ])
+            ->call('save', '👍')
+            ->assertSee('👍');
+
+        $this->assertDatabaseHas('reactions', [
+            'reactionable_id' => $message->id,
+            'reactionable_type' => Message::class,
+            'emoji' => '👍',
+        ]);
+    }
+
+    /** @test */
+    public function we_can_remove_a_reaction(): void
+    {
+        $user = User::factory()->create();
+        $message = Message::factory()->create();
+        $reaction = Reaction::factory()->create([
+            'reactionable_id' => $message->id,
+            'reactionable_type' => Message::class,
+            'user_id' => $user->id,
+            'emoji' => '👍',
+        ]);
+
+        Livewire::actingAs($user)
+            ->test(ManageMessageReactions::class, [
+                'messageId' => $message->id,
+                'reactions' => $message->reactions()->get()->map(fn (Reaction $reaction) => [
+                    'id' => $reaction->id,
+                    'emoji' => $reaction->emoji,
+                    'author' => [
+                        'id' => $reaction->user->id,
+                        'name' => $reaction->user->name,
+                        'avatar' => $reaction->user->avatar,
+                    ],
+                ]),
+            ])
+            ->call('destroy', $reaction->id);
+
+        $this->assertDatabaseMissing('reactions', [
+            'id' => $reaction->id,
+        ]);
     }
 }
