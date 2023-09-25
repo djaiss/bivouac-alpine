@@ -2,61 +2,32 @@
 
 namespace App\Services;
 
-use App\Exceptions\NotEnoughPermissionException;
 use App\Models\Message;
-use App\Models\Project;
 use App\Models\Reaction;
-use App\Models\User;
 
 class AddReactionToMessage extends BaseService
 {
-    private Reaction $reaction;
+    private string $emoji;
     private Message $message;
-    private User $user;
-    private array $data;
+    private Reaction $reaction;
 
-    public function rules(): array
+    public function execute(string $emoji, int $messageId): Reaction
     {
-        return [
-            'user_id' => 'required|integer|exists:users,id',
-            'message_id' => 'required|integer|exists:messages,id',
-            'emoji' => 'nullable|string|max:255',
-        ];
-    }
+        $this->emoji = $emoji;
+        $this->message = Message::find($messageId);
 
-    public function execute(array $data): Reaction
-    {
-        $this->data = $data;
-
-        $this->validate();
         $this->create();
         $this->associate();
 
         return $this->reaction;
     }
 
-    private function validate(): void
-    {
-        $this->validateRules($this->data);
-
-        $this->user = User::findOrFail($this->data['user_id']);
-
-        $this->message = Message::findOrFail($this->data['message_id']);
-
-        $project = Project::where('organization_id', $this->user->organization_id)
-            ->findOrFail($this->message->project_id);
-
-        if ($project->users()->where('user_id', $this->user->id)->doesntExist() && ! $project->is_public) {
-            throw new NotEnoughPermissionException;
-        }
-    }
-
     private function create(): void
     {
         $this->reaction = Reaction::create([
-            'organization_id' => $this->user->organization_id,
-            'user_id' => $this->user->id,
-            'emoji' => $this->data['emoji'],
+            'organization_id' => auth()->user()->organization_id,
+            'user_id' => auth()->user()->id,
+            'emoji' => $this->emoji,
         ]);
     }
 
