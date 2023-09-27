@@ -5,7 +5,6 @@ namespace App\Livewire;
 use App\Helpers\StringHelper;
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\Modelable;
-use Livewire\Attributes\Rule;
 use Livewire\Component;
 
 class TextareaMarkdown extends Component

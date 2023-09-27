@@ -9,7 +9,6 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\Reactive;
-use Livewire\Attributes\Rule;
 use Livewire\Component;
 
 class ManageMessageComments extends Component
