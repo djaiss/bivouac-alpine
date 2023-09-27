@@ -12,14 +12,13 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table): void {
             $table->id();
             $table->unsignedBigInteger('organization_id');
-            $table->unsignedBigInteger('author_id')->nullable();
-            $table->string('author_name');
+            $table->unsignedBigInteger('user_id');
             $table->text('body');
             $table->unsignedBigInteger('commentable_id')->nullable();
             $table->string('commentable_type')->nullable();
             $table->timestamps();
             $table->foreign('organization_id')->references('id')->on('organizations')->onDelete('cascade');
-            $table->foreign('author_id')->references('id')->on('users')->onDelete('set null');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             if (config('scout.driver') === 'database' && in_array(DB::connection()->getDriverName(), ['mysql', 'pgsql'])) {
                 $table->fullText('body');

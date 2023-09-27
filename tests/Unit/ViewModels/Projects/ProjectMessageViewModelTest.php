@@ -97,7 +97,7 @@ class ProjectMessageViewModelTest extends TestCase
 
         $array = ProjectMessageViewModel::show($message);
 
-        $this->assertCount(6, $array);
+        $this->assertCount(7, $array);
         $this->assertEquals(
             $message->id,
             $array['id']

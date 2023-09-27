@@ -4,19 +4,22 @@ namespace App\Livewire;
 
 use App\Helpers\StringHelper;
 use Illuminate\Contracts\View\View;
+use Livewire\Attributes\Modelable;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 
 class TextareaMarkdown extends Component
 {
-    public string $activeTab = 'write';
+    #[Modelable]
+    public $body = '';
 
-    #[Rule('required|min:1|max:65535')]
-    public string $body = '';
+    public $activeTab = 'write';
 
-    public string $previewBody = '';
+    public $previewBody = '';
 
-    public function mount(string $body = ''): void
+    public $minHeight = 'min-h-[400px]';
+
+    public function mount($body = ''): void
     {
         $this->body = $body;
     }

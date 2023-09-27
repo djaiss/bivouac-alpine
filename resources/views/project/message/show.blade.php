@@ -41,6 +41,9 @@
         {{-- <TaskList class="mb-8" :task-list="data.task_list" :context="'message'" /> --}}
 
         <!-- comments -->
+        <livewire:projects.manage-message-comments :messageId="$view['id']"
+                                                   :comments="$view['comments']" />
+
         {{-- <Comments :comments="data.comments" :url="data.url" /> --}}
       </div>
 

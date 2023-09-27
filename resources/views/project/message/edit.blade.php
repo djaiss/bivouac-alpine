@@ -71,7 +71,7 @@
           <div class="rounded-lg shadow">
             <div class="flex items-center justify-between rounded-t-lg border-b bg-white px-6 py-4">
               <x-link class="text-sm font-medium text-blue-700 underline hover:rounded-sm hover:bg-blue-700 hover:text-white"
-                      href="{{ route('project.message.index', ['project' => $header['id']]) }}"
+                      href="{{ route('project.message.show', ['project' => $header['id'], 'message' => $view['id']]) }}"
                       wire:navigate>
                 {{ __('Back') }}
               </x-link>

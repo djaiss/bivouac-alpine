@@ -11,6 +11,7 @@
   <title>{{ config('app.name', 'Bivouac') }}</title>
 
   <!-- Scripts -->
+  @livewireScripts
   @vite(['resources/css/app.css', 'resources/js/app.js'])
 
   @livewireStyles
@@ -151,7 +152,6 @@
       }, 3000);
     }
   </script>
-  @livewireScripts
 </body>
 
 </html>

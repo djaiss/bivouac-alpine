@@ -203,11 +203,10 @@ class SetupDummyAccount extends Command
         $this->info('☐ Add comments to message ' . $message->title);
 
         for ($i = 0; $i < rand(3, 5); $i++) {
-            (new AddCommentToMessage)->execute([
-                'user_id' => User::inRandomOrder()->first()->id,
-                'message_id' => $message->id,
-                'body' => $this->faker->paragraph(15),
-            ]);
+            (new AddCommentToMessage)->execute(
+                messageId: $message->id,
+                body: $this->faker->paragraph(15)
+            );
         }
     }
 
