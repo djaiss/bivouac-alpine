@@ -27,9 +27,7 @@
       <x-input-error class="mt-2"
                      :messages="$errors->get('body')" />
     </div>
-
   @else
-
     <!-- preview mode -->
     <div class="w-full rounded-lg border bg-gray-50 p-4">
       @if ($previewBody !== '')

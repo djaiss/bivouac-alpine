@@ -56,7 +56,7 @@
 
             <!-- Description -->
             <div class="mb-4">
-              <livewire:textarea-markdown />
+              <livewire:textarea-markdown :minHeight="'min-h-[300px]'" />
 
               <x-input-error class="mt-2"
                              :messages="$errors->get('body')" />

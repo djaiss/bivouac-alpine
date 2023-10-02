@@ -6,7 +6,7 @@
         <li class="mb-10 ml-4"
             wire:key="{{ $comment['id'] }}">
           <div
-            class="border-bg-900 absolute -left-1.5 mt-1.5 h-3 w-3 rounded-full border bg-gray-300 dark:border-gray-900 dark:bg-gray-700">
+               class="border-bg-900 absolute -left-1.5 mt-1.5 h-3 w-3 rounded-full border bg-gray-300 dark:border-gray-900 dark:bg-gray-700">
           </div>
 
           <!-- avatar + time -->
@@ -29,8 +29,7 @@
           </div>
 
           <!-- comment -->
-          <div class="rounded-lg bg-white shadow"
-               v-if="editedComment != comment">
+          <div class="rounded-lg bg-white shadow">
             <div class="border-b px-4 py-4">
               <div class="prose">{!! $comment['body'] !!}</div>
             </div>
@@ -100,7 +99,8 @@
       <div class="rounded-lg bg-white px-4 py-4 shadow">
         <p class="mb-3 font-bold">{{ __('Add a comment') }}</p>
 
-        <livewire:textarea-markdown wire:model="value" :minHeight="'min-h-[100px]'" />
+        <livewire:textarea-markdown wire:model="value"
+                                    :minHeight="'min-h-[100px]'" />
 
         <!-- actions -->
         <div class="mt-4 flex justify-start">
@@ -109,7 +109,7 @@
           </x-primary-button>
 
           <span class="flex cursor-pointer rounded-md border border-gray-300 bg-gray-100 px-3 py-1 font-semibold text-gray-700 hover:border-solid hover:border-gray-500 hover:bg-gray-200"
-                @click="open = false">
+                wire:click="cancel()">
             {{ __('Cancel') }}
           </span>
         </div>

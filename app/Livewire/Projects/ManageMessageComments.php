@@ -8,12 +8,10 @@ use App\Services\DestroyReaction;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Livewire\Attributes\Locked;
-use Livewire\Attributes\Reactive;
 use Livewire\Component;
 
 class ManageMessageComments extends Component
 {
-    #[Reactive]
     public $value = '';
 
     #[Locked]
@@ -34,10 +32,9 @@ class ManageMessageComments extends Component
 
     public function save(): void
     {
-        dd($this->value);
         $comment = (new AddCommentToMessage)->execute(
             messageId: $this->messageId,
-            body: $this->body,
+            body: $this->value,
         );
 
         $this->comments->push([
@@ -51,6 +48,13 @@ class ManageMessageComments extends Component
             'body_raw' => $comment->body,
             'created_at' => $comment->created_at->format('Y-m-d H:i:s'),
         ]);
+
+        $this->value = '';
+    }
+
+    public function cancel(): void
+    {
+        $this->value = '';
     }
 
     public function destroy(int $commentId): void
