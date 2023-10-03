@@ -51,6 +51,7 @@ class ManageMessageComments extends Component
             'body' => StringHelper::parse($comment->body),
             'body_raw' => $comment->body,
             'created_at' => $comment->created_at->format('Y-m-d H:i:s'),
+            'reactions' => collect(),
         ]);
 
         $this->value = '';

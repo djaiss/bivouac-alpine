@@ -43,8 +43,6 @@
         <!-- comments -->
         <livewire:projects.manage-message-comments :messageId="$view['id']"
                                                    :comments="$view['comments']" />
-
-        {{-- <Comments :comments="data.comments" :url="data.url" /> --}}
       </div>
 
       <!-- right -->
