@@ -10,15 +10,15 @@ use Livewire\Component;
 class TextareaMarkdown extends Component
 {
     #[Modelable]
-    public $body = '';
+    public string $body = '';
 
-    public $activeTab = 'write';
+    public string $activeTab = 'write';
 
-    public $previewBody = '';
+    public string $previewBody = '';
 
-    public $minHeight = 'min-h-[400px]';
+    public string $minHeight = 'min-h-[400px]';
 
-    public function mount($body = ''): void
+    public function mount(string $body = ''): void
     {
         $this->body = $body;
     }

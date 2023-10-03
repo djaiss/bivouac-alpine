@@ -12,7 +12,7 @@ use Livewire\Component;
 
 class ManageMessageComments extends Component
 {
-    public $value = '';
+    public string $value = '';
 
     #[Locked]
     public int $messageId = 0;
