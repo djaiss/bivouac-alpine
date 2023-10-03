@@ -22,14 +22,14 @@ class CommentTest extends TestCase
     }
 
     /** @test */
-    public function it_belongs_to_one_creator(): void
+    public function it_belongs_to_one_user(): void
     {
         $user = User::factory()->create();
         $comment = Comment::factory()->create([
-            'author_id' => $user->id,
+            'user_id' => $user->id,
         ]);
 
-        $this->assertTrue($comment->creator()->exists());
+        $this->assertTrue($comment->user()->exists());
     }
 
     /** @test */
@@ -45,38 +45,9 @@ class CommentTest extends TestCase
     }
 
     /** @test */
-    public function it_gets_the_author(): void
-    {
-        $user = User::factory()->create([
-            'first_name' => 'John',
-            'last_name' => 'Doe',
-        ]);
-        $comment = Comment::factory()->create([
-            'author_id' => null,
-            'author_name' => 'Henri Troyat',
-        ]);
-
-        $this->assertEquals(
-            'Henri Troyat',
-            $comment->authorName
-        );
-
-        $comment->author_id = $user->id;
-        $comment->save();
-
-        $this->assertEquals(
-            'John Doe',
-            $comment->authorName
-        );
-    }
-
-    /** @test */
     public function it_gets_the_object_the_comment_is_about(): void
     {
-        $comment = Comment::factory()->create([
-            'author_id' => null,
-            'author_name' => 'Henri Troyat',
-        ]);
+        $comment = Comment::factory()->create();
 
         $this->assertInstanceOf(
             Project::class,

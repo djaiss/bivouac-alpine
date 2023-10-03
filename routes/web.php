@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\ValidateInvitationController;
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Projects\ProjectCommentController;
 use App\Http\Controllers\Projects\ProjectController;
 use App\Http\Controllers\Projects\ProjectMemberController;
 use App\Http\Controllers\Projects\ProjectMessageController;
@@ -75,6 +76,13 @@ Route::middleware('auth', 'verified')->group(function (): void {
             Route::get('projects/{project}/messages/{message}/edit', [ProjectMessageController::class, 'edit'])->name('project.message.edit');
             Route::put('projects/{project}/messages/{message}', [ProjectMessageController::class, 'update'])->name('project.message.update');
             Route::delete('projects/{project}/messages/{message}', [ProjectMessageController::class, 'destroy'])->name('project.message.destroy');
+
+            Route::middleware(['comment'])->group(function (): void {
+                Route::get('projects/{project}/messages/{message}/comments/{comment}/edit', [ProjectCommentController::class, 'edit'])->name('project.message.comment.edit');
+                Route::put('projects/{project}/messages/{message}/comments/{comment}', [ProjectCommentController::class, 'update'])->name('project.message.comment.update');
+                Route::get('projects/{project}/messages/{message}/comments/{comment}/delete', [ProjectCommentController::class, 'delete'])->name('project.message.comment.delete');
+                Route::delete('projects/{project}/messages/{message}/comments/{comment}', [ProjectCommentController::class, 'destroy'])->name('project.message.comment.destroy');
+            });
         });
     });
 

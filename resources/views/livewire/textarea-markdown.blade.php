@@ -5,7 +5,7 @@
         wire:click="toggle('write')">
       {{ __('Write') }}
     </li>
-    <li class="{{ $activeTab === 'preview' ? 'border-blue-600 text-blue-600' : '' }} inline cursor-pointer rounded-r-md border-b border-r border-t px-3 py-1 hover:border-blue-600 hover:text-blue-600"
+    <li class="{{ $activeTab === 'preview' ? 'border-blue-600 text-blue-600 border-l' : '' }} inline cursor-pointer rounded-r-md border-b border-r border-t px-3 py-1 hover:border-blue-600 hover:text-blue-600"
         wire:click="toggle('preview')">
       {{ __('Preview') }}
     </li>
@@ -21,8 +21,11 @@
                   type="text"
                   wire:model="body"
                   required
-                  :minHeight="'min-h-[400px]'"
+                  :minHeight="$minHeight"
                   :value="old('body')" />
+
+      <x-input-error class="mt-2"
+                     :messages="$errors->get('body')" />
     </div>
   @else
     <!-- preview mode -->
