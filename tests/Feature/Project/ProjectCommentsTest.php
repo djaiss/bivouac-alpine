@@ -2,11 +2,13 @@
 
 namespace Tests\Feature\Project;
 
+use App\Livewire\Projects\ManageCommentReactions;
 use App\Livewire\Projects\ManageMessageComments;
 use App\Models\Comment;
 use App\Models\Message;
 use App\Models\Organization;
 use App\Models\Project;
+use App\Models\Reaction;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
@@ -138,6 +140,80 @@ class ProjectCommentsTest extends TestCase
 
         $this->assertDatabaseMissing('comments', [
             'id' => $comment->id,
+        ]);
+    }
+
+    /** @test */
+    public function reaction_component_exists_on_the_page(): void
+    {
+        $user = User::factory()->create();
+        $project = Project::factory()->create([
+            'organization_id' => $user->organization_id,
+            'is_public' => true,
+        ]);
+        $message = Message::factory()->create([
+            'project_id' => $project->id,
+        ]);
+        Comment::factory()->create([
+            'commentable_id' => $message->id,
+            'commentable_type' => Message::class,
+        ]);
+
+        $this->actingAs($user)
+            ->get('/projects/' . $project->id . '/messages/' . $message->id)
+            ->assertSeeLivewire(ManageCommentReactions::class);
+    }
+
+    /** @test */
+    public function we_can_add_a_reaction(): void
+    {
+        $user = User::factory()->create();
+        $comment = Comment::factory()->create();
+
+        Livewire::actingAs($user)
+            ->test(ManageCommentReactions::class, [
+                'commentId' => $comment->id,
+                'reactions' => collect(),
+            ])
+            ->call('save', '👍')
+            ->assertSee('👍');
+
+        $this->assertDatabaseHas('reactions', [
+            'reactionable_id' => $comment->id,
+            'reactionable_type' => Comment::class,
+            'emoji' => '👍',
+        ]);
+    }
+
+    /** @test */
+    public function we_can_remove_a_reaction(): void
+    {
+        $user = User::factory()->create();
+        $comment = Comment::factory()->create();
+        $reaction = Reaction::factory()->create([
+            'reactionable_id' => $comment->id,
+            'reactionable_type' => Comment::class,
+            'user_id' => $user->id,
+            'emoji' => '👍',
+        ]);
+
+        Livewire::actingAs($user)
+            ->test(ManageCommentReactions::class, [
+                'commentId' => $comment->id,
+                'reactions' => $comment->reactions()->get()->map(fn (Reaction $reaction) => [
+                    'id' => $reaction->id,
+                    'emoji' => $reaction->emoji,
+                    'author' => [
+                        'id' => $reaction->user->id,
+                        'name' => $reaction->user->name,
+                        'avatar' => $reaction->user->avatar,
+                    ],
+                ]),
+            ])
+            ->call('destroy', $reaction->id);
+
+        $this->assertDatabaseMissing('reactions', [
+            'id' => $reaction->id,
         ]);
     }
 }
