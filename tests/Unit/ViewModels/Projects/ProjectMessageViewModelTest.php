@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\ViewModels\Projects;
 
+use App\Models\Comment;
 use App\Models\Message;
 use App\Models\Project;
 use App\Models\Reaction;
@@ -84,6 +85,7 @@ class ProjectMessageViewModelTest extends TestCase
     /** @test */
     public function it_gets_the_show_view(): void
     {
+        Carbon::setTestNow(Carbon::create(2018, 1, 1));
         $message = Message::factory()->create([
             'title' => 'Microsoft',
             'body' => 'this is my best friend',
@@ -93,6 +95,16 @@ class ProjectMessageViewModelTest extends TestCase
             'emoji' => '👍',
             'reactionable_id' => $message->id,
             'reactionable_type' => Message::class,
+        ]);
+        $comment = Comment::factory()->create([
+            'body' => 'this is my best friend',
+            'commentable_id' => $message->id,
+            'commentable_type' => Message::class,
+        ]);
+        $commentReaction = Reaction::factory()->create([
+            'emoji' => '👎',
+            'reactionable_id' => $comment->id,
+            'reactionable_type' => Comment::class,
         ]);
 
         $array = ProjectMessageViewModel::show($message);
@@ -135,6 +147,24 @@ class ProjectMessageViewModelTest extends TestCase
                 ],
             ],
             $array['reactions']->toArray()
+        );
+        $this->assertEquals(
+            $comment->id,
+            $array['comments']->toArray()[0]['id']
+        );
+        $this->assertEquals(
+            [
+                0 => [
+                    'id' => $commentReaction->id,
+                    'emoji' => '👎',
+                    'author' => [
+                        'id' => $commentReaction->user->id,
+                        'name' => $commentReaction->user->name,
+                        'avatar' => $commentReaction->user->avatar,
+                    ],
+                ],
+            ],
+            $array['comments']->toArray()[0]['reactions']->toArray()
         );
     }
 

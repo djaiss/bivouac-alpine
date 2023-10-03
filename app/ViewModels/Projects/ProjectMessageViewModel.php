@@ -65,6 +65,8 @@ class ProjectMessageViewModel
             ->get()
             ->map(fn (Comment $comment) => [
                 'id' => $comment->id,
+                'project_id' => $message->project_id,
+                'message_id' => $message->id,
                 'author' => [
                     'id' => $comment->user->id,
                     'name' => $comment->user->name,

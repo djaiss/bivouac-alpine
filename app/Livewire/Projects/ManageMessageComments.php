@@ -37,8 +37,12 @@ class ManageMessageComments extends Component
             body: $this->value,
         );
 
+        $message = $comment->commentable;
+
         $this->comments->push([
             'id' => $comment->id,
+            'project_id' => $message->project_id,
+            'message_id' => $message->id,
             'author' => [
                 'id' => $comment->user->id,
                 'name' => $comment->user->name,

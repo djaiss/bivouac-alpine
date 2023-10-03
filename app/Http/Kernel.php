@@ -71,5 +71,6 @@ class Kernel extends HttpKernel
         'project' => \App\Http\Middleware\CheckProject::class,
         'message' => \App\Http\Middleware\CheckMessage::class,
         'user' => \App\Http\Middleware\CheckUser::class,
+        'comment' => \App\Http\Middleware\CheckComment::class,
     ];
 }
