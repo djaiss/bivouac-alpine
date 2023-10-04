@@ -3,14 +3,14 @@
   @if ($comments->count() > 0)
     <ol class="relative mx-auto max-w-3xl border-l border-gray-200 dark:border-gray-700">
       @foreach ($comments as $comment)
-        <li class="mb-10 ml-4"
+        <li class="mb-4 ml-4"
             wire:key="{{ $comment['id'] }}">
           <div
                class="border-bg-900 absolute -left-1.5 mt-3 h-3 w-3 rounded-full border bg-gray-300 dark:border-gray-900 dark:bg-gray-700">
           </div>
 
           <!-- avatar + time -->
-          <div class="mb-2 flex justify-between text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
+          <div class="mb-0 flex justify-between text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
             <div class="flex items-center">
               <div class="mr-3 flex items-center">
                 <x-avatar class="mr-2 w-5"
