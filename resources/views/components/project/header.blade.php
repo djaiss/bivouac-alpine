@@ -21,51 +21,37 @@
     <div class="text-center text-gray-500 dark:text-gray-400">
       <ul class="-mb-px flex flex-wrap">
         <li class="mr-2">
-          <a class="inline-block rounded-t-lg border-b-2 p-3 hover:border-blue-300 hover:text-blue-600 dark:hover:text-gray-300"
-             href="{{ route('project.show', ['project' => $data['id']]) }}"
-             wire:navigate>
+          <a class="inline-block rounded-t-lg border-b-2 p-3 hover:border-blue-300 hover:text-blue-600 dark:hover:text-gray-300" href="{{ route('project.show', ['project' => $data['id']]) }}" wire:navigate>
             {{ __('Summary') }}
           </a>
         </li>
         <li class="mr-2">
-          <a class="inline-block rounded-t-lg border-b-2 p-3 hover:border-blue-300 hover:text-blue-600 dark:hover:text-gray-300"
-             href="{{ route('project.message.index', ['project' => $data['id']]) }}"
-             wire:navigate.hover>
+          <a class="inline-block rounded-t-lg border-b-2 p-3 hover:border-blue-300 hover:text-blue-600 dark:hover:text-gray-300" href="{{ route('project.message.index', ['project' => $data['id']]) }}" wire:navigate.hover>
             {{ __('Messages') }}
           </a>
         </li>
         <li class="mr-2">
-          <a class="inline-block rounded-t-lg border-b-2 border-transparent p-3 hover:border-blue-300 hover:text-blue-600 dark:hover:text-gray-300"
-             href="#"
-             wire:navigate>
+          <a class="inline-block rounded-t-lg border-b-2 border-transparent p-3 hover:border-blue-300 hover:text-blue-600 dark:hover:text-gray-300" href="#" wire:navigate>
             {{ __('Decisions') }}
           </a>
         </li>
         <li class="mr-2">
-          <a class="inline-block rounded-t-lg border-b-2 p-3 hover:border-blue-300 hover:text-blue-600 dark:hover:text-gray-300"
-             href="{{ route('project.tasklist.index', ['project' => $data['id']]) }}"
-             wire:navigate>
+          <a class="inline-block rounded-t-lg border-b-2 p-3 hover:border-blue-300 hover:text-blue-600 dark:hover:text-gray-300" href="{{ route('project.tasklist.index', ['project' => $data['id']]) }}" wire:navigate>
             {{ __('Tasks') }}
           </a>
         </li>
         <li class="mr-2">
-          <a class="inline-block rounded-t-lg border-b-2 border-transparent p-3 hover:border-blue-300 hover:text-blue-600 dark:hover:text-gray-300"
-             href="#"
-             wire:navigate>
+          <a class="inline-block rounded-t-lg border-b-2 border-transparent p-3 hover:border-blue-300 hover:text-blue-600 dark:hover:text-gray-300" href="#" wire:navigate>
             {{ __('Files') }}
           </a>
         </li>
         <li class="mr-2">
-          <a class="inline-block rounded-t-lg border-b-2 p-3 hover:border-blue-300 hover:text-blue-600 dark:hover:text-gray-300"
-             href="{{ route('project.member.index', ['project' => $data['id']]) }}"
-             wire:navigate>
+          <a class="inline-block rounded-t-lg border-b-2 p-3 hover:border-blue-300 hover:text-blue-600 dark:hover:text-gray-300" href="{{ route('project.member.index', ['project' => $data['id']]) }}" wire:navigate>
             {{ __('Members') }}
           </a>
         </li>
         <li class="mr-2">
-          <a class="inline-block rounded-t-lg border-b-2 p-3 hover:border-blue-300 hover:text-blue-600 dark:hover:text-gray-300"
-             href="{{ route('project.edit', ['project' => $data['id']]) }}"
-             wire:navigate.hover>
+          <a class="inline-block rounded-t-lg border-b-2 p-3 hover:border-blue-300 hover:text-blue-600 dark:hover:text-gray-300" href="{{ route('project.edit', ['project' => $data['id']]) }}" wire:navigate.hover>
             {{ __('Settings') }}
           </a>
         </li>

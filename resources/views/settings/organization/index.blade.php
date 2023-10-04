@@ -6,16 +6,12 @@
       <nav class="flex py-3 text-gray-700">
         <ol class="inline-flex items-center space-x-1 md:space-x-3">
           <li class="inline-flex items-center">
-            <x-link class="text-sm"
-                    href="{{ route('dashboard') }}"
-                    wire:navigate>{{ __('Home') }}</x-link>
+            <x-link class="text-sm" href="{{ route('dashboard') }}" wire:navigate>{{ __('Home') }}</x-link>
           </li>
           <li>
             <div class="flex items-center">
               <x-heroicon-s-chevron-right class="mr-2 h-4 w-4 text-gray-400" />
-              <x-link class="text-sm"
-                      href="{{ route('settings.index') }}"
-                      wire:navigate>{{ __('Account settings') }}</x-link>
+              <x-link class="text-sm" href="{{ route('settings.index') }}" wire:navigate>{{ __('Account settings') }}</x-link>
             </div>
           </li>
           <li>
@@ -47,15 +43,12 @@
             </div>
 
             <div class="w-full p-4">
-              <form class="max-w-5xl space-y-4"
-                    method="POST"
-                    action="{{ route('settings.organization.store') }}">
+              <form class="max-w-5xl space-y-4" method="POST" action="{{ route('settings.organization.store') }}">
 
                 @csrf
                 <!-- name -->
                 <div>
-                  <x-input-label for="label"
-                                 :value="__('What is the name of the organization?')" />
+                  <x-input-label for="label" :value="__('What is the name of the organization?')" />
 
                   <x-text-input class="mt-1 block w-full"
                                 id="label"
@@ -65,8 +58,7 @@
                                 required
                                 autofocus />
 
-                  <x-input-error class="mt-2"
-                                 :messages="$errors->get('label')" />
+                  <x-input-error class="mt-2" :messages="$errors->get('label')" />
                 </div>
 
                 <!-- actions -->

@@ -16,11 +16,9 @@
 
             <!-- avatar + name -->
             <div class="mb-8 flex items-center justify-center text-sm">
-              <x-avatar class="mr-2 w-5"
-                        :data="$view['author']['avatar']" />
+              <x-avatar class="mr-2 w-5" :data="$view['author']['avatar']" />
 
-              <x-link class="mr-4 text-blue-700 underline hover:rounded-sm hover:bg-blue-700 hover:text-white"
-                      href="{{ route('user.show', ['user' => $view['author']['id']]) }}">
+              <x-link class="mr-4 text-blue-700 underline hover:rounded-sm hover:bg-blue-700 hover:text-white" href="{{ route('user.show', ['user' => $view['author']['id']]) }}">
                 {{ $view['author']['name'] }}
               </x-link>
               <p>{{ $view['created_at'] }}</p>
@@ -32,38 +30,31 @@
 
           <!-- message footer -->
           <div class="rounded-b-lg bg-gray-50 p-3">
-            <livewire:projects.manage-message-reactions :messageId="$view['id']"
-                                                        :reactions="$view['reactions']" />
+            <livewire:projects.manage-message-reactions :messageId="$view['id']" :reactions="$view['reactions']" />
           </div>
         </div>
 
         <!-- tasks -->
         <div class="mb-4">
-          <livewire:projects.manage-task-lists :taskList="$view['task_list']"
-                                               :context="'message'" />
+          <livewire:projects.manage-task-lists :taskList="$view['task_list']" :context="'message'" />
         </div>
 
         <!-- comments -->
-        <livewire:projects.manage-message-comments :messageId="$view['id']"
-                                                   :comments="$view['comments']" />
+        <livewire:projects.manage-message-comments :messageId="$view['id']" :comments="$view['comments']" />
       </div>
 
       <!-- right -->
       <div>
         <div class="rounded-lg shadow">
           <div class="flex items-center justify-between rounded-t-lg border-b bg-white px-6 py-4">
-            <x-link class="text-sm font-medium text-blue-700 underline hover:rounded-sm hover:bg-blue-700 hover:text-white"
-                    href="{{ route('project.message.edit', ['project' => $header['id'], 'message' => $view['id']]) }}"
-                    wire:navigate.hover>
+            <x-link class="text-sm font-medium text-blue-700 underline hover:rounded-sm hover:bg-blue-700 hover:text-white" href="{{ route('project.message.edit', ['project' => $header['id'], 'message' => $view['id']]) }}" wire:navigate.hover>
               {{ __('Edit') }}
             </x-link>
           </div>
 
           <!-- markdown help -->
           <div class="prose rounded-b-lg bg-gray-50 px-6 py-4 text-sm">
-            <x-link class="cursor-pointer font-medium text-red-700 underline hover:rounded-sm hover:bg-red-700 hover:text-white"
-                    href="{{ route('project.message.delete', ['project' => $header['id'], 'message' => $view['id']]) }}"
-                    wire:navigate>
+            <x-link class="cursor-pointer font-medium text-red-700 underline hover:rounded-sm hover:bg-red-700 hover:text-white" href="{{ route('project.message.delete', ['project' => $header['id'], 'message' => $view['id']]) }}" wire:navigate>
               {{ __('Delete') }}
             </x-link>
           </div>

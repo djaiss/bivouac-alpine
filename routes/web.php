@@ -98,7 +98,7 @@ Route::middleware('auth', 'verified')->group(function (): void {
             Route::delete('projects/{project}/tasklists/{tasklist}', [ProjectTaskListController::class, 'destroy'])->name('project.tasklist.destroy');
 
             Route::middleware(['task'])->group(function (): void {
-                Route::get('projects/{project}/tasklists/{tasklist}/tasks/{task}', [ProjectTaskController::class, 'edit'])->name('project.tasklist.task.show');
+                Route::get('projects/{project}/tasklists/{tasklist}/tasks/{task}', [ProjectTaskController::class, 'show'])->name('project.tasklist.task.show');
             });
         });
     });

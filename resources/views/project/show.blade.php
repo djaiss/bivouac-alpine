@@ -23,8 +23,7 @@
         </div>
 
         <!-- key resources -->
-        <div class="mb-6 bg-white px-4 py-4 shadow sm:rounded-lg"
-             x-data="{ open: false, label: '', link: '' }">
+        <div class="mb-6 bg-white px-4 py-4 shadow sm:rounded-lg" x-data="{ open: false, label: '', link: '' }">
           <p class="mb-4 text-sm font-bold">{{ __('Key resources') }}</p>
 
           <livewire:projects.manage-key-resources :data="$view" />

@@ -15,23 +15,17 @@
         <div class="flex">
           <!-- instructions -->
           <div class="mr-8 w-96 p-4 text-sm">
-            {{ __(
-                "A project title is a concise phrase that identifies a project, providing a brief overview of its subject or purpose. A project description expands on the title and provides a more detailed explanation of the project's goals, objectives, scope, and expected outcomes.",
-            ) }}
+            {{ __("A project title is a concise phrase that identifies a project, providing a brief overview of its subject or purpose. A project description expands on the title and provides a more detailed explanation of the project's goals, objectives, scope, and expected outcomes.") }}
           </div>
 
           <div class="w-full p-4">
-            <form class="max-w-5xl space-y-4"
-                  method="post"
-                  action="{{ route('project.update', ['project' => $view['id']]) }}">
+            <form class="max-w-5xl space-y-4" method="post" action="{{ route('project.update', ['project' => $view['id']]) }}">
               @csrf
               @method('PUT')
 
               <!-- name -->
               <div>
-                <x-input-label class="mb-1"
-                               for="title"
-                               :value="__('What is the name of the project?')" />
+                <x-input-label class="mb-1" for="title" :value="__('What is the name of the project?')" />
 
                 <x-text-input class="block w-full"
                               id="title"
@@ -41,8 +35,7 @@
                               required
                               autofocus />
 
-                <x-input-error class="mt-2"
-                               :messages="$errors->get('title')" />
+                <x-input-error class="mt-2" :messages="$errors->get('title')" />
               </div>
 
               <!-- short description -->
@@ -58,8 +51,7 @@
                               type="text"
                               :value="old('short_description', $view['short_description'])" />
 
-                <x-input-error class="mt-2"
-                               :messages="$errors->get('short_description')" />
+                <x-input-error class="mt-2" :messages="$errors->get('short_description')" />
               </div>
 
               <!-- full description -->
@@ -74,8 +66,7 @@
                             name="description"
                             type="text">{{ old('description', $view['description']) }}</x-textarea>
 
-                <x-input-error class="mt-2"
-                               :messages="$errors->get('description')" />
+                <x-input-error class="mt-2" :messages="$errors->get('description')" />
               </div>
 
               <div class="space-y-2">
@@ -86,8 +77,7 @@
                          type="radio"
                          value="true"
                          @checked(old('is_public', $view['is_public'])) />
-                  <label class="block text-sm font-medium leading-6 text-gray-900"
-                         for="hidden">
+                  <label class="block text-sm font-medium leading-6 text-gray-900" for="hidden">
                     {{ __('Public: everyone can see and participate') }}
                   </label>
                 </div>
@@ -98,14 +88,12 @@
                          type="radio"
                          value="false"
                          @checked(old('is_public', !$view['is_public'])) />
-                  <label class="block text-sm font-medium leading-6 text-gray-900"
-                         for="month_day">
+                  <label class="block text-sm font-medium leading-6 text-gray-900" for="month_day">
                     {{ __('Private: only selected users can access this project') }}
                   </label>
                 </div>
 
-                <x-input-error class="mt-2"
-                               :messages="$errors->get('is_public')" />
+                <x-input-error class="mt-2" :messages="$errors->get('is_public')" />
               </div>
 
               <div>
@@ -145,9 +133,7 @@
               </x-danger-button>
 
               <template x-teleport="body">
-                <div class="fixed left-0 top-0 z-[99] flex h-screen w-screen items-center justify-center"
-                     x-show="modalOpen"
-                     x-cloak>
+                <div class="fixed left-0 top-0 z-[99] flex h-screen w-screen items-center justify-center" x-show="modalOpen" x-cloak>
                   <div class="absolute inset-0 h-full w-full bg-white bg-opacity-70 backdrop-blur-sm"
                        x-show="modalOpen"
                        x-transition:enter="ease-out duration-300"
@@ -174,9 +160,7 @@
                         {{ __('Once the project is deleted, all of its resources and data will be permanently deleted.') }}
                       </p>
                     </div>
-                    <form class="flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2"
-                          method="post"
-                          action="{{ route('project.destroy', ['project' => $view['id']]) }}">
+                    <form class="flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2" method="post" action="{{ route('project.destroy', ['project' => $view['id']]) }}">
                       @csrf
                       @method('delete')
                       <x-secondary-button @click="modalOpen = false">

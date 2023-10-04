@@ -6,15 +6,11 @@
       <nav class="flex py-3 text-gray-700">
         <ol class="inline-flex items-center space-x-1 md:space-x-3">
           <li class="inline-flex items-center">
-            <x-link class="text-sm"
-                    href="{{ route('dashboard') }}"
-                    wire:navigate>{{ __('Home') }}</x-link>
+            <x-link class="text-sm" href="{{ route('dashboard') }}" wire:navigate>{{ __('Home') }}</x-link>
           </li>
           <li class="inline-flex items-center">
             <x-heroicon-s-chevron-right class="mr-2 h-4 w-4 text-gray-400" />
-            <x-link class="text-sm"
-                    href="{{ route('project.message.index', ['project' => $header['id']]) }}"
-                    wire:navigate>{{ $header['name'] }}</x-link>
+            <x-link class="text-sm" href="{{ route('project.message.index', ['project' => $header['id']]) }}" wire:navigate>{{ $header['name'] }}</x-link>
           </li>
           <li>
             <div class="flex items-center">
@@ -29,18 +25,14 @@
 
   <div class="pb-12">
     <div class="mx-auto max-w-6xl overflow-hidden">
-      <form class="grid grid-cols-[2fr_1fr] gap-4 px-4"
-            method="POST"
-            action="{{ route('project.message.store', ['project' => $header['id']]) }}">
+      <form class="grid grid-cols-[2fr_1fr] gap-4 px-4" method="POST" action="{{ route('project.message.store', ['project' => $header['id']]) }}">
         @csrf
         <!-- left -->
         <div>
           <div class="relative bg-white px-6 py-4 shadow sm:rounded-lg">
             <!-- Title -->
             <div class="mb-8">
-              <x-input-label class="mb-1"
-                             for="title"
-                             :value="__('Title of the message')" />
+              <x-input-label class="mb-1" for="title" :value="__('Title of the message')" />
 
               <x-text-input class="block w-full"
                             id="title"
@@ -50,16 +42,14 @@
                             required
                             autofocus />
 
-              <x-input-error class="mt-2"
-                             :messages="$errors->get('title')" />
+              <x-input-error class="mt-2" :messages="$errors->get('title')" />
             </div>
 
             <!-- Description -->
             <div class="mb-4">
               <livewire:textarea-markdown :minHeight="'min-h-[300px]'" />
 
-              <x-input-error class="mt-2"
-                             :messages="$errors->get('body')" />
+              <x-input-error class="mt-2" :messages="$errors->get('body')" />
             </div>
           </div>
         </div>
@@ -68,9 +58,7 @@
         <div>
           <div class="rounded-lg shadow">
             <div class="flex items-center justify-between rounded-t-lg border-b bg-white px-6 py-4">
-              <x-link class="text-sm font-medium text-blue-700 underline hover:rounded-sm hover:bg-blue-700 hover:text-white"
-                      href="{{ route('project.message.index', ['project' => $header['id']]) }}"
-                      wire:navigate>
+              <x-link class="text-sm font-medium text-blue-700 underline hover:rounded-sm hover:bg-blue-700 hover:text-white" href="{{ route('project.message.index', ['project' => $header['id']]) }}" wire:navigate>
                 {{ __('Back') }}
               </x-link>
 

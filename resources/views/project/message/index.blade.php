@@ -11,8 +11,7 @@
         </h2>
 
         <div>
-          <x-primary-link wire:navigate.hover
-                          :href="route('project.message.create', ['project' => $view['project_id']])">{{ __('Add a message') }}</x-primary-link>
+          <x-primary-link wire:navigate.hover :href="route('project.message.create', ['project' => $view['project_id']])">{{ __('Add a message') }}</x-primary-link>
         </div>
       </div>
 
@@ -20,19 +19,16 @@
       @if (count($view['messages']) > 0)
         <ul class="w-full">
           @foreach ($view['messages'] as $message)
-            <li class="flex py-4 pl-4 pr-6 hover:bg-slate-50 last:hover:rounded-b-lg"
-                wire:key="{{ $message['id'] }}">
+            <li class="flex py-4 pl-4 pr-6 hover:bg-slate-50 last:hover:rounded-b-lg" wire:key="{{ $message['id'] }}">
               <!-- unread status -->
               @if (!$message['read'])
-                <div class="relative"
-                     x-data="{
-                         tooltipVisible: false,
-                         tooltipText: 'Tooltip text',
-                         tooltipArrow: true,
-                         tooltipPosition: 'top',
-                     }"
-                     x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; });
-                     $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });">
+                <div class="relative" x-data="{
+                    tooltipVisible: false,
+                    tooltipText: 'Tooltip text',
+                    tooltipArrow: true,
+                    tooltipPosition: 'top',
+                }" x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; });
+                $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });">
 
                   <div class="absolute w-auto text-sm"
                        x-ref="{{ __('The message is unread') }}"
@@ -48,11 +44,8 @@
                                'right'
                        }"
                        x-cloak>
-                    <div class="relative rounded bg-black bg-opacity-90 px-2 py-1 text-white"
-                         x-show="tooltipVisible"
-                         x-transition>
-                      <p class="block flex-shrink-0 whitespace-nowrap text-xs"
-                         x-text="tooltipText"></p>
+                    <div class="relative rounded bg-black bg-opacity-90 px-2 py-1 text-white" x-show="tooltipVisible" x-transition>
+                      <p class="block flex-shrink-0 whitespace-nowrap text-xs" x-text="tooltipText"></p>
                       <div class="absolute inline-flex items-center justify-center overflow-hidden"
                            x-ref="tooltipArrow"
                            x-show="tooltipArrow"
@@ -66,23 +59,21 @@
                                'left-0 -translate-y-1/2 top-1/2 h-2.5 -mt-px -translate-x-full': tooltipPosition ==
                                    'right'
                            }">
-                        <div class="h-1.5 w-1.5 transform bg-black bg-opacity-90"
-                             :class="{
-                                 'origin-top-left -rotate-45': tooltipPosition ==
-                                     'top',
-                                 'origin-top-left rotate-45': tooltipPosition ==
-                                     'left',
-                                 'origin-bottom-left rotate-45': tooltipPosition ==
-                                     'bottom',
-                                 'origin-top-right -rotate-45': tooltipPosition == 'right'
-                             }">
+                        <div class="h-1.5 w-1.5 transform bg-black bg-opacity-90" :class="{
+                            'origin-top-left -rotate-45': tooltipPosition ==
+                                'top',
+                            'origin-top-left rotate-45': tooltipPosition ==
+                                'left',
+                            'origin-bottom-left rotate-45': tooltipPosition ==
+                                'bottom',
+                            'origin-top-right -rotate-45': tooltipPosition == 'right'
+                        }">
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  <div class="unread"
-                       x-ref="content"></div>
+                  <div class="unread" x-ref="content"></div>
                 </div>
               @endif
 
@@ -90,9 +81,7 @@
               <div class="ml-1">
 
                 <!-- title -->
-                <x-link class="mb-2 inline-block text-blue-700 underline hover:rounded-sm hover:bg-blue-700 hover:text-white"
-                        href="{{ route('project.message.show', ['project' => $header['id'], 'message' => $message['id']]) }}"
-                        wire:navigate>
+                <x-link class="mb-2 inline-block text-blue-700 underline hover:rounded-sm hover:bg-blue-700 hover:text-white" href="{{ route('project.message.show', ['project' => $header['id'], 'message' => $message['id']]) }}" wire:navigate>
                   {{ $message['title'] }}
                 </x-link>
 
@@ -100,11 +89,9 @@
                 <div class="flex text-sm">
                   <!-- user name -->
                   <div class="group mr-4 flex items-center">
-                    <x-avatar class="mr-2 h-4 w-4"
-                              :data="$message['author']['avatar']" />
+                    <x-avatar class="mr-2 h-4 w-4" :data="$message['author']['avatar']" />
 
-                    <x-link class="text-gray-600 group-hover:underline"
-                            href="{{ route('user.show', ['user' => $message['author']['id']]) }}">
+                    <x-link class="text-gray-600 group-hover:underline" href="{{ route('user.show', ['user' => $message['author']['id']]) }}">
                       {{ $message['author']['name'] }}
                     </x-link>
                   </div>
@@ -118,9 +105,7 @@
         <div class="px-4 py-6 text-center">
           <h3 class="mb-2 text-lg font-medium text-gray-900">{{ __("You haven't written a message yet.") }}</h3>
           <p class="mb-5 text-gray-500">{{ __('Get started by adding your first message.') }}</p>
-          <img class="mx-auto block h-60 w-60"
-               src="/img/messages.png"
-               alt="" />
+          <img class="mx-auto block h-60 w-60" src="/img/messages.png" alt="" />
         </div>
       @endif
     </div>

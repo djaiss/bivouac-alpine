@@ -3,9 +3,7 @@
   <div class="mx-auto mb-6 max-w-4xl px-12 pt-6 sm:px-6 lg:px-8">
     <div class="flex justify-center bg-white px-4 shadow sm:rounded-lg">
       <div class="flex items-center">
-        <img class="mr-6 h-24 w-24"
-             src="/img/settings.png"
-             alt="settings" />
+        <img class="mr-6 h-24 w-24" src="/img/settings.png" alt="settings" />
         <p class="text-lg font-bold">{{ __('Account settings') }}</p>
       </div>
     </div>
@@ -18,29 +16,24 @@
           <ul>
             <li class="flex items-center border-b border-gray-200 px-4 py-2 hover:rounded-t-lg hover:bg-slate-50">
               <span class="mr-4 rounded border border-yellow-400 bg-yellow-100 px-1">👥</span>
-              <x-link href="{{ route('settings.user.index') }}"
-                      wire:navigate>{{ __('Add or remove users') }}</x-link>
+              <x-link href="{{ route('settings.user.index') }}" wire:navigate>{{ __('Add or remove users') }}</x-link>
             </li>
             <li class="flex items-center border-b border-gray-200 px-4 py-2 hover:bg-slate-50">
               <span class="mr-4 rounded border border-yellow-400 bg-yellow-100 px-1">🏣</span>
-              <x-link href="{{ route('settings.organization.index') }}"
-                      wire:navigate>
+              <x-link href="{{ route('settings.organization.index') }}" wire:navigate>
                 {{ __("Update organization's name") }}</x-link>
             </li>
             <li class="flex items-center border-b border-gray-200 px-4 py-2 hover:bg-slate-50">
               <span class="mr-4 rounded border border-yellow-400 bg-yellow-100 px-1">🏢</span>
-              <x-link href="{{ route('settings.office.index') }}"
-                      wire:navigate>{{ __('Manage offices') }}</x-link>
+              <x-link href="{{ route('settings.office.index') }}" wire:navigate>{{ __('Manage offices') }}</x-link>
             </li>
             <li class="flex items-center border-b border-gray-200 px-4 py-2 hover:bg-slate-50">
               <span class="mr-4 rounded border border-yellow-400 bg-yellow-100 px-1">👮‍♂️</span>
-              <x-link href="{{ route('settings.role.index') }}"
-                      wire:navigate>{{ __('Manage roles') }}</x-link>
+              <x-link href="{{ route('settings.role.index') }}" wire:navigate>{{ __('Manage roles') }}</x-link>
             </li>
             <li class="flex items-center px-4 py-2 hover:rounded-b-lg hover:bg-slate-50">
               <span class="mr-4 rounded border border-yellow-400 bg-yellow-100 px-1">🗑️</span>
-              <x-link href="{{ route('settings.organization.delete') }}"
-                      wire:navigate>{{ __('Delete organization') }}</x-link>
+              <x-link href="{{ route('settings.organization.delete') }}" wire:navigate>{{ __('Delete organization') }}</x-link>
             </li>
           </ul>
         </div>

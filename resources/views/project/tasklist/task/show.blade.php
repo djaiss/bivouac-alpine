@@ -11,16 +11,14 @@
           <!-- body of the task  -->
           <div class="border-b px-6 py-6">
             <!-- task header -->
-            <div
-                 class="flex cursor-pointer items-start rounded-lg border border-transparent px-2 py-2 hover:border-gray-200">
+            <div class="flex cursor-pointer items-start rounded-lg border border-transparent px-2 py-2 hover:border-gray-200">
 
-              <input class="checkbox-title relative mr-3 h-6 w-6"
-                     type="checkbox"
+              <input wire:click="checkTask({{ $task['id'] }})"
                      {{ $task['is_completed'] ? 'checked="checked"' : '' }}
-                     wire:click="checkTask({{ $task['id'] }})">
+                     class="checkbox-title relative mr-3 h-6 w-6"
+                     type="checkbox">
 
-              <p class="text-xl"
-                 @click="editTitle()">{{ title }}</p>
+              <p class="text-xl" @click="editTitle()">{{ $view['title'] }}</p>
             </div>
 
             <!-- edit title box -->

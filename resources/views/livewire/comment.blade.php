@@ -3,18 +3,15 @@
   @if ($comments->count() > 0)
     <ol class="relative mx-auto max-w-3xl border-l border-gray-200 dark:border-gray-700">
       @foreach ($comments as $comment)
-        <li class="mb-4 ml-4"
-            wire:key="{{ $comment['id'] }}">
-          <div
-               class="border-bg-900 absolute -left-1.5 mt-3 h-3 w-3 rounded-full border bg-gray-300 dark:border-gray-900 dark:bg-gray-700">
+        <li class="mb-4 ml-4" wire:key="{{ $comment['id'] }}">
+          <div class="border-bg-900 absolute -left-1.5 mt-3 h-3 w-3 rounded-full border bg-gray-300 dark:border-gray-900 dark:bg-gray-700">
           </div>
 
           <!-- avatar + time -->
           <div class="mb-0 flex justify-between text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
             <div class="flex items-center">
               <div class="mr-3 flex items-center">
-                <x-avatar class="mr-2 w-5"
-                          :data="$comment['author']['avatar']" />
+                <x-avatar class="mr-2 w-5" :data="$comment['author']['avatar']" />
 
                 <x-link href="{{ route('user.show', ['user' => $comment['author']['id']]) }}">
                   {{ $comment['author']['name'] }}
@@ -25,10 +22,8 @@
             </div>
 
             <!-- actions -->
-            <div class="relative"
-                 x-data="{ dropdownOpen: false }">
-              <button class="inline-flex items-center justify-center rounded-md border-gray-100 px-3 py-2 text-sm font-medium text-neutral-700 transition-colors hover:border-gray-400 hover:bg-white focus:outline-none disabled:pointer-events-none disabled:opacity-50"
-                      @click="dropdownOpen=true">
+            <div class="relative" x-data="{ dropdownOpen: false }">
+              <button class="inline-flex items-center justify-center rounded-md border-gray-100 px-3 py-2 text-sm font-medium text-neutral-700 transition-colors hover:border-gray-400 hover:bg-white focus:outline-none disabled:pointer-events-none disabled:opacity-50" @click="dropdownOpen=true">
                 <x-heroicon-o-ellipsis-horizontal class="h-5 w-5 text-gray-500 hover:text-gray-700" />
               </button>
 
@@ -40,13 +35,11 @@
                    x-transition:enter-end="translate-y-0"
                    x-cloak>
                 <div class="mt-1 rounded-md border border-neutral-200/70 bg-white p-1 text-neutral-700 shadow-md">
-                  <a class="relative flex cursor-pointer select-none items-center rounded px-2 py-1.5 text-sm outline-none transition-colors hover:bg-neutral-100 data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
-                     href="{{ route('project.message.comment.edit', ['project' => $comment['project_id'], 'message' => $comment['message_id'], 'comment' => $comment['id']]) }}">
+                  <a class="relative flex cursor-pointer select-none items-center rounded px-2 py-1.5 text-sm outline-none transition-colors hover:bg-neutral-100 data-[disabled]:pointer-events-none data-[disabled]:opacity-50" href="{{ route('project.message.comment.edit', ['project' => $comment['project_id'], 'message' => $comment['message_id'], 'comment' => $comment['id']]) }}">
                     <x-heroicon-o-pencil class="mr-2 h-4 w-4" />
                     <span>{{ __('Edit') }}</span>
                   </a>
-                  <a class="relative flex cursor-pointer select-none items-center rounded px-2 py-1.5 text-sm outline-none transition-colors hover:bg-neutral-100 data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
-                     href="{{ route('project.message.comment.delete', ['project' => $comment['project_id'], 'message' => $comment['message_id'], 'comment' => $comment['id']]) }}">
+                  <a class="relative flex cursor-pointer select-none items-center rounded px-2 py-1.5 text-sm outline-none transition-colors hover:bg-neutral-100 data-[disabled]:pointer-events-none data-[disabled]:opacity-50" href="{{ route('project.message.comment.delete', ['project' => $comment['project_id'], 'message' => $comment['message_id'], 'comment' => $comment['id']]) }}">
                     <x-heroicon-o-trash class="mr-2 h-4 w-4" />
                     <span>{{ __('Delete') }}</span>
                   </a>
@@ -63,9 +56,7 @@
 
             <!-- message footer -->
             <div class="rounded-b-lg bg-gray-50 p-3">
-              <livewire:projects.manage-comment-reactions wire:key="{{ $comment['id'] }}"
-                                                          :commentId="$comment['id']"
-                                                          :reactions="$comment['reactions']" />
+              <livewire:projects.manage-comment-reactions wire:key="{{ $comment['id'] }}" :commentId="$comment['id']" :reactions="$comment['reactions']" />
             </div>
           </div>
         </li>
@@ -75,32 +66,24 @@
 
   <!-- post a comment box -->
   <div x-data="{ add: false }">
-    <div class="flex cursor-pointer items-center rounded-lg bg-white px-4 py-4 shadow hover:bg-gray-50"
-         x-show="! add"
-         @click="add = true">
+    <div class="flex cursor-pointer items-center rounded-lg bg-white px-4 py-4 shadow hover:bg-gray-50" x-show="! add" @click="add = true">
       <x-heroicon-o-chat-bubble-left-ellipsis class="mr-2 h-5 w-5 text-gray-500" />
 
       <p>{{ __('Add a comment') }}</p>
     </div>
 
-    <form class="rounded-lg bg-white px-4 py-4 shadow"
-          x-show="add"
-          wire:submit="save">
+    <form class="rounded-lg bg-white px-4 py-4 shadow" x-show="add" wire:submit="save">
       <p class="mb-3 font-bold">{{ __('Add a comment') }}</p>
 
-      <livewire:textarea-markdown wire:model="value"
-                                  :minHeight="'min-h-[100px]'" />
+      <livewire:textarea-markdown wire:model="value" :minHeight="'min-h-[100px]'" />
 
       <!-- actions -->
       <div class="mt-4 flex justify-start">
-        <x-primary-button class="mr-2"
-                          x-on:click="add = false">
+        <x-primary-button class="mr-2" x-on:click="add = false">
           {{ __('Save') }}
         </x-primary-button>
 
-        <span class="flex cursor-pointer rounded-md border border-gray-300 bg-gray-100 px-3 py-1 font-semibold text-gray-700 hover:border-solid hover:border-gray-500 hover:bg-gray-200"
-              wire:click="cancel()"
-              x-on:click="add = false">
+        <span class="flex cursor-pointer rounded-md border border-gray-300 bg-gray-100 px-3 py-1 font-semibold text-gray-700 hover:border-solid hover:border-gray-500 hover:bg-gray-200" wire:click="cancel()" x-on:click="add = false">
           {{ __('Cancel') }}
         </span>
       </div>

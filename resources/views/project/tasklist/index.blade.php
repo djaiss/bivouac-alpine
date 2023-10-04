@@ -12,8 +12,7 @@
           </h2>
 
           <div>
-            <x-primary-link wire:navigate.hover
-                            :href="route('project.tasklist.create', ['project' => $header['id']])">{{ __('Add a task list') }}</x-primary-link>
+            <x-primary-link wire:navigate.hover :href="route('project.tasklist.create', ['project' => $header['id']])">{{ __('Add a task list') }}</x-primary-link>
           </div>
         </div>
       </div>
@@ -25,8 +24,7 @@
           <!-- task lists -->
           @foreach ($view['task_lists'] as $taskList)
             <div class="mb-4">
-              <livewire:projects.manage-task-lists :taskList="$taskList"
-                                                   :context="'project'" />
+              <livewire:projects.manage-task-lists :taskList="$taskList" :context="'project'" />
             </div>
           @endforeach
         @else
@@ -36,9 +34,7 @@
             <p class="mb-5 text-gray-500">
               {{ __('Create a task list to begin tracking your tasks and assign them to the appropriate people.') }}
             </p>
-            <img class="mx-auto block h-60 w-60"
-                 src="/img/messages.png"
-                 alt="" />
+            <img class="mx-auto block h-60 w-60" src="/img/messages.png" alt="" />
           </div>
 
         @endif

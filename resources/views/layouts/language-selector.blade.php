@@ -2,8 +2,7 @@
   @foreach ($user['locales'] as $locale)
     <li class="mr-2 inline">
       @if ($user['current_locale'] !== $locale['shortCode'])
-        <x-link class="text-sm text-white hover:bg-transparent"
-                href="{{ $locale['url'] }}">{{ $locale['name'] }}</x-link>
+        <x-link class="text-sm text-white hover:bg-transparent" href="{{ $locale['url'] }}">{{ $locale['name'] }}</x-link>
       @else
         <span class="text-sm text-gray-500">{{ $locale['name'] }}</span>
       @endif
