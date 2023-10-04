@@ -7,6 +7,7 @@ use App\Http\Controllers\Projects\ProjectCommentController;
 use App\Http\Controllers\Projects\ProjectController;
 use App\Http\Controllers\Projects\ProjectMemberController;
 use App\Http\Controllers\Projects\ProjectMessageController;
+use App\Http\Controllers\Projects\ProjectTaskListController;
 use App\Http\Controllers\Settings\SettingsController;
 use App\Http\Controllers\Settings\SettingsInviteUserController;
 use App\Http\Controllers\Settings\SettingsOfficeController;
@@ -84,6 +85,9 @@ Route::middleware('auth', 'verified')->group(function (): void {
                 Route::delete('projects/{project}/messages/{message}/comments/{comment}', [ProjectCommentController::class, 'destroy'])->name('project.message.comment.destroy');
             });
         });
+
+        // tasks
+        Route::get('projects/{project}/tasklists', [ProjectTaskListController::class, 'index'])->name('project.tasklist.index');
     });
 
     // tasklists
