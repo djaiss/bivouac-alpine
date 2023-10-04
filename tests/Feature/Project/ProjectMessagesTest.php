@@ -3,6 +3,7 @@
 namespace Tests\Feature\Project;
 
 use App\Livewire\Projects\ManageMessageReactions;
+use App\Livewire\Projects\ManageTaskLists;
 use App\Models\Message;
 use App\Models\Organization;
 use App\Models\Project;
@@ -205,6 +206,123 @@ class ProjectMessagesTest extends TestCase
 
         $this->assertDatabaseMissing('reactions', [
             'id' => $reaction->id,
+        ]);
+    }
+
+    /** @test */
+    public function tasks_component_exists_on_the_page(): void
+    {
+        $user = User::factory()->create();
+        $project = Project::factory()->create([
+            'organization_id' => $user->organization_id,
+            'is_public' => true,
+        ]);
+        $message = Message::factory()->create([
+            'project_id' => $project->id,
+        ]);
+        TaskList::factory()->create([
+            'tasklistable_id' => $message->id,
+            'tasklistable_type' => Message::class,
+        ]);
+
+        $this->actingAs($user)
+            ->get('/projects/' . $project->id . '/messages/' . $message->id)
+            ->assertSeeLivewire(ManageTaskLists::class);
+    }
+
+    /** @test */
+    public function we_can_toggle_the_task_list(): void
+    {
+        $user = User::factory()->create();
+        $message = Message::factory()->create();
+        $taskList = TaskList::factory()->create([
+            'tasklistable_id' => $message->id,
+            'tasklistable_type' => Message::class,
+        ]);
+
+        Livewire::actingAs($user)
+            ->test(ManageTaskLists::class, [
+                'taskList' => [
+                    'id' => $taskList->id,
+                    'name' => $taskList->name,
+                    'collapsed' => false,
+                    'tasks' => collect(),
+                ],
+                'context' => 'message',
+            ])
+            ->call('toggle');
+
+        $this->assertDatabaseHas('task_lists', [
+            'tasklistable_id' => $message->id,
+            'tasklistable_type' => Message::class,
+            'collapsed' => true,
+        ]);
+    }
+
+    /** @test */
+    public function we_can_add_a_task(): void
+    {
+        $user = User::factory()->create();
+        $message = Message::factory()->create();
+        $taskList = TaskList::factory()->create([
+            'tasklistable_id' => $message->id,
+            'tasklistable_type' => Message::class,
+        ]);
+
+        Livewire::actingAs($user)
+            ->test(ManageTaskLists::class, [
+                'taskList' => [
+                    'id' => $taskList->id,
+                    'name' => $taskList->name,
+                    'collapsed' => false,
+                    'tasks' => collect(),
+                ],
+                'context' => 'message',
+            ])
+            ->set('title', 'test')
+            ->call('save')
+            ->assertSee('test');
+
+        $this->assertDatabaseHas('tasks', [
+            'task_list_id' => $taskList->id,
+            'title' => 'test',
+        ]);
+    }
+
+    /** @test */
+    public function we_can_update_a_task(): void
+    {
+        $user = User::factory()->create();
+        $message = Message::factory()->create();
+        $taskList = TaskList::factory()->create([
+            'tasklistable_id' => $message->id,
+            'tasklistable_type' => Message::class,
+        ]);
+        $task = $taskList->tasks()->create([
+            'title' => 'test',
+        ]);
+
+        Livewire::actingAs($user)
+            ->test(ManageTaskLists::class, [
+                'taskList' => [
+                    'id' => $taskList->id,
+                    'name' => $taskList->name,
+                    'collapsed' => false,
+                    'tasks' => collect()->push([
+                        'id' => $task->id,
+                        'title' => $task->title,
+                        'assignees' => [],
+                    ]),
+                ],
+                'context' => 'message',
+            ])
+            ->set('title', 'real text')
+            ->call('update', $task->id)
+            ->assertSee('real text');
+
+        $this->assertDatabaseHas('tasks', [
+            'task_list_id' => $taskList->id,
+            'title' => 'real text',
         ]);
     }
 }
