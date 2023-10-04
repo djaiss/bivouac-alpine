@@ -10,6 +10,24 @@ use App\Models\User;
 
 class ProjectTaskListViewModel
 {
+    public static function index(Project $project): array
+    {
+        $taskLists = $project->taskLists()
+            ->where(function ($query) {
+                $query->where('tasklistable_type', Project::class)
+                    ->orWhere(function ($query) {
+                        $query->where('tasklistable_type', Message::class)
+                            ->whereHas('tasks');
+                    });
+            })
+            ->get()
+            ->map(fn (TaskList $taskList) => self::dto($taskList));
+
+        return [
+            'task_lists' => $taskLists,
+        ];
+    }
+
     public static function dto(TaskList $taskList): array
     {
         $tasks = $taskList->tasks()
@@ -53,6 +71,21 @@ class ProjectTaskListViewModel
                 'is_project' => $taskList->tasklistable_type === Project::class,
                 'url' => $parentUrl,
             ],
+        ];
+    }
+
+    public static function edit(TaskList $taskList): array
+    {
+        return [
+            'id' => $taskList->id,
+            'title' => $taskList->name,
+        ];
+    }
+
+    public static function delete(TaskList $taskList): array
+    {
+        return [
+            'id' => $taskList->id,
         ];
     }
 }

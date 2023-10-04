@@ -88,10 +88,16 @@ Route::middleware('auth', 'verified')->group(function (): void {
 
         // tasks
         Route::get('projects/{project}/tasklists', [ProjectTaskListController::class, 'index'])->name('project.tasklist.index');
-    });
+        Route::get('projects/{project}/tasklists/create', [ProjectTaskListController::class, 'create'])->name('project.tasklist.create');
+        Route::post('projects/{project}/tasklists', [ProjectTaskListController::class, 'store'])->name('project.tasklist.store');
 
-    // tasklists
-    Route::get('{project}/taskLists', [ProjectTaskListController::class, 'index'])->name('tasks.index');
+        Route::middleware(['taskList'])->group(function (): void {
+            Route::get('projects/{project}/tasklists/{tasklist}/edit', [ProjectTaskListController::class, 'edit'])->name('project.tasklist.edit');
+            Route::put('projects/{project}/tasklists/{tasklist}', [ProjectTaskListController::class, 'update'])->name('project.tasklist.update');
+            Route::get('projects/{project}/tasklists/{tasklist}/delete', [ProjectTaskListController::class, 'delete'])->name('project.tasklist.delete');
+            Route::delete('projects/{project}/tasklists/{tasklist}', [ProjectTaskListController::class, 'destroy'])->name('project.tasklist.destroy');
+        });
+    });
 
     // settings
     Route::middleware(['administrator'])->group(function (): void {

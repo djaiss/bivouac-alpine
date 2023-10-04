@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Projects;
 use App\Http\Controllers\Controller;
 use App\Services\CreateMessage;
 use App\Services\DestroyMessage;
+use App\Services\MarkMessageAsRead;
 use App\Services\UpdateMessage;
 use App\ViewModels\Projects\ProjectMessageViewModel;
 use App\ViewModels\Projects\ProjectViewModel;
@@ -54,6 +55,10 @@ class ProjectMessageController extends Controller
 
     public function show(Request $request): View
     {
+        (new MarkMessageAsRead)->execute(
+            messageId: $request->message->id,
+        );
+
         return view('project.message.show', [
             'header' => ProjectViewModel::header($request->project),
             'view' => ProjectMessageViewModel::show($request->message),

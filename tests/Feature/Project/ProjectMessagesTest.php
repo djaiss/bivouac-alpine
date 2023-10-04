@@ -247,6 +247,10 @@ class ProjectMessagesTest extends TestCase
                     'name' => $taskList->name,
                     'collapsed' => false,
                     'tasks' => collect(),
+                    'parent' => [
+                        'id' => $message->id,
+                        'is_project' => false,
+                    ],
                 ],
                 'context' => 'message',
             ])
@@ -276,6 +280,10 @@ class ProjectMessagesTest extends TestCase
                     'name' => $taskList->name,
                     'collapsed' => false,
                     'tasks' => collect(),
+                    'parent' => [
+                        'id' => $message->id,
+                        'is_project' => false,
+                    ],
                 ],
                 'context' => 'message',
             ])
@@ -314,6 +322,10 @@ class ProjectMessagesTest extends TestCase
                         'is_completed' => $task->is_completed,
                         'assignees' => [],
                     ]),
+                    'parent' => [
+                        'id' => $message->id,
+                        'is_project' => false,
+                    ],
                 ],
                 'context' => 'message',
             ])
@@ -353,6 +365,10 @@ class ProjectMessagesTest extends TestCase
                         'is_completed' => $task->is_completed,
                         'assignees' => [],
                     ]),
+                    'parent' => [
+                        'id' => $message->id,
+                        'is_project' => false,
+                    ],
                 ],
                 'context' => 'message',
             ])

@@ -18,17 +18,78 @@
 
       <!-- list of messages -->
       @if (count($view['messages']) > 0)
-        <ul class="w-full"
-            v-if="data.messages.length > 0">
+        <ul class="w-full">
           @foreach ($view['messages'] as $message)
             <li class="flex py-4 pl-4 pr-6 hover:bg-slate-50 last:hover:rounded-b-lg"
                 wire:key="{{ $message['id'] }}">
               <!-- unread status -->
-              <div class="unread"
-                   v-if="!message.read"
-                   v-tooltip="__('The message is unread')"></div>
+              @if (!$message['read'])
+                <div class="relative"
+                     x-data="{
+                         tooltipVisible: false,
+                         tooltipText: 'Tooltip text',
+                         tooltipArrow: true,
+                         tooltipPosition: 'top',
+                     }"
+                     x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; });
+                     $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });">
 
+                  <div class="absolute w-auto text-sm"
+                       x-ref="{{ __('The message is unread') }}"
+                       x-show="tooltipVisible"
+                       :class="{
+                           'top-0 left-1/2 -translate-x-1/2 -mt-0.5 -translate-y-full': tooltipPosition ==
+                               'top',
+                           'top-1/2 -translate-y-1/2 -ml-0.5 left-0 -translate-x-full': tooltipPosition ==
+                               'left',
+                           'bottom-0 left-1/2 -translate-x-1/2 -mb-0.5 translate-y-full': tooltipPosition ==
+                               'bottom',
+                           'top-1/2 -translate-y-1/2 -mr-0.5 right-0 translate-x-full': tooltipPosition ==
+                               'right'
+                       }"
+                       x-cloak>
+                    <div class="relative rounded bg-black bg-opacity-90 px-2 py-1 text-white"
+                         x-show="tooltipVisible"
+                         x-transition>
+                      <p class="block flex-shrink-0 whitespace-nowrap text-xs"
+                         x-text="tooltipText"></p>
+                      <div class="absolute inline-flex items-center justify-center overflow-hidden"
+                           x-ref="tooltipArrow"
+                           x-show="tooltipArrow"
+                           :class="{
+                               'bottom-0 -translate-x-1/2 left-1/2 w-2.5 translate-y-full': tooltipPosition ==
+                                   'top',
+                               'right-0 -translate-y-1/2 top-1/2 h-2.5 -mt-px translate-x-full': tooltipPosition ==
+                                   'left',
+                               'top-0 -translate-x-1/2 left-1/2 w-2.5 -translate-y-full': tooltipPosition ==
+                                   'bottom',
+                               'left-0 -translate-y-1/2 top-1/2 h-2.5 -mt-px -translate-x-full': tooltipPosition ==
+                                   'right'
+                           }">
+                        <div class="h-1.5 w-1.5 transform bg-black bg-opacity-90"
+                             :class="{
+                                 'origin-top-left -rotate-45': tooltipPosition ==
+                                     'top',
+                                 'origin-top-left rotate-45': tooltipPosition ==
+                                     'left',
+                                 'origin-bottom-left rotate-45': tooltipPosition ==
+                                     'bottom',
+                                 'origin-top-right -rotate-45': tooltipPosition == 'right'
+                             }">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="unread"
+                       x-ref="content"></div>
+                </div>
+              @endif
+
+              <!-- message info -->
               <div class="ml-1">
+
+                <!-- title -->
                 <x-link class="mb-2 inline-block text-blue-700 underline hover:rounded-sm hover:bg-blue-700 hover:text-white"
                         href="{{ route('project.message.show', ['project' => $header['id'], 'message' => $message['id']]) }}"
                         wire:navigate>
