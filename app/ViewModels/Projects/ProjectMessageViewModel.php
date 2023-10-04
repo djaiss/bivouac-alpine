@@ -99,6 +99,12 @@ class ProjectMessageViewModel
                 ],
             ]);
 
+        $taskList = $message->taskLists()
+            ->with('tasks')
+            ->first();
+
+        $taskList = ProjectTaskListViewModel::dto($taskList);
+
         return [
             'id' => $message->id,
             'title' => $message->title,
@@ -106,6 +112,7 @@ class ProjectMessageViewModel
             'created_at' => DateHelper::parse($message->created_at),
             'comments' => $comments,
             'reactions' => $reactions,
+            'task_list' => $taskList,
             'author' => [
                 'id' => $message->user_id,
                 'name' => $message->user->name,

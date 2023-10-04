@@ -7,6 +7,7 @@ use App\Models\Message;
 use App\Models\Organization;
 use App\Models\Project;
 use App\Models\Reaction;
+use App\Models\TaskList;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
@@ -143,6 +144,10 @@ class ProjectMessagesTest extends TestCase
         ]);
         $message = Message::factory()->create([
             'project_id' => $project->id,
+        ]);
+        TaskList::factory()->create([
+            'tasklistable_id' => $message->id,
+            'tasklistable_type' => Message::class,
         ]);
 
         $this->actingAs($user)

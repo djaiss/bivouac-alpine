@@ -38,7 +38,10 @@
         </div>
 
         <!-- tasks -->
-        {{-- <TaskList class="mb-8" :task-list="data.task_list" :context="'message'" /> --}}
+        <div class="mb-4">
+          <livewire:projects.manage-task-lists :taskList="$view['task_list']"
+                                               :context="'message'" />
+        </div>
 
         <!-- comments -->
         <livewire:projects.manage-message-comments :messageId="$view['id']"

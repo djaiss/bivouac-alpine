@@ -6,6 +6,7 @@ use App\Models\Comment;
 use App\Models\Message;
 use App\Models\Project;
 use App\Models\Reaction;
+use App\Models\TaskList;
 use App\Models\User;
 use App\ViewModels\Projects\ProjectMessageViewModel;
 use Carbon\Carbon;
@@ -106,10 +107,14 @@ class ProjectMessageViewModelTest extends TestCase
             'reactionable_id' => $comment->id,
             'reactionable_type' => Comment::class,
         ]);
+        TaskList::factory()->create([
+            'tasklistable_id' => $message->id,
+            'tasklistable_type' => Message::class,
+        ]);
 
         $array = ProjectMessageViewModel::show($message);
 
-        $this->assertCount(7, $array);
+        $this->assertCount(8, $array);
         $this->assertEquals(
             $message->id,
             $array['id']
