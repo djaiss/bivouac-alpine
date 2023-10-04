@@ -3,14 +3,14 @@
   @if ($comments->count() > 0)
     <ol class="relative mx-auto max-w-3xl border-l border-gray-200 dark:border-gray-700">
       @foreach ($comments as $comment)
-        <li class="mb-10 ml-4"
+        <li class="mb-4 ml-4"
             wire:key="{{ $comment['id'] }}">
           <div
                class="border-bg-900 absolute -left-1.5 mt-3 h-3 w-3 rounded-full border bg-gray-300 dark:border-gray-900 dark:bg-gray-700">
           </div>
 
           <!-- avatar + time -->
-          <div class="mb-2 flex justify-between text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
+          <div class="mb-0 flex justify-between text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
             <div class="flex items-center">
               <div class="mr-3 flex items-center">
                 <x-avatar class="mr-2 w-5"
@@ -74,26 +74,29 @@
   @endif
 
   <!-- post a comment box -->
-  <div>
-    <form wire:submit="save">
+  <div x-data="{ add: false }">
+    <div x-show="! add" @click="add = true" class="rounded-lg bg-white px-4 py-4 shadow flex items-center hover:bg-gray-50 cursor-pointer">
+      <x-heroicon-o-chat-bubble-left-ellipsis class="h-5 w-5 text-gray-500 mr-2" />
 
-      <div class="rounded-lg bg-white px-4 py-4 shadow">
-        <p class="mb-3 font-bold">{{ __('Add a comment') }}</p>
+      <p>{{ __('Add a comment') }}</p>
+    </div>
 
-        <livewire:textarea-markdown wire:model="value"
-                                    :minHeight="'min-h-[100px]'" />
+    <form x-show="add" class="rounded-lg bg-white px-4 py-4 shadow" wire:submit="save">
+      <p class="mb-3 font-bold">{{ __('Add a comment') }}</p>
 
-        <!-- actions -->
-        <div class="mt-4 flex justify-start">
-          <x-primary-button class="mr-2">
-            {{ __('Save') }}
-          </x-primary-button>
+      <livewire:textarea-markdown wire:model="value"
+                                  :minHeight="'min-h-[100px]'" />
 
-          <span class="flex cursor-pointer rounded-md border border-gray-300 bg-gray-100 px-3 py-1 font-semibold text-gray-700 hover:border-solid hover:border-gray-500 hover:bg-gray-200"
-                wire:click="cancel()">
-            {{ __('Cancel') }}
-          </span>
-        </div>
+      <!-- actions -->
+      <div class="mt-4 flex justify-start">
+        <x-primary-button x-on:click="add = false" class="mr-2">
+          {{ __('Save') }}
+        </x-primary-button>
+
+        <span class="flex cursor-pointer rounded-md border border-gray-300 bg-gray-100 px-3 py-1 font-semibold text-gray-700 hover:border-solid hover:border-gray-500 hover:bg-gray-200"
+              wire:click="cancel()" x-on:click="add = false">
+          {{ __('Cancel') }}
+        </span>
       </div>
     </form>
   </div>
