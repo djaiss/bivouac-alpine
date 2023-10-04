@@ -96,6 +96,10 @@ Route::middleware('auth', 'verified')->group(function (): void {
             Route::put('projects/{project}/tasklists/{tasklist}', [ProjectTaskListController::class, 'update'])->name('project.tasklist.update');
             Route::get('projects/{project}/tasklists/{tasklist}/delete', [ProjectTaskListController::class, 'delete'])->name('project.tasklist.delete');
             Route::delete('projects/{project}/tasklists/{tasklist}', [ProjectTaskListController::class, 'destroy'])->name('project.tasklist.destroy');
+
+            Route::middleware(['task'])->group(function (): void {
+                Route::get('projects/{project}/tasklists/{tasklist}/tasks/{task}', [ProjectTaskController::class, 'edit'])->name('project.tasklist.task.show');
+            });
         });
     });
 

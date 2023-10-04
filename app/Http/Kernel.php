@@ -73,5 +73,6 @@ class Kernel extends HttpKernel
         'user' => \App\Http\Middleware\CheckUser::class,
         'comment' => \App\Http\Middleware\CheckComment::class,
         'taskList' => \App\Http\Middleware\CheckTaskList::class,
+        'task' => \App\Http\Middleware\CheckTask::class,
     ];
 }
