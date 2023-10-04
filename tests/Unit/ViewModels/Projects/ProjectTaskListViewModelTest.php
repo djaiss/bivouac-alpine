@@ -14,6 +14,27 @@ class ProjectTaskListViewModelTest extends TestCase
     use DatabaseTransactions;
 
     /** @test */
+    public function it_gets_the_data_for_the_index_view(): void
+    {
+        $message = Message::factory()->create();
+        $taskList = TaskList::factory()->create([
+            'name' => 'Title',
+            'tasklistable_id' => $message->id,
+            'tasklistable_type' => Message::class,
+        ]);
+        Task::factory()->create([
+            'task_list_id' => $taskList->id,
+            'title' => 'Task',
+            'is_completed' => true,
+        ]);
+
+        $array = ProjectTaskListViewModel::index($message->project);
+
+        $this->assertCount(1, $array);
+        $this->assertArrayHasKey('task_lists', $array);
+    }
+
+    /** @test */
     public function it_gets_the_dto(): void
     {
         $message = Message::factory()->create();
@@ -22,7 +43,7 @@ class ProjectTaskListViewModelTest extends TestCase
             'tasklistable_id' => $message->id,
             'tasklistable_type' => Message::class,
         ]);
-        $task = Task::factory()->create([
+        Task::factory()->create([
             'task_list_id' => $taskList->id,
             'title' => 'Task',
             'is_completed' => true,
@@ -60,6 +81,46 @@ class ProjectTaskListViewModelTest extends TestCase
                 'url' => env('APP_URL') . '/projects/' . $message->project_id . '/messages/' . $message->id,
             ],
             $array['parent']
+        );
+    }
+
+    /** @test */
+    public function it_gets_the_data_for_the_edit_view(): void
+    {
+        $taskList = TaskList::factory()->create([
+            'name' => 'Title',
+        ]);
+
+        $array = ProjectTaskListViewModel::edit($taskList);
+
+        $this->assertCount(2, $array);
+        $this->assertArrayHasKey('id', $array);
+        $this->assertArrayHasKey('title', $array);
+        $this->assertEquals(
+            [
+                'id' => $taskList->id,
+                'title' => 'Title',
+            ],
+            $array
+        );
+    }
+
+    /** @test */
+    public function it_gets_the_data_for_the_delete_view(): void
+    {
+        $taskList = TaskList::factory()->create([
+            'name' => 'Title',
+        ]);
+
+        $array = ProjectTaskListViewModel::delete($taskList);
+
+        $this->assertCount(1, $array);
+        $this->assertArrayHasKey('id', $array);
+        $this->assertEquals(
+            [
+                'id' => $taskList->id,
+            ],
+            $array
         );
     }
 }

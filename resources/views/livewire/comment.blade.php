@@ -75,13 +75,17 @@
 
   <!-- post a comment box -->
   <div x-data="{ add: false }">
-    <div x-show="! add" @click="add = true" class="rounded-lg bg-white px-4 py-4 shadow flex items-center hover:bg-gray-50 cursor-pointer">
-      <x-heroicon-o-chat-bubble-left-ellipsis class="h-5 w-5 text-gray-500 mr-2" />
+    <div class="flex cursor-pointer items-center rounded-lg bg-white px-4 py-4 shadow hover:bg-gray-50"
+         x-show="! add"
+         @click="add = true">
+      <x-heroicon-o-chat-bubble-left-ellipsis class="mr-2 h-5 w-5 text-gray-500" />
 
       <p>{{ __('Add a comment') }}</p>
     </div>
 
-    <form x-show="add" class="rounded-lg bg-white px-4 py-4 shadow" wire:submit="save">
+    <form class="rounded-lg bg-white px-4 py-4 shadow"
+          x-show="add"
+          wire:submit="save">
       <p class="mb-3 font-bold">{{ __('Add a comment') }}</p>
 
       <livewire:textarea-markdown wire:model="value"
@@ -89,12 +93,14 @@
 
       <!-- actions -->
       <div class="mt-4 flex justify-start">
-        <x-primary-button x-on:click="add = false" class="mr-2">
+        <x-primary-button class="mr-2"
+                          x-on:click="add = false">
           {{ __('Save') }}
         </x-primary-button>
 
         <span class="flex cursor-pointer rounded-md border border-gray-300 bg-gray-100 px-3 py-1 font-semibold text-gray-700 hover:border-solid hover:border-gray-500 hover:bg-gray-200"
-              wire:click="cancel()" x-on:click="add = false">
+              wire:click="cancel()"
+              x-on:click="add = false">
           {{ __('Cancel') }}
         </span>
       </div>

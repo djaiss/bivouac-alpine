@@ -7,6 +7,7 @@ use App\Http\Controllers\Projects\ProjectCommentController;
 use App\Http\Controllers\Projects\ProjectController;
 use App\Http\Controllers\Projects\ProjectMemberController;
 use App\Http\Controllers\Projects\ProjectMessageController;
+use App\Http\Controllers\Projects\ProjectTaskListController;
 use App\Http\Controllers\Settings\SettingsController;
 use App\Http\Controllers\Settings\SettingsInviteUserController;
 use App\Http\Controllers\Settings\SettingsOfficeController;
@@ -84,10 +85,19 @@ Route::middleware('auth', 'verified')->group(function (): void {
                 Route::delete('projects/{project}/messages/{message}/comments/{comment}', [ProjectCommentController::class, 'destroy'])->name('project.message.comment.destroy');
             });
         });
-    });
 
-    // tasklists
-    Route::get('{project}/taskLists', [ProjectTaskListController::class, 'index'])->name('tasks.index');
+        // tasks
+        Route::get('projects/{project}/tasklists', [ProjectTaskListController::class, 'index'])->name('project.tasklist.index');
+        Route::get('projects/{project}/tasklists/create', [ProjectTaskListController::class, 'create'])->name('project.tasklist.create');
+        Route::post('projects/{project}/tasklists', [ProjectTaskListController::class, 'store'])->name('project.tasklist.store');
+
+        Route::middleware(['taskList'])->group(function (): void {
+            Route::get('projects/{project}/tasklists/{tasklist}/edit', [ProjectTaskListController::class, 'edit'])->name('project.tasklist.edit');
+            Route::put('projects/{project}/tasklists/{tasklist}', [ProjectTaskListController::class, 'update'])->name('project.tasklist.update');
+            Route::get('projects/{project}/tasklists/{tasklist}/delete', [ProjectTaskListController::class, 'delete'])->name('project.tasklist.delete');
+            Route::delete('projects/{project}/tasklists/{tasklist}', [ProjectTaskListController::class, 'destroy'])->name('project.tasklist.destroy');
+        });
+    });
 
     // settings
     Route::middleware(['administrator'])->group(function (): void {

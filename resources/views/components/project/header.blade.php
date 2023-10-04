@@ -43,7 +43,7 @@
         </li>
         <li class="mr-2">
           <a class="inline-block rounded-t-lg border-b-2 p-3 hover:border-blue-300 hover:text-blue-600 dark:hover:text-gray-300"
-             href="menu.url.tasks"
+             href="{{ route('project.tasklist.index', ['project' => $data['id']]) }}"
              wire:navigate>
             {{ __('Tasks') }}
           </a>
