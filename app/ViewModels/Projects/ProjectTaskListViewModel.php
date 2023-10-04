@@ -13,9 +13,9 @@ class ProjectTaskListViewModel
     public static function index(Project $project): array
     {
         $taskLists = $project->taskLists()
-            ->where(function ($query) {
+            ->where(function ($query): void {
                 $query->where('tasklistable_type', Project::class)
-                    ->orWhere(function ($query) {
+                    ->orWhere(function ($query): void {
                         $query->where('tasklistable_type', Message::class)
                             ->whereHas('tasks');
                     });
