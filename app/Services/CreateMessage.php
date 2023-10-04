@@ -3,8 +3,6 @@
 namespace App\Services;
 
 use App\Models\Message;
-use App\Models\Project;
-use App\Models\User;
 
 class CreateMessage extends BaseService
 {
@@ -21,7 +19,7 @@ class CreateMessage extends BaseService
 
         $this->create();
         $this->markAsRead();
-        //$this->createDefaultEmptyTaskList();
+        $this->createDefaultEmptyTaskList();
 
         return $this->message;
     }
@@ -47,15 +45,14 @@ class CreateMessage extends BaseService
      * A message can only have one task list, so it's easier to actually create
      * it here, rather than having to deal with it later.
      */
-    // private function createDefaultEmptyTaskList(): void
-    // {
-    //     $taskList = (new CreateTaskList)->execute([
-    //         'user_id' => $this->user->id,
-    //         'name' => null,
-    //     ]);
-    //     $taskList->project_id = $this->data['project_id'];
-    //     $taskList->tasklistable_id = $this->message->id;
-    //     $taskList->tasklistable_type = Message::class;
-    //     $taskList->save();
-    // }
+    private function createDefaultEmptyTaskList(): void
+    {
+        $taskList = (new CreateTaskList)->execute(
+            name: null,
+        );
+        $taskList->project_id = $this->projectId;
+        $taskList->tasklistable_id = $this->message->id;
+        $taskList->tasklistable_type = Message::class;
+        $taskList->save();
+    }
 }

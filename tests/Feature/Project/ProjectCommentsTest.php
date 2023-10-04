@@ -9,6 +9,7 @@ use App\Models\Message;
 use App\Models\Organization;
 use App\Models\Project;
 use App\Models\Reaction;
+use App\Models\TaskList;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
@@ -28,6 +29,10 @@ class ProjectCommentsTest extends TestCase
         ]);
         $message = Message::factory()->create([
             'project_id' => $project->id,
+        ]);
+        TaskList::factory()->create([
+            'tasklistable_id' => $message->id,
+            'tasklistable_type' => Message::class,
         ]);
 
         $this->actingAs($user)
@@ -157,6 +162,10 @@ class ProjectCommentsTest extends TestCase
         Comment::factory()->create([
             'commentable_id' => $message->id,
             'commentable_type' => Message::class,
+        ]);
+        TaskList::factory()->create([
+            'tasklistable_id' => $message->id,
+            'tasklistable_type' => Message::class,
         ]);
 
         $this->actingAs($user)

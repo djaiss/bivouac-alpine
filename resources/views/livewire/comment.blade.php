@@ -6,7 +6,7 @@
         <li class="mb-10 ml-4"
             wire:key="{{ $comment['id'] }}">
           <div
-               class="border-bg-900 absolute -left-1.5 mt-1.5 h-3 w-3 rounded-full border bg-gray-300 dark:border-gray-900 dark:bg-gray-700">
+               class="border-bg-900 absolute -left-1.5 mt-3 h-3 w-3 rounded-full border bg-gray-300 dark:border-gray-900 dark:bg-gray-700">
           </div>
 
           <!-- avatar + time -->
@@ -32,7 +32,7 @@
                 <x-heroicon-o-ellipsis-horizontal class="h-5 w-5 text-gray-500 hover:text-gray-700" />
               </button>
 
-              <div class="absolute left-1/2 top-0 z-50 mt-12 w-56 -translate-x-1/2"
+              <div class="absolute left-1/2 top-0 z-50 mt-10 w-56 -translate-x-1/2"
                    x-show="dropdownOpen"
                    @click.away="dropdownOpen=false"
                    x-transition:enter="ease-out duration-200"

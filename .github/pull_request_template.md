@@ -1,5 +1,0 @@
-- [ ] Put strings in views in lang/fr.json and any other languages files
-- [ ] 100% unit tests
-- [ ] 100% front end tests
-- [ ] API for any new service
-- [ ] Documentation
