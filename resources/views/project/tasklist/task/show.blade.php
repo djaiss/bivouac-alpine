@@ -9,45 +9,51 @@
         <!-- task -->
         <div class="relative mb-4 bg-white shadow sm:rounded-lg">
           <!-- body of the task  -->
-          <div class="border-b px-6 py-6">
+          <div class="border-b px-6 py-6" x-data="{
+                isEditing: false,
+                title: '{{ $view['title'] }}',
+                focus: function() {
+                    const textInput = this.$refs.textInput;
+                    textInput.focus();
+                    textInput.select();
+                }
+            }" x-cloak>
             <!-- task header -->
-            <div class="flex cursor-pointer items-start rounded-lg border border-transparent px-2 py-2 hover:border-gray-200">
+            <div x-show="!isEditing" class="flex cursor-pointer items-start rounded-lg border border-transparent px-2 py-2 hover:border-gray-200">
 
-              <input wire:click="checkTask({{ $task['id'] }})"
-                     {{ $task['is_completed'] ? 'checked="checked"' : '' }}
-                     class="checkbox-title relative mr-3 h-6 w-6"
+              <input wire:click="checkTask({{ $view['id'] }})"
+                     {{ $view['is_completed'] ? 'checked="checked"' : '' }}
+                     class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500 checkbox-title relative mr-3 h-6 w-6"
+                     style="top: 3px;"
                      type="checkbox">
 
-              <p class="text-xl" @click="editTitle()">{{ $view['title'] }}</p>
+              <p class="text-xl" @click="isEditing = true">{{ $view['title'] }}</p>
             </div>
 
             <!-- edit title box -->
-            {{-- <div v-if="editTitleShown">
-              <form @submit.prevent="update()" class="flex items-center justify-between">
-                <TextInput
-                  id="term"
+            <form x-show="isEditing" class="flex items-center justify-between">
+              <x-text-input class="mr-3 w-full"
+                  id="title"
+                  name="title"
                   type="text"
-                  :placeholder="$t('Enter a title')"
-                  class="mr-3 w-full"
-                  v-model="form.title"
-                  autofocus
-                  @keydown.esc="editTitleShown = false"
-                  required />
+                  wire:model="title"
+                  x-model="title"
+                  x-ref="textInput"
+                  required
+                  x-on:keydown.escape="isEditing = false"
+                  :value="old('title')" />
 
-                <!-- actions -->
-                <div class="flex items-center">
-                  <PrimaryButton class="mr-2" :loading="loadingState" :disabled="loadingState">
-                    {{ $t('Save') }}
-                  </PrimaryButton>
+              <!-- actions -->
+              <div class="flex items-center">
+                <x-primary-button class="mr-2" x-on:click="isEditing = false">
+                  {{ __('Save') }}
+                </x-primary-button>
 
-                  <span
-                    @click="editTitleShown = false"
-                    class="flex cursor-pointer rounded-md bg-gray-100 px-3 py-1.5 font-semibold text-gray-700 shadow-sm ring-1 ring-inset ring-gray-200 hover:bg-gray-200">
-                    {{ $t('Cancel') }}
-                  </span>
-                </div>
-              </form>
-            </div> --}}
+                <span class="flex cursor-pointer rounded-md border border-gray-300 bg-gray-100 px-3 py-1 font-semibold text-gray-700 hover:border-solid hover:border-gray-500 hover:bg-gray-200" x-on:click="isEditing = false">
+                  {{ __('Cancel') }}
+                </span>
+              </div>
+            </form>
 
             <!-- description -->
             {{-- <div v-if="description && !editDescriptionShown" class="ml-3 rounded-lg p-2 hover:bg-gray-100"> --}}

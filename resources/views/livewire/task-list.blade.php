@@ -103,7 +103,7 @@
                          {{ $task['is_completed'] ? 'checked="checked"' : '' }}
                          wire:click="checkTask({{ $task['id'] }})">
 
-                  <a href="{{ route('project.tasklist.task.show', ['project' => $header['id'], 'tasklist' => $taskList['id'], 'task' => $task['id']]) }}" wire:navigate>{{ $task['title'] }}</a>
+                  <a href="{{ $task['url'] }}" wire:navigate class="hover:underline">{{ $task['title'] }}</a>
                 </div>
 
                 <!-- options and assignees -->
@@ -148,8 +148,7 @@
               <!-- edit a task -->
               <form class="flex items-center justify-between" x-show="isEditing" wire:submit="update({{ $task['id'] }})">
 
-                <x-text-input class="block w-full"
-                              class="mr-3 w-full"
+                <x-text-input class="mr-3 w-full"
                               id="title"
                               name="title"
                               type="text"

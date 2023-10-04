@@ -7,6 +7,7 @@ use App\Http\Controllers\Projects\ProjectCommentController;
 use App\Http\Controllers\Projects\ProjectController;
 use App\Http\Controllers\Projects\ProjectMemberController;
 use App\Http\Controllers\Projects\ProjectMessageController;
+use App\Http\Controllers\Projects\ProjectTaskController;
 use App\Http\Controllers\Projects\ProjectTaskListController;
 use App\Http\Controllers\Settings\SettingsController;
 use App\Http\Controllers\Settings\SettingsInviteUserController;
