@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Projects;
 
+use App\Models\Task;
 use App\Models\User;
 use App\Services\CreateTask;
 use App\Services\ToggleTaskList;
@@ -72,6 +73,7 @@ class ManageTaskLists extends Component
         $this->tasks->push([
             'id' => $task->id,
             'title' => $this->title,
+            'is_completed' => $task->is_completed,
             'assignees' => $task->users()
                 ->get()
                 ->map(fn (User $user) => [
@@ -88,17 +90,38 @@ class ManageTaskLists extends Component
     {
         $this->validate();
 
+        $task = Task::findOrFail($taskId);
+
         $task = (new UpdateTask)->execute(
             taskId: $taskId,
             title: $this->title,
-            isCompleted: false,
+            isCompleted: $task->is_completed,
         );
 
+        $this->refreshTaskList($task);
+    }
+
+    public function checkTask(int $taskId): void
+    {
+        $task = Task::findOrFail($taskId);
+
+        $task = (new UpdateTask)->execute(
+            taskId: $taskId,
+            title: $task->title,
+            isCompleted: ! $task->is_completed,
+        );
+
+        $this->refreshTaskList($task);
+    }
+
+    public function refreshTaskList(Task $task): void
+    {
         $this->tasks = $this->tasks->map(function (array $value, int $key) use ($task) {
             if ($value['id'] === $task->id) {
                 return [
                     'id' => $task->id,
                     'title' => $task->title,
+                    'is_completed' => $task->is_completed,
                     'assignees' => $task->users()
                         ->get()
                         ->map(fn (User $user) => [

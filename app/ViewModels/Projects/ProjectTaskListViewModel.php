@@ -31,6 +31,7 @@ class ProjectTaskListViewModel
         $tasks = $tasks->map(fn (Task $task) => [
             'id' => $task->id,
             'title' => $task->title,
+            'is_completed' => $task->is_completed,
             'assignees' => $task->users()
                 ->get()
                 ->map(fn (User $user) => [

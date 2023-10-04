@@ -6,7 +6,7 @@
         <li class="mb-10 ml-4"
             wire:key="{{ $comment['id'] }}">
           <div
-               class="border-bg-900 absolute -left-1.5 mt-1.5 h-3 w-3 rounded-full border bg-gray-300 dark:border-gray-900 dark:bg-gray-700">
+               class="border-bg-900 absolute -left-1.5 mt-3 h-3 w-3 rounded-full border bg-gray-300 dark:border-gray-900 dark:bg-gray-700">
           </div>
 
           <!-- avatar + time -->
