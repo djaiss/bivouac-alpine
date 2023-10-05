@@ -23,7 +23,7 @@ class DestroyUser extends BaseService
     private function validate(): void
     {
         if ($this->user->id === auth()->user()->id) {
-            throw new CantDeleteHimselfException;
+            throw new CantDeleteHimselfException();
         }
     }
 

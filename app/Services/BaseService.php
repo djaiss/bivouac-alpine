@@ -45,6 +45,6 @@ abstract class BaseService
             return null;
         }
 
-        return $data[$index] == '' ? null : $data[$index];
+        return $data[$index] === '' ? null : $data[$index];
     }
 }

@@ -37,7 +37,7 @@ class ManageTask extends Component
     {
         $this->validate();
 
-        $task = (new UpdateTask)->execute(
+        $task = (new UpdateTask())->execute(
             taskId: $this->task['id'],
             title: $this->title,
             description: $this->task['description_raw'],
@@ -51,10 +51,10 @@ class ManageTask extends Component
     {
         $task = Task::findOrFail($taskId);
 
-        $task = (new UpdateTask)->execute(
+        $task = (new UpdateTask())->execute(
             taskId: $taskId,
             title: $task->title,
-            description: $task->description_raw,
+            description: $task->description,
             isCompleted: ! $task->is_completed,
         );
 

@@ -40,6 +40,6 @@ class UpdateMessage extends BaseService
 
     private function markAsRead(): void
     {
-        (new MarkMessageAsRead)->execute($this->message->id);
+        (new MarkMessageAsRead())->execute($this->message->id);
     }
 }

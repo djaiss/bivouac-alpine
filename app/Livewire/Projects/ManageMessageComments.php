@@ -32,7 +32,7 @@ class ManageMessageComments extends Component
 
     public function save(): void
     {
-        $comment = (new AddCommentToMessage)->execute(
+        $comment = (new AddCommentToMessage())->execute(
             messageId: $this->messageId,
             body: $this->value,
         );
@@ -64,7 +64,7 @@ class ManageMessageComments extends Component
 
     public function destroy(int $commentId): void
     {
-        (new DestroyReaction)->execute([
+        (new DestroyReaction())->execute([
             'user_id' => auth()->user()->id,
             'comment_id' => $commentId,
         ]);

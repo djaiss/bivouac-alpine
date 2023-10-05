@@ -37,7 +37,7 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Password::min(8)->uncompromised()],
         ]);
 
-        $user = (new CreateAccount)->execute([
+        $user = (new CreateAccount())->execute([
             'email' => $request->input('email'),
             'password' => $request->input('password'),
             'first_name' => $request->input('first_name'),

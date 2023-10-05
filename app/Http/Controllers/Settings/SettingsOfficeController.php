@@ -33,7 +33,7 @@ class SettingsOfficeController extends Controller
             'is_main_office' => 'nullable|string',
         ]);
 
-        (new CreateOffice)->execute(
+        (new CreateOffice())->execute(
             name: $validated['name'],
             isMainOffice: $validated['is_main_office'] ?? false,
         );
@@ -65,7 +65,7 @@ class SettingsOfficeController extends Controller
             'is_main_office' => 'nullable|string',
         ]);
 
-        $office = (new UpdateOffice)->execute(
+        $office = (new UpdateOffice())->execute(
             office: $office,
             name: $validated['name'],
             isMainOffice: $validated['is_main_office'] ?? false
@@ -93,7 +93,7 @@ class SettingsOfficeController extends Controller
             return redirect()->to(route('settings.office.index'));
         }
 
-        (new DestroyOffice)->execute(
+        (new DestroyOffice())->execute(
             office: $office,
         );
 

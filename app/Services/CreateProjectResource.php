@@ -7,7 +7,7 @@ use App\Models\ProjectResource;
 
 class CreateProjectResource extends BaseService
 {
-    public function execute(int $projectId, string $label = null, string $link): ProjectResource
+    public function execute(int $projectId, ?string $label, string $link): ProjectResource
     {
         $projectResource = ProjectResource::create([
             'project_id' => $projectId,

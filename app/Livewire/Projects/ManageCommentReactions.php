@@ -29,7 +29,7 @@ class ManageCommentReactions extends Component
 
     public function save(string $emoji): void
     {
-        $reaction = (new AddReactionToComment)->execute($emoji, $this->commentId);
+        $reaction = (new AddReactionToComment())->execute($emoji, $this->commentId);
 
         $this->reactions->push([
             'id' => $reaction->id,
@@ -44,7 +44,7 @@ class ManageCommentReactions extends Component
 
     public function destroy(int $reactionId): void
     {
-        (new DestroyReaction)->execute([
+        (new DestroyReaction())->execute([
             'user_id' => auth()->user()->id,
             'reaction_id' => $reactionId,
         ]);

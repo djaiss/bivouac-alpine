@@ -16,7 +16,7 @@ class SettingsInviteUserController extends Controller
             return redirect()->to(route('settings.user.index'));
         }
 
-        (new ResendUserInvitation)->execute(
+        (new ResendUserInvitation())->execute(
             user: $user
         );
 

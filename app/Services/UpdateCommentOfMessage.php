@@ -33,6 +33,6 @@ class UpdateCommentOfMessage extends BaseService
             ->where('message_id', $this->comment->commentable_id)
             ->delete();
 
-        (new MarkMessageAsRead)->execute($this->comment->commentable_id);
+        (new MarkMessageAsRead())->execute($this->comment->commentable_id);
     }
 }

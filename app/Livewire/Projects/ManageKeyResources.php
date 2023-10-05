@@ -68,7 +68,7 @@ class ManageKeyResources extends Component
     {
         $this->validate();
 
-        $resource = (new CreateProjectResource)->execute(
+        $resource = (new CreateProjectResource())->execute(
             projectId: $this->projectId,
             label: $this->label,
             link: $this->link,
@@ -122,7 +122,7 @@ class ManageKeyResources extends Component
         UpdateProjectLastUpdatedAt::dispatch($this->projectId);
 
         $this->resources = $this->resources->filter(function (array $value, int $key) use ($projectResource) {
-            return $value['id'] != $projectResource->id;
+            return $value['id'] !== $projectResource->id;
         });
     }
 }

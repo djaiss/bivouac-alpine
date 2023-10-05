@@ -39,7 +39,7 @@ class ProjectMessageController extends Controller
             'body' => 'required|string|max:65535',
         ]);
 
-        $message = (new CreateMessage)->execute(
+        $message = (new CreateMessage())->execute(
             projectId: $request->project->id,
             title: $validated['title'] ?? '',
             body: $validated['body'] ?? '',
@@ -55,7 +55,7 @@ class ProjectMessageController extends Controller
 
     public function show(Request $request): View
     {
-        (new MarkMessageAsRead)->execute(
+        (new MarkMessageAsRead())->execute(
             messageId: $request->message->id,
         );
 
@@ -80,7 +80,7 @@ class ProjectMessageController extends Controller
             'body' => 'required|string|max:65535',
         ]);
 
-        $message = (new UpdateMessage)->execute(
+        $message = (new UpdateMessage())->execute(
             message: $request->message,
             title: $validated['title'],
             body: $validated['body'],
@@ -104,7 +104,7 @@ class ProjectMessageController extends Controller
 
     public function destroy(Request $request): RedirectResponse
     {
-        (new DestroyMessage)->execute(
+        (new DestroyMessage())->execute(
             message: $request->message,
         );
 

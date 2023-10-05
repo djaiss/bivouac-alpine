@@ -27,7 +27,7 @@ class ProjectCommentController extends Controller
             'body' => 'required|string|max:65535',
         ]);
 
-        $comment = (new UpdateCommentOfMessage)->execute(
+        $comment = (new UpdateCommentOfMessage())->execute(
             comment: $request->comment,
             body: $validated['body'],
         );
@@ -50,7 +50,7 @@ class ProjectCommentController extends Controller
 
     public function destroy(Request $request): RedirectResponse
     {
-        (new DestroyCommentOfMessage)->execute(
+        (new DestroyCommentOfMessage())->execute(
             comment: $request->comment,
         );
 

@@ -20,11 +20,9 @@ class MultiAvatar
 
     public array $ver;
 
-    public function __invoke(string $avatarId, string $sansEnv = null, array $ver = null): string
+    public function __invoke(string $avatarId, ?string $sansEnv = null, ?array $ver = null): string
     {
-        $svgCode = $this->generate(strval($avatarId), $sansEnv, $ver);
-
-        return $svgCode;
+        return $this->generate(strval($avatarId), $sansEnv, $ver);
     }
 
     public function getFinal(string $part, string $partV, string $theme, array $themes, array $sP): string
@@ -43,12 +41,10 @@ class MultiAvatar
             }
         }
 
-        $resultFinal = $svgString;
-
-        return $resultFinal;
+        return $svgString;
     }
 
-    public function generate(string $avatarId, string $sansEnv = null, array $ver = null): string
+    public function generate(string $avatarId, ?string $sansEnv = null, ?array $ver = null): string
     {
         $themes = [];
 
@@ -560,7 +556,7 @@ class MultiAvatar
         // Multiavatar algorithm
         $hash = '';
 
-        if (strlen($avatarId) == 0) {
+        if (strlen($avatarId) === 0) {
             return $hash;
         }
 
@@ -573,34 +569,34 @@ class MultiAvatar
 
         // Get parts (range 0-47)
         $p['env'] = $hash[0] . '' . $hash[1];
-        $p['env'] = round((47 / 100) * (int) $p['env']);
+        $p['env'] = round(47 / 100 * (int) $p['env']);
 
         // Freeze a single part
         // e.g. '0' = 01A; '16' = 01B; '32' = 01C; '1' = 02A; '17' = 02B;
         // p['env'] = '16';
 
         $p['clo'] = $hash[2] . '' . $hash[3];
-        $p['clo'] = round((47 / 100) * (int) $p['clo']);
+        $p['clo'] = round(47 / 100 * (int) $p['clo']);
 
         // p['clo'] = '16';
 
         $p['head'] = $hash[4] . '' . $hash[5];
-        $p['head'] = round((47 / 100) * (int) $p['head']);
+        $p['head'] = round(47 / 100 * (int) $p['head']);
 
         // p['head'] = '01';
 
         $p['mouth'] = $hash[6] . '' . $hash[7];
-        $p['mouth'] = round((47 / 100) * (int) $p['mouth']);
+        $p['mouth'] = round(47 / 100 * (int) $p['mouth']);
 
         // p['mouth'] = '16';
 
         $p['eyes'] = $hash[8] . '' . $hash[9];
-        $p['eyes'] = round((47 / 100) * (int) $p['eyes']);
+        $p['eyes'] = round(47 / 100 * (int) $p['eyes']);
 
         // p['eyes'] = '16';
 
         $p['top'] = $hash[10] . '' . $hash[11];
-        $p['top'] = round((47 / 100) * (int) $p['top']);
+        $p['top'] = round(47 / 100 * (int) $p['top']);
 
         // p['top'] = '25';
 
@@ -609,13 +605,13 @@ class MultiAvatar
             $nr = $part;
 
             if ($nr > 31) {
-                $nr = $nr - 32 . '';
+                $nr -= 32 . '';
                 if ($nr < 10) {
                     $nr = '0' . $nr;
                 }
                 $p[$key] = $nr . 'C';
             } elseif ($nr > 15) {
-                $nr = $nr - 16;
+                $nr -= 16;
                 if ($nr < 10) {
                     $nr = '0' . $nr;
                 }
@@ -636,7 +632,7 @@ class MultiAvatar
             $partV = substr($p[$key], 0, 2);
             $theme = substr($p[$key], 2, 3);
 
-            if ($ver != null) {
+            if ($ver !== null) {
                 $partV = $ver['part'];
                 $theme = $ver['theme'];
             }

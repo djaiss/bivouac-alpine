@@ -25,7 +25,7 @@ class SettingsOrganizationController extends Controller
             'label' => 'required|string|max:255',
         ]);
 
-        (new UpdateOrganization)->execute(
+        (new UpdateOrganization())->execute(
             name: $validated['label']
         );
 
@@ -43,7 +43,7 @@ class SettingsOrganizationController extends Controller
 
     public function destroy(): RedirectResponse
     {
-        (new DestroyOrganization)->execute();
+        (new DestroyOrganization())->execute();
 
         return redirect()->route('login');
     }

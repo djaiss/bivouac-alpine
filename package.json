@@ -7,7 +7,7 @@
     "format": "yarn prettier --write '**/*.{js,css,scss,blade.php}'",
     "lint": "eslint --ext .js *.js resources",
     "pretest": "DB_CONNECTION=testing php artisan migrate:fresh",
-    "posttest": "yarn lint --fix && ./vendor/bin/duster fix && yarn format && yarn lint",
+    "posttest": "yarn lint --fix && ./vendor/bin/duster fix && yarn format && yarn lint && php artisan insights --fix",
     "test": "vendor/bin/phpunit"
   },
   "devDependencies": {

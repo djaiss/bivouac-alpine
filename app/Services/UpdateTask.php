@@ -11,7 +11,7 @@ class UpdateTask extends BaseService
     private ?string $description;
     private bool $isCompleted;
 
-    public function execute(int $taskId, string $title, string $description = null, bool $isCompleted): Task
+    public function execute(int $taskId, string $title, ?string $description, bool $isCompleted): Task
     {
         $this->task = Task::findOrFail($taskId);
         $this->title = $title;

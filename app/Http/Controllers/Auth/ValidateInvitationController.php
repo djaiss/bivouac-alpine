@@ -32,7 +32,7 @@ class ValidateInvitationController extends Controller
 
     public function update(Request $request, string $code): RedirectResponse
     {
-        $user = (new ActivateUserAccount)->execute([
+        $user = (new ActivateUserAccount())->execute([
             'invitation_code' => $code,
             'password' => $request->input('password'),
             'first_name' => $request->input('first_name'),

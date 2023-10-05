@@ -28,7 +28,7 @@ class CheckProject
                 ->findOrFail($id);
 
             if ($project->users()->where('user_id', $request->user()->id)->doesntExist() && ! $project->is_public) {
-                throw new ModelNotFoundException;
+                throw new ModelNotFoundException();
             }
 
             // adding the current project to the request object so we can

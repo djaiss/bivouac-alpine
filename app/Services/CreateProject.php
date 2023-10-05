@@ -14,8 +14,8 @@ class CreateProject extends BaseService
     public function execute(
         string $name,
         string $description,
-        bool $isPublic): Project
-    {
+        bool $isPublic
+    ): Project {
         $this->name = $name;
         $this->description = $description;
         $this->isPublic = $isPublic;
