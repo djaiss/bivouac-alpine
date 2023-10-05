@@ -3,10 +3,7 @@
 namespace App\ViewModels\Projects;
 
 use App\Helpers\StringHelper;
-use App\Models\Message;
-use App\Models\Project;
 use App\Models\Task;
-use App\Models\TaskList;
 use App\Models\User;
 
 class ProjectTaskViewModel

@@ -81,7 +81,7 @@
   @if (!$collapsed)
     <div class="rounded-b-lg bg-gray-50">
       <!-- list of tasks -->
-      @if (count($tasks))
+      @if ($tasks->count() > 0)
         @foreach ($tasks as $task)
           <div class="border-b px-4 py-2 last:border-b-0" wire:key="{{ $task['id'] }}">
             <div x-data="{
@@ -92,11 +92,11 @@
                     textInput.focus();
                     textInput.select();
                 }
-            }" x-cloak>
+            }">
               <!-- content of the task -->
-              <div class="relative flex w-full items-center justify-between rounded-md border border-transparent px-2 py-1 hover:border hover:border-gray-200 hover:bg-white">
+              <div x-show="!isEditing" class="relative flex w-full items-center justify-between rounded-md border border-transparent px-2 py-1 hover:border hover:border-gray-200 hover:bg-white">
                 <!-- title and checkbox -->
-                <div class="flex items-center" x-show="!isEditing">
+                <div class="flex items-center">
 
                   <input class="mr-2 rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800"
                          type="checkbox"
@@ -107,7 +107,7 @@
                 </div>
 
                 <!-- options and assignees -->
-                <div class="flex items-center" x-show="!isEditing">
+                <div class="flex items-center">
                   <!-- assignees -->
                   @if (count($task['assignees']) > 0)
                     <div class="flex -space-x-3">
@@ -131,7 +131,7 @@
                          x-transition:enter-end="translate-y-0"
                          x-cloak>
                       <div class="mt-1 rounded-md border border-neutral-200/70 bg-white p-1 text-neutral-700 shadow-md">
-                        <span class="relative flex cursor-pointer select-none items-center rounded px-2 py-1.5 text-sm outline-none transition-colors hover:bg-neutral-100 data-[disabled]:pointer-events-none data-[disabled]:opacity-50" x-on:click="isEditing = true; $nextTick(() => focus()); dropdownOpen=false">
+                        <span x-on:click="isEditing = true; $nextTick(() => focus()); dropdownOpen=false" class="relative flex cursor-pointer select-none items-center rounded px-2 py-1.5 text-sm outline-none transition-colors hover:bg-neutral-100 data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
                           <x-heroicon-o-pencil class="mr-2 h-4 w-4" />
                           <span>{{ __('Edit') }}</span>
                         </span>
@@ -146,8 +146,10 @@
               </div>
 
               <!-- edit a task -->
-              <form class="flex items-center justify-between" x-show="isEditing" wire:submit="update({{ $task['id'] }})">
-
+              <form x-show="isEditing"
+                    wire:submit="update({{ $task['id'] }})"
+                    class="flex items-center justify-between"
+                    x-cloak>
                 <x-text-input class="mr-3 w-full"
                               id="title"
                               name="title"
@@ -176,7 +178,7 @@
       @endif
 
       <!-- blank state -->
-      @if (count($tasks) == 0 && !$showAddTaskModal)
+      @if ($tasks->count() == 0 && !$showAddTaskModal)
         <p class="px-4 py-2 text-sm">
           {{ __('Use tasks to iterate on something that is essential to achieve.') }}
         </p>

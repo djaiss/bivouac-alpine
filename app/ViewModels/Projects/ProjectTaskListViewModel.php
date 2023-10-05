@@ -61,7 +61,7 @@ class ProjectTaskListViewModel
                 'project' => $taskList->project_id,
                 'tasklist' => $taskList->id,
                 'task' => $task->id,
-            ])
+            ]),
         ]);
 
         return [

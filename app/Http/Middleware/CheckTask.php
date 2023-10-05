@@ -2,9 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Comment;
 use App\Models\Task;
-use App\Models\TaskList;
 use Closure;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
