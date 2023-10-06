@@ -27,7 +27,7 @@ class ProjectCommentController extends Controller
             'body' => 'required|string|max:65535',
         ]);
 
-        $comment = (new UpdateCommentOfMessage())->execute(
+        (new UpdateCommentOfMessage())->execute(
             comment: $request->comment,
             body: $validated['body'],
         );

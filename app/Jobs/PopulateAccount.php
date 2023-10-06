@@ -48,9 +48,10 @@ class PopulateAccount implements ShouldQueue
                 'organization_id' => $this->organization->id,
                 'label' => null,
                 'label_translation_key' => $job,
-                'position' => $position++,
+                'position' => $position,
                 'created_at' => now(),
             ]);
+            $position++;
         }
     }
 }

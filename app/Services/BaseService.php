@@ -41,10 +41,9 @@ abstract class BaseService
      */
     public function valueOrNull(array $data, string $index): ?string
     {
-        if (empty($data[$index])) {
+        if (!isset($data[$index]) || is_null($data[$index])) {
             return null;
         }
-
-        return $data[$index] === '' ? null : $data[$index];
+        return (string) $data[$index];
     }
 }
