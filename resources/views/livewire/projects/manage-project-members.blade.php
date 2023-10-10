@@ -6,25 +6,21 @@
       <div class="flex items-center justify-between border-b px-4 py-2">
         <p class="font-bold">{{ __('Add a user to this project') }}</p>
 
-        <x-heroicon-s-x-mark class="h-5 w-5 cursor-pointer rounded text-gray-400 hover:bg-gray-300 hover:text-gray-600 group-hover:block"
-                             wire:click="toggle" />
+        <x-heroicon-s-x-mark class="h-5 w-5 cursor-pointer rounded text-gray-400 hover:bg-gray-300 hover:text-gray-600 group-hover:block" wire:click="toggle" />
       </div>
       <div wire:loading>{{ __('Loading users...') }}</div>
 
       <!-- list -->
       <ul class="max-h-40 overflow-auto">
         @foreach ($potentialMembers as $user)
-          <li class="flex items-center justify-between py-4 pl-4 pr-6 hover:bg-slate-50 last:hover:rounded-b-lg"
-              wire:key="{{ $user['id'] }}">
+          <li class="flex items-center justify-between py-4 pl-4 pr-6 hover:bg-slate-50 last:hover:rounded-b-lg" wire:key="{{ $user['id'] }}">
             <div class="flex">
-              <x-avatar class="mr-2 h-6 w-6 rounded"
-                        :data="$user['avatar']" />
+              <x-avatar class="mr-2 h-6 w-6 rounded" :data="$user['avatar']" />
               <div>{{ $user['name'] }}</div>
             </div>
 
             <!-- add button -->
-            <span class="flex cursor-pointer rounded-md border border-gray-300 bg-gray-100 px-3 py-1 font-semibold text-gray-700 hover:border-solid hover:border-gray-500 hover:bg-gray-200"
-                  wire:click="add({{ $user['id'] }})">
+            <span class="flex cursor-pointer rounded-md border border-gray-300 bg-gray-100 px-3 py-1 font-semibold text-gray-700 hover:border-solid hover:border-gray-500 hover:bg-gray-200" wire:click="add({{ $user['id'] }})">
               {{ __('Add') }}
             </span>
           </li>
@@ -48,11 +44,9 @@
     <!-- list of users -->
     <ul class="w-full">
       @foreach ($members as $member)
-        <li class="flex items-center justify-between border-b py-4 pl-4 pr-6 last:border-b-0 hover:bg-slate-50 last:hover:rounded-b-lg"
-            wire:key="{{ $member['id'] }}">
+        <li class="flex items-center justify-between border-b py-4 pl-4 pr-6 last:border-b-0 hover:bg-slate-50 last:hover:rounded-b-lg" wire:key="{{ $member['id'] }}">
           <div class="group mr-4 flex items-center">
-            <x-avatar class="mr-2 h-6 w-6 rounded"
-                      :data="$member['avatar']" />
+            <x-avatar class="mr-2 h-6 w-6 rounded" :data="$member['avatar']" />
 
             <x-link :href="'member.url.show'">
               {{ $member['name'] }}
@@ -62,9 +56,7 @@
           <!-- actions -->
           @if ($member['id'] !== auth()->user()->id)
             <div class="">
-              <x-link class="text-sm"
-                      href="{{ route('project.member.delete', ['project' => $projectId, 'user' => $member['id']]) }}"
-                      wire:navigate>{{ __('Remove from project') }}</x-link>
+              <x-link class="text-sm" href="{{ route('project.member.delete', ['project' => $projectId, 'user' => $member['id']]) }}" wire:navigate>{{ __('Remove from project') }}</x-link>
             </div>
           @endif
         </li>

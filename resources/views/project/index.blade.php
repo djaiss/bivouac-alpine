@@ -6,28 +6,24 @@
         <div class="flex items-center justify-between text-center font-medium text-gray-500 dark:text-gray-400">
           <ul class="-mb-px flex flex-wrap">
             <li class="mr-2">
-              <a class="inline-block rounded-t-lg border-b-2 border-transparent p-4 hover:border-blue-300 hover:text-blue-600 dark:hover:text-gray-300"
-                 href="#">
+              <a class="inline-block rounded-t-lg border-b-2 border-transparent p-4 hover:border-blue-300 hover:text-blue-600 dark:hover:text-gray-300" href="#">
                 {{ __('Your projects') }}
               </a>
             </li>
             <li class="mr-2">
-              <a class="active inline-block rounded-t-lg border-b-2 border-blue-600 p-4 text-blue-600 dark:border-blue-500 dark:text-blue-500"
-                 href="#">
+              <a class="active inline-block rounded-t-lg border-b-2 border-blue-600 p-4 text-blue-600 dark:border-blue-500 dark:text-blue-500" href="#">
                 {{ __('Starred projects') }}
               </a>
             </li>
             <li class="mr-2">
-              <a class="inline-block rounded-t-lg border-b-2 border-transparent p-4 hover:border-blue-300 hover:text-blue-600 dark:hover:text-gray-300"
-                 href="#">
+              <a class="inline-block rounded-t-lg border-b-2 border-transparent p-4 hover:border-blue-300 hover:text-blue-600 dark:hover:text-gray-300" href="#">
                 {{ __('All projects') }}
               </a>
             </li>
           </ul>
 
           <div>
-            <x-primary-link wire:navigate
-                            :href="route('project.create')">{{ __('Create project') }}</x-primary-link>
+            <x-primary-link wire:navigate :href="route('project.create')">{{ __('Create project') }}</x-primary-link>
           </div>
         </div>
       </div>
@@ -42,8 +38,7 @@
           <div class="flex">
             <ul class="w-full">
               @foreach ($view['projects'] as $project)
-                <li
-                    class="border-b px-6 py-4 last:border-b-0 hover:bg-slate-50 first:hover:rounded-t-lg last:hover:rounded-b-lg">
+                <li class="border-b px-6 py-4 last:border-b-0 hover:bg-slate-50 first:hover:rounded-t-lg last:hover:rounded-b-lg">
                   <!-- project information -->
                   <div class="flex items-center justify-between">
                     <div class="mr-6 flex flex-col">
@@ -53,8 +48,7 @@
                           <x-icon-lock />
                         @endif
 
-                        <x-link href="{{ route('project.show', ['project' => $project['id']]) }}"
-                                wire:navigate>
+                        <x-link href="{{ route('project.show', ['project' => $project['id']]) }}" wire:navigate>
                           {{ $project['name'] }}
                         </x-link>
                       </div>
@@ -83,13 +77,11 @@
                     <!-- contributors -->
                     <div class="flex -space-x-4">
                       @foreach ($project['members'] as $member)
-                        <x-avatar class="mr-2 h-8 w-8 cursor-pointer rounded-full border-2 border-white"
-                                  :data="$member['avatar']" />
+                        <x-avatar class="mr-2 h-8 w-8 cursor-pointer rounded-full border-2 border-white" :data="$member['avatar']" />
                       @endforeach
 
                       @if ($project['other_members_counter'] > 0)
-                        <div
-                             class="flex h-8 w-8 items-center justify-center rounded-full border-2 border-white bg-gray-700 text-xs font-medium text-white hover:bg-gray-600 dark:border-gray-800">
+                        <div class="flex h-8 w-8 items-center justify-center rounded-full border-2 border-white bg-gray-700 text-xs font-medium text-white hover:bg-gray-600 dark:border-gray-800">
                           <span>+{{ $project['other_members_counter'] }}</span>
                         </div>
                       @endif
@@ -106,9 +98,7 @@
               <div class="px-4 py-6 text-center">
                 <h3 class="mb-2 text-lg font-medium text-gray-900">{{ __("You haven't started a project yet.") }}</h3>
                 <p class="mb-10 text-gray-500">{{ __('Get started by adding your first project.') }}</p>
-                <img class="mx-auto block h-60 w-60"
-                     src="/img/projects.png"
-                     alt="projects" />
+                <img class="mx-auto block h-60 w-60" src="/img/projects.png" alt="projects" />
               </div>
             </div>
           @endif

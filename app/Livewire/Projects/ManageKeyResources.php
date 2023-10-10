@@ -122,7 +122,7 @@ class ManageKeyResources extends Component
         UpdateProjectLastUpdatedAt::dispatch($this->projectId);
 
         $this->resources = $this->resources->filter(function (array $value, int $key) use ($projectResource) {
-            return $value['id'] != $projectResource->id;
+            return $value['id'] !== $projectResource->id;
         });
     }
 }

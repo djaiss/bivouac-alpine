@@ -76,7 +76,7 @@ class ProjectController extends Controller
             name: $validated['title'],
             description: $validated['description'] ?? null,
             shortDescription: $validated['short_description'] ?? null,
-            isPublic: $validated['is_public'] == 'true' ? true : false,
+            isPublic: $validated['is_public'] === 'true' ? true : false,
         );
 
         notify()->success(__('Changes saved.'));

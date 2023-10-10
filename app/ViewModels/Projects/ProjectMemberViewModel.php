@@ -44,12 +44,10 @@ class ProjectMemberViewModel
      */
     public static function listUsers(User $user, Project $project): Collection
     {
-        $users = User::where('id', '!=', $user->id)
+        return User::where('id', '!=', $user->id)
             ->whereNotIn('id', $project->users()->pluck('id'))
             ->where('organization_id', $user->organization_id)
             ->get()
             ->map(fn (User $user) => self::dto($user));
-
-        return $users;
     }
 }

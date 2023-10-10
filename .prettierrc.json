@@ -1,21 +1,22 @@
 {
-  "printWidth": 120,
+  "printWidth": 600,
   "tabWidth": 2,
   "trailingComma": "all",
   "singleQuote": true,
   "bracketSameLine": true,
+  "wrapAttributes": "auto",
+  "wrapAttributesMinAttrs": 4,
   "sortTailwindcssClasses": true,
-  "sortHtmlAttributes": "code-guide",
+  "sortHtmlAttributes": "none",
   "htmlWhitespaceSensitivity": "ignore",
-  "plugins": [
-    "prettier-plugin-tailwindcss",
-    "@shufo/prettier-plugin-blade"
-  ],
+  "singleAttributePerLine": false,
+  "noPhpSyntaxCheck": false,
+  "indentInnerHtml": true,
+  "extraLiners": "",
+  "plugins": ["prettier-plugin-tailwindcss", "@shufo/prettier-plugin-blade"],
   "overrides": [
     {
-      "files": [
-        "*.blade.php"
-      ],
+      "files": ["*.blade.php"],
       "options": {
         "parser": "blade"
       }

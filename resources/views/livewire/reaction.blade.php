@@ -7,8 +7,7 @@
        @click.outside="open = false"
        @close.stop="open = false">
 
-    <div class="inline-block rounded-full bg-gray-200 p-1 hover:cursor-pointer hover:bg-lime-200"
-         @click="open = ! open">
+    <div class="inline-block rounded-full bg-gray-200 p-1 hover:cursor-pointer hover:bg-lime-200" @click="open = ! open">
       <x-heroicon-o-face-smile class="w-4" />
     </div>
 
@@ -24,36 +23,28 @@
          @click="open = false">
       <div class="{{ $contentClasses }} rounded-md ring-1 ring-black ring-opacity-5">
         <div class="flex p-2">
-          <div class="mr-1 cursor-pointer rounded-lg bg-gray-200 px-2 py-1 hover:bg-gray-300"
-               wire:click="save('👍')">
+          <div class="mr-1 cursor-pointer rounded-lg bg-gray-200 px-2 py-1 hover:bg-gray-300" wire:click="save('👍')">
             👍
           </div>
-          <div class="mr-1 cursor-pointer rounded-lg bg-gray-200 px-2 py-1 hover:bg-gray-300"
-               wire:click="save('👎')">
+          <div class="mr-1 cursor-pointer rounded-lg bg-gray-200 px-2 py-1 hover:bg-gray-300" wire:click="save('👎')">
             👎
           </div>
-          <div class="mr-1 cursor-pointer rounded-lg bg-gray-200 px-2 py-1 hover:bg-gray-300"
-               wire:click="save('😁')">
+          <div class="mr-1 cursor-pointer rounded-lg bg-gray-200 px-2 py-1 hover:bg-gray-300" wire:click="save('😁')">
             😁
           </div>
-          <div class="mr-1 cursor-pointer rounded-lg bg-gray-200 px-2 py-1 hover:bg-gray-300"
-               wire:click="save('🎉')">
+          <div class="mr-1 cursor-pointer rounded-lg bg-gray-200 px-2 py-1 hover:bg-gray-300" wire:click="save('🎉')">
             🎉
           </div>
-          <div class="mr-1 cursor-pointer rounded-lg bg-gray-200 px-2 py-1 hover:bg-gray-300"
-               wire:click="save('🫤')">
+          <div class="mr-1 cursor-pointer rounded-lg bg-gray-200 px-2 py-1 hover:bg-gray-300" wire:click="save('🫤')">
             🫤
           </div>
-          <div class="mr-1 cursor-pointer rounded-lg bg-gray-200 px-2 py-1 hover:bg-gray-300"
-               wire:click="save('😭')">
+          <div class="mr-1 cursor-pointer rounded-lg bg-gray-200 px-2 py-1 hover:bg-gray-300" wire:click="save('😭')">
             😭
           </div>
-          <div class="mr-1 cursor-pointer rounded-lg bg-gray-200 px-2 py-1 hover:bg-gray-300"
-               wire:click="save('❤️')">
+          <div class="mr-1 cursor-pointer rounded-lg bg-gray-200 px-2 py-1 hover:bg-gray-300" wire:click="save('❤️')">
             ❤️
           </div>
-          <div class="cursor-pointer rounded-lg bg-gray-200 px-2 py-1 hover:bg-gray-300"
-               wire:click="save('🚀')">🚀</div>
+          <div class="cursor-pointer rounded-lg bg-gray-200 px-2 py-1 hover:bg-gray-300" wire:click="save('🚀')">🚀</div>
         </div>
       </div>
     </div>
@@ -63,13 +54,11 @@
   @if ($reactions->count() > 0)
     <div class="flex items-center">
       @foreach ($reactions as $reaction)
-        <div wire:key="{{ $reaction['id'] }}"
-             @if ($reaction['author']['id'] === auth()->user()->id) class="mr-2 flex rounded-lg px-1 py-1 cursor-pointer border border-yellow-200 bg-yellow-100"
+        <div wire:key="{{ $reaction['id'] }}" @if ($reaction['author']['id'] === auth()->user()->id) class="mr-2 flex rounded-lg px-1 py-1 cursor-pointer border border-yellow-200 bg-yellow-100"
       wire:click="destroy({{ $reaction['id'] }})"
       @else
       class="mr-2 flex rounded-lg px-1 py-1 border border-gray-300" @endif>
-          <x-avatar class="mr-2 h-6 w-6 rounded"
-                    :data="$reaction['author']['avatar']" />
+          <x-avatar class="mr-2 h-6 w-6 rounded" :data="$reaction['author']['avatar']" />
 
           <span>{{ $reaction['emoji'] }}</span>
         </div>

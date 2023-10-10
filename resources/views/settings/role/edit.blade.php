@@ -6,24 +6,18 @@
       <nav class="flex py-3 text-gray-700">
         <ol class="inline-flex items-center space-x-1 md:space-x-3">
           <li class="inline-flex items-center">
-            <x-link class="text-sm"
-                    href="{{ route('dashboard') }}"
-                    wire:navigate>{{ __('Home') }}</x-link>
+            <x-link class="text-sm" href="{{ route('dashboard') }}" wire:navigate>{{ __('Home') }}</x-link>
           </li>
           <li>
             <div class="flex items-center">
               <x-heroicon-s-chevron-right class="mr-2 h-4 w-4 text-gray-400" />
-              <x-link class="text-sm"
-                      href="{{ route('settings.index') }}"
-                      wire:navigate>{{ __('Account settings') }}</x-link>
+              <x-link class="text-sm" href="{{ route('settings.index') }}" wire:navigate>{{ __('Account settings') }}</x-link>
             </div>
           </li>
           <li>
             <div class="flex items-center">
               <x-heroicon-s-chevron-right class="mr-2 h-4 w-4 text-gray-400" />
-              <x-link class="text-sm"
-                      href="{{ route('settings.role.index') }}"
-                      wire:navigate>{{ __('Manage roles') }}</x-link>
+              <x-link class="text-sm" href="{{ route('settings.role.index') }}" wire:navigate>{{ __('Manage roles') }}</x-link>
             </div>
           </li>
           <li>
@@ -39,23 +33,19 @@
 
   <div class="pb-12">
     <div class="mx-auto max-w-lg overflow-hidden rounded-lg bg-white shadow-md dark:bg-gray-800">
-      <form method="post"
-            action="{{ route('settings.role.update', ['role' => $view['id']]) }}">
+      <form method="post" action="{{ route('settings.role.update', ['role' => $view['id']]) }}">
         @csrf
         @method('PUT')
 
         <div class="relative border-b px-6 py-4">
           <div class="h-3w-32 relative mx-auto mb-4 w-32 overflow-hidden rounded-full">
-            <img class="mx-auto block text-center"
-                 src="/img/office_create.png"
-                 alt="logo" />
+            <img class="mx-auto block text-center" src="/img/office_create.png" alt="logo" />
           </div>
           <h1 class="mb-2 text-center text-lg font-bold">{{ __('Edit a role') }}</h1>
         </div>
 
         <div class="relative px-6 py-4">
-          <x-input-label for="name"
-                         :value="__('What is the name of this role?')" />
+          <x-input-label for="name" :value="__('What is the name of this role?')" />
 
           <x-text-input class="mt-1 block w-full"
                         id="label"
@@ -65,14 +55,12 @@
                         :value="old('label', $view['label'])"
                         autofocus />
 
-          <x-input-error class="mt-2"
-                         :messages="$errors->get('label')" />
+          <x-input-error class="mt-2" :messages="$errors->get('label')" />
         </div>
 
         <!-- actions -->
         <div class="flex items-center justify-between border-t bg-gray-50 px-6 py-4">
-          <x-link href="{{ route('settings.role.index') }}"
-                  wire:navigate>{{ __('Back') }}</x-link>
+          <x-link href="{{ route('settings.role.index') }}" wire:navigate>{{ __('Back') }}</x-link>
 
           <div>
             <x-primary-button class="w-full text-center">

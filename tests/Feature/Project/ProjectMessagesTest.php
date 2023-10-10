@@ -321,6 +321,7 @@ class ProjectMessagesTest extends TestCase
                         'title' => $task->title,
                         'is_completed' => $task->is_completed,
                         'assignees' => [],
+                        'url' => '',
                     ]),
                     'parent' => [
                         'id' => $message->id,
@@ -364,6 +365,7 @@ class ProjectMessagesTest extends TestCase
                         'title' => $task->title,
                         'is_completed' => $task->is_completed,
                         'assignees' => [],
+                        'url' => 'url',
                     ]),
                     'parent' => [
                         'id' => $message->id,

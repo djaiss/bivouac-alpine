@@ -166,8 +166,8 @@ class SetupDummyAccount extends Command
         for ($i = 0; $i < rand(3, 5); $i++) {
             $project = (new CreateProject)->execute(
                 name: $projectNames[array_rand($projectNames)],
-                description: rand(1, 2) == 1 ? $this->faker->sentence() : '',
-                isPublic: rand(1, 2) == false
+                description: $this->faker->optional()->sentence(),
+                isPublic: $this->faker->boolean(),
             );
 
             $this->addMembersToProject($project);

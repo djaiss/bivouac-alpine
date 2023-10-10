@@ -8,9 +8,7 @@
     {{ __('Delete project') }}
   </x-danger-button>
   <template x-teleport="body">
-    <div class="fixed left-0 top-0 z-[99] flex h-screen w-screen items-center justify-center"
-         x-show="modalOpen"
-         x-cloak>
+    <div class="fixed left-0 top-0 z-[99] flex h-screen w-screen items-center justify-center" x-show="modalOpen" x-cloak>
       <div class="absolute inset-0 h-full w-full bg-white bg-opacity-70 backdrop-blur-sm"
            x-show="modalOpen"
            x-transition:enter="ease-out duration-300"
@@ -37,9 +35,7 @@
             {{ __('Once the project is deleted, all of its resources and data will be permanently deleted.') }}
           </p>
         </div>
-        <form class="flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2"
-              method="post"
-              action="{{ route('project.destroy', ['project' => $view['id']]) }}">
+        <form class="flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2" method="post" action="{{ route('project.destroy', ['project' => $view['id']]) }}">
           @csrf
           @method('delete')
           <x-secondary-button @click="modalOpen=false">

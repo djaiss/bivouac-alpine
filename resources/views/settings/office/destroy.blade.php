@@ -6,24 +6,18 @@
       <nav class="flex py-3 text-gray-700">
         <ol class="inline-flex items-center space-x-1 md:space-x-3">
           <li class="inline-flex items-center">
-            <x-link class="text-sm"
-                    href="{{ route('dashboard') }}"
-                    wire:navigate>{{ __('Home') }}</x-link>
+            <x-link class="text-sm" href="{{ route('dashboard') }}" wire:navigate>{{ __('Home') }}</x-link>
           </li>
           <li>
             <div class="flex items-center">
               <x-heroicon-s-chevron-right class="mr-2 h-4 w-4 text-gray-400" />
-              <x-link class="text-sm"
-                      href="{{ route('settings.index') }}"
-                      wire:navigate>{{ __('Account settings') }}</x-link>
+              <x-link class="text-sm" href="{{ route('settings.index') }}" wire:navigate>{{ __('Account settings') }}</x-link>
             </div>
           </li>
           <li>
             <div class="flex items-center">
               <x-heroicon-s-chevron-right class="mr-2 h-4 w-4 text-gray-400" />
-              <x-link class="text-sm"
-                      href="{{ route('settings.office.index') }}"
-                      wire:navigate>{{ __('Manage offices') }}</x-link>
+              <x-link class="text-sm" href="{{ route('settings.office.index') }}" wire:navigate>{{ __('Manage offices') }}</x-link>
             </div>
           </li>
           <li>
@@ -39,17 +33,14 @@
 
   <div class="pb-12">
     <div class="mx-auto max-w-lg overflow-hidden rounded-lg bg-white shadow-md dark:bg-gray-800">
-      <form method="POST"
-            action="{{ route('settings.office.destroy', ['office' => $view['id']]) }}">
+      <form method="POST" action="{{ route('settings.office.destroy', ['office' => $view['id']]) }}">
 
         @csrf
         @method('delete')
 
         <div class="relative border-b px-6 py-4">
           <div class="h-3w-32 relative mx-auto mb-4 w-32 overflow-hidden rounded-full">
-            <img class="mx-auto block text-center"
-                 src="/img/invite.png"
-                 alt="logo" />
+            <img class="mx-auto block text-center" src="/img/invite.png" alt="logo" />
           </div>
           <h1 class="text-center text-lg font-bold">{{ __('Delete :name from the system', ['name' => $view['name']]) }}
           </h1>
@@ -63,8 +54,7 @@
 
         <!-- actions -->
         <div class="flex items-center justify-between bg-gray-50 px-6 py-4">
-          <x-link href="{{ route('settings.office.index') }}"
-                  wire:navigate>{{ __('Back') }}</x-link>
+          <x-link href="{{ route('settings.office.index') }}" wire:navigate>{{ __('Back') }}</x-link>
 
           <div>
             <x-danger-button class="w-full text-center">

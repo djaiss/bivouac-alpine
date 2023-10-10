@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Comment;
 use App\Models\TaskList;
 use Closure;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -28,8 +27,8 @@ class CheckTaskList
             $taskList = TaskList::where('project_id', $request->project->id)
                 ->findOrFail($id);
 
-            // adding the current comment to the request object so we can
-            // access it in the controller by using $request->comment
+            // adding the current task list to the request object so we can
+            // access it in the controller by using $request->taskList
             $request->merge(['taskList' => $taskList]);
 
             return $next($request);

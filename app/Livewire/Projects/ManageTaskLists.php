@@ -81,6 +81,11 @@ class ManageTaskLists extends Component
                     'name' => $user->name,
                     'avatar' => $user->avatar,
                 ]),
+            'url' => route('project.tasklist.task.show', [
+                'project' => $this->taskList['parent']['id'],
+                'tasklist' => $this->taskList['id'],
+                'task' => $task->id,
+            ]),
         ]);
 
         $this->toggleAddModal();
@@ -95,6 +100,7 @@ class ManageTaskLists extends Component
         $task = (new UpdateTask)->execute(
             taskId: $taskId,
             title: $this->title,
+            description: $task->description,
             isCompleted: $task->is_completed,
         );
 
@@ -108,6 +114,7 @@ class ManageTaskLists extends Component
         $task = (new UpdateTask)->execute(
             taskId: $taskId,
             title: $task->title,
+            description: $task->description,
             isCompleted: ! $task->is_completed,
         );
 
@@ -129,6 +136,11 @@ class ManageTaskLists extends Component
                             'name' => $user->name,
                             'avatar' => $user->avatar,
                         ]),
+                    'url' => route('project.tasklist.task.show', [
+                        'project' => $this->taskList['parent']['id'],
+                        'tasklist' => $this->taskList['id'],
+                        'task' => $task->id,
+                    ]),
                 ];
             }
 

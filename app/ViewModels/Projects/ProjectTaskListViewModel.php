@@ -57,6 +57,11 @@ class ProjectTaskListViewModel
                     'name' => $user->name,
                     'avatar' => $user->avatar,
                 ]),
+            'url' => route('project.tasklist.task.show', [
+                'project' => $taskList->project_id,
+                'tasklist' => $taskList->id,
+                'task' => $task->id,
+            ]),
         ]);
 
         return [

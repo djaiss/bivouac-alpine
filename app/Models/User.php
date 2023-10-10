@@ -112,7 +112,7 @@ class User extends Authenticatable implements MustVerifyEmail
                 $completeName = $attributes['first_name'];
 
                 if (! is_null($attributes['last_name'])) {
-                    $completeName = $completeName . ' ' . $attributes['last_name'];
+                    $completeName .= ' ' . $attributes['last_name'];
                 }
 
                 return $completeName;
