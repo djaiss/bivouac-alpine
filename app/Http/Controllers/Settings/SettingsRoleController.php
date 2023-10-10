@@ -32,7 +32,7 @@ class SettingsRoleController extends Controller
             'label' => 'required|string|max:255',
         ]);
 
-        (new CreateRole())->execute(
+        (new CreateRole)->execute(
             label: $validated['label'],
         );
 
@@ -62,7 +62,7 @@ class SettingsRoleController extends Controller
             'label' => 'required|string|max:255',
         ]);
 
-        $role = (new UpdateRole())->execute(
+        $role = (new UpdateRole)->execute(
             role: $role,
             label: $validated['label'],
             position: $role->position,
@@ -90,7 +90,7 @@ class SettingsRoleController extends Controller
             return redirect()->to(route('settings.role.index'));
         }
 
-        (new DestroyRole())->execute(
+        (new DestroyRole)->execute(
             role: $role,
         );
 

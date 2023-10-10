@@ -45,11 +45,11 @@ class RemoveUserFromTask extends BaseService
             ->findOrFail($this->task->taskList->project_id);
 
         if ($project->users()->where('user_id', $this->user->id)->doesntExist() && ! $project->is_public) {
-            throw new NotEnoughPermissionException();
+            throw new NotEnoughPermissionException;
         }
 
         if ($project->users()->where('user_id', $this->assignee->id)->doesntExist() && ! $project->is_public) {
-            throw new NotEnoughPermissionException();
+            throw new NotEnoughPermissionException;
         }
     }
 

@@ -33,7 +33,7 @@ class ProjectController extends Controller
             'is_public' => 'nullable|string',
         ]);
 
-        $project = (new CreateProject())->execute(
+        $project = (new CreateProject)->execute(
             name: $validated['title'],
             description: $validated['description'] ?? '',
             isPublic: $validated['is_public'] ?? false,
@@ -71,7 +71,7 @@ class ProjectController extends Controller
             'is_public' => 'required|string',
         ]);
 
-        $project = (new UpdateProject())->execute(
+        $project = (new UpdateProject)->execute(
             project: $request->project,
             name: $validated['title'],
             description: $validated['description'] ?? null,
@@ -86,7 +86,7 @@ class ProjectController extends Controller
 
     public function destroy(Request $request): RedirectResponse
     {
-        (new DestroyProject())->execute($request->project);
+        (new DestroyProject)->execute($request->project);
 
         notify()->success(__('Project successfully deleted.'));
 

@@ -59,7 +59,7 @@ class SetupScout extends Command
     {
         if (config('scout.driver') !== null && $this->option('flush')) {
             foreach (config('scout.meilisearch.index-settings') as $index => $settings) {
-                $name = (new $index())->getTable();
+                $name = (new $index)->getTable();
                 $this->artisan("☐ Flush {$name} index", 'scout:flush', ['model' => $index, '--verbose' => true]);
             }
 
@@ -74,7 +74,7 @@ class SetupScout extends Command
     {
         if (config('scout.driver') !== null && $this->option('import')) {
             foreach (config('scout.meilisearch.index-settings') as $index => $settings) {
-                $name = (new $index())->getTable();
+                $name = (new $index)->getTable();
                 $this->artisan("☐ Import {$name}", 'scout:import', ['model' => $index, '--verbose' => true]);
             }
 

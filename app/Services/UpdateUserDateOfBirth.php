@@ -44,7 +44,7 @@ class UpdateUserDateOfBirth extends BaseService
         $this->author = User::findOrFail($this->data['user_id']);
 
         if ($this->user->organization_id !== $this->author->organization_id) {
-            throw new NotEnoughPermissionException();
+            throw new NotEnoughPermissionException;
         }
     }
 }

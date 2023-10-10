@@ -9,7 +9,7 @@ class CreateTaskList extends BaseService
     private TaskList $taskList;
     private ?string $name;
 
-    public function execute(?string $name = null): TaskList
+    public function execute(string $name = null): TaskList
     {
         $this->name = $name;
         $this->create();

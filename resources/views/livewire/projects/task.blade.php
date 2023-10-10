@@ -8,7 +8,7 @@
           isEditingTitle: false,
           isEditingDescription: false,
           title: '{{ $task['title'] }}',
-          description: '{{ $task['description_raw'] }}',
+          description: '{{ $task['description'] }}',
           focus: function() {
               const textInput = this.$refs.textInput;
               textInput.focus();
@@ -56,24 +56,27 @@
         </form>
 
         <!-- description -->
-        {{-- <div v-if="description && !editDescriptionShown" class="ml-3 rounded-lg p-2 hover:bg-gray-100"> --}}
-        <div x-show="!isEditingDescription && description" class="ml-3 rounded-lg p-2 hover:bg-gray-100" x-cloak>
-          <div class="prose">{!! $task['description'] !!}</div>
+        <div x-on:click="isEditingDescription = true" x-show="!isEditingDescription && description != ''" class="ml-3 cursor-pointer rounded-lg p-2 hover:bg-gray-100">
+          <div class="prose" :key="$task['id']">{!! $task['description'] !!}</div>
         </div>
+
         <div x-show="!isEditingDescription && description == ''"
-             x-on:click="isEditingDescription = true; $nextTick(() => focus())"
+             x-on:click="isEditingDescription = true"
              class="mt-4 cursor-pointer text-sm text-gray-600 hover:underline"
              x-cloak>
           {{ __('+ add description') }}
         </div>
 
         <!-- edit description -->
-        <form x-show="isEditingDescription" class="mt-6" x-cloak>
+        <form wire:submit="saveDescription()"
+              x-show="isEditingDescription"
+              class="mt-6"
+              x-cloak>
           <livewire:textarea-markdown wire:model="description" :minHeight="'min-h-[100px]'" />
 
           <!-- actions -->
           <div class="mt-4 flex justify-start">
-            <x-primary-button class="mr-2" x-on:click="add = false">
+            <x-primary-button x-on:click="isEditingDescription = false" class="mr-2">
               {{ __('Save') }}
             </x-primary-button>
 

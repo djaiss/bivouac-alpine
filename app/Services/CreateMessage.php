@@ -36,7 +36,7 @@ class CreateMessage extends BaseService
 
     private function markAsRead(): void
     {
-        (new MarkMessageAsRead())->execute($this->message->id);
+        (new MarkMessageAsRead)->execute($this->message->id);
     }
 
     /**
@@ -47,7 +47,7 @@ class CreateMessage extends BaseService
      */
     private function createDefaultEmptyTaskList(): void
     {
-        $taskList = (new CreateTaskList())->execute(
+        $taskList = (new CreateTaskList)->execute(
             name: null,
         );
         $taskList->project_id = $this->projectId;

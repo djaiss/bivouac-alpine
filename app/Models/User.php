@@ -151,7 +151,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return Attribute::make(
             get: function ($value) {
                 $type = self::AVATAR_TYPE_SVG;
-                $multiavatar = new MultiAvatar();
+                $multiavatar = new MultiAvatar;
                 $avatar = $multiavatar($this->name_for_avatar, null, null);
 
                 // if ($this->file) {

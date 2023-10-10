@@ -17,6 +17,7 @@
                   id="body"
                   name="body"
                   type="text"
+                  x-model="description"
                   wire:model="body"
                   required
                   :minHeight="$minHeight"

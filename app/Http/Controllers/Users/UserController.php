@@ -27,7 +27,7 @@ class UserController extends Controller
             'email' => 'required|email|max:255',
         ]);
 
-        $user = (new UpdateUserInformation())->execute(
+        $user = (new UpdateUserInformation)->execute(
             user: $request->user,
             firstName: $validated['first_name'],
             lastName: $validated['last_name'],

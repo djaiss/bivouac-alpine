@@ -20,7 +20,7 @@ class MultiAvatar
 
     public array $ver;
 
-    public function __invoke(string $avatarId, ?string $sansEnv = null, ?array $ver = null): string
+    public function __invoke(string $avatarId, string $sansEnv = null, array $ver = null): string
     {
         return $this->generate(strval($avatarId), $sansEnv, $ver);
     }
@@ -44,7 +44,7 @@ class MultiAvatar
         return $svgString;
     }
 
-    public function generate(string $avatarId, ?string $sansEnv = null, ?array $ver = null): string
+    public function generate(string $avatarId, string $sansEnv = null, array $ver = null): string
     {
         $themes = [];
 

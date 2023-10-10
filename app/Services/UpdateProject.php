@@ -9,8 +9,8 @@ class UpdateProject extends BaseService
     public function execute(
         Project $project,
         string $name,
-        ?string $description = null,
-        ?string $shortDescription = null,
+        string $description = null,
+        string $shortDescription = null,
         bool $isPublic = true
     ): Project {
         $project->name = $name;

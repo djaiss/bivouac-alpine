@@ -68,7 +68,7 @@ class ManageKeyResources extends Component
     {
         $this->validate();
 
-        $resource = (new CreateProjectResource())->execute(
+        $resource = (new CreateProjectResource)->execute(
             projectId: $this->projectId,
             label: $this->label,
             link: $this->link,

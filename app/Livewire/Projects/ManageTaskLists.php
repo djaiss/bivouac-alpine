@@ -50,7 +50,7 @@ class ManageTaskLists extends Component
     {
         $this->collapsed = ! $this->collapsed;
 
-        (new ToggleTaskList())->execute(
+        (new ToggleTaskList)->execute(
             taskListId: $this->taskList['id'],
         );
     }
@@ -65,7 +65,7 @@ class ManageTaskLists extends Component
     {
         $this->validate();
 
-        $task = (new CreateTask())->execute(
+        $task = (new CreateTask)->execute(
             taskListId: $this->taskList['id'],
             title: $this->title,
         );
@@ -97,7 +97,7 @@ class ManageTaskLists extends Component
 
         $task = Task::findOrFail($taskId);
 
-        $task = (new UpdateTask())->execute(
+        $task = (new UpdateTask)->execute(
             taskId: $taskId,
             title: $this->title,
             description: $task->description,
@@ -111,7 +111,7 @@ class ManageTaskLists extends Component
     {
         $task = Task::findOrFail($taskId);
 
-        $task = (new UpdateTask())->execute(
+        $task = (new UpdateTask)->execute(
             taskId: $taskId,
             title: $task->title,
             description: $task->description,

@@ -33,7 +33,7 @@ class SettingsUserController extends Controller
             'email' => 'required|string|email|max:255|unique:' . User::class,
         ]);
 
-        (new InviteUser())->execute(
+        (new InviteUser)->execute(
             email: $validated['email']
         );
 
@@ -63,7 +63,7 @@ class SettingsUserController extends Controller
             'permissions' => 'required|string|max:255',
         ]);
 
-        (new UpdateUserPermission())->execute(
+        (new UpdateUserPermission)->execute(
             user: $user,
             permissions: $validated['permissions']
         );
@@ -91,7 +91,7 @@ class SettingsUserController extends Controller
         }
 
         try {
-            (new DestroyUser())->execute(
+            (new DestroyUser)->execute(
                 user: $user
             );
         } catch (CantDeleteHimselfException) {

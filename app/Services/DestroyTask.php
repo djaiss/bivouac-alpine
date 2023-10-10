@@ -35,7 +35,7 @@ class DestroyTask extends BaseService
         $this->task = Task::findOrFail($this->data['task_id']);
 
         if ($this->task->taskList->organization_id !== $user->organization_id) {
-            throw new ModelNotFoundException();
+            throw new ModelNotFoundException;
         }
     }
 }

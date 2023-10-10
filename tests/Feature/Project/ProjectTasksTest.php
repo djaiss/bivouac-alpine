@@ -2,12 +2,15 @@
 
 namespace Tests\Feature\Project;
 
+use App\Livewire\Projects\ManageTask;
 use App\Models\Message;
 use App\Models\Project;
 use App\Models\Task;
 use App\Models\TaskList;
 use App\Models\User;
+use App\ViewModels\Projects\ProjectTaskViewModel;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Livewire\Livewire;
 use Tests\TestCase;
 
 class ProjectTasksTest extends TestCase
@@ -111,6 +114,78 @@ class ProjectTasksTest extends TestCase
 
         $this->assertDatabaseMissing('task_lists', [
             'id' => $taskList->id,
+        ]);
+    }
+
+    /** @test */
+    public function the_component_exists_on_the_message_page(): void
+    {
+        $user = User::factory()->create();
+        $project = Project::factory()->create([
+            'organization_id' => $user->organization_id,
+            'is_public' => true,
+        ]);
+        $taskList = TaskList::factory()->create([
+            'project_id' => $project->id,
+        ]);
+        $task = Task::factory()->create([
+            'task_list_id' => $taskList->id,
+        ]);
+
+        $this->actingAs($user)
+            ->get('/projects/' . $project->id . '/tasklists/' . $taskList->id . '/tasks/' . $task->id)
+            ->assertSeeLivewire(ManageTask::class);
+    }
+
+    /** @test */
+    public function the_task_title_can_be_edited(): void
+    {
+        $user = User::factory()->create();
+        $project = Project::factory()->create([
+            'organization_id' => $user->organization_id,
+            'is_public' => true,
+        ]);
+        $taskList = TaskList::factory()->create([
+            'project_id' => $project->id,
+        ]);
+        $task = Task::factory()->create([
+            'task_list_id' => $taskList->id,
+        ]);
+
+        Livewire::actingAs($user)
+            ->test(ManageTask::class, ['task' => ProjectTaskViewModel::show($task)])
+            ->set('title', 'this is a title')
+            ->call('save');
+
+        $this->assertDatabaseHas('tasks', [
+            'id' => $task->id,
+            'title' => 'this is a title',
+        ]);
+    }
+
+    /** @test */
+    public function the_task_description_can_be_edited(): void
+    {
+        $user = User::factory()->create();
+        $project = Project::factory()->create([
+            'organization_id' => $user->organization_id,
+            'is_public' => true,
+        ]);
+        $taskList = TaskList::factory()->create([
+            'project_id' => $project->id,
+        ]);
+        $task = Task::factory()->create([
+            'task_list_id' => $taskList->id,
+        ]);
+
+        Livewire::actingAs($user)
+            ->test(ManageTask::class, ['task' => ProjectTaskViewModel::show($task)])
+            ->set('description', 'this is a description')
+            ->call('saveDescription');
+
+        $this->assertDatabaseHas('tasks', [
+            'id' => $task->id,
+            'description' => 'this is a description',
         ]);
     }
 }

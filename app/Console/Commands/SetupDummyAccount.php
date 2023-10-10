@@ -105,7 +105,7 @@ class SetupDummyAccount extends Command
     {
         $this->info('☐ Create first user of the account');
 
-        $this->user = (new CreateAccount())->execute([
+        $this->user = (new CreateAccount)->execute([
             'email' => 'admin@admin.com',
             'password' => 'admin123',
             'first_name' => 'Michael',
@@ -164,7 +164,7 @@ class SetupDummyAccount extends Command
         ];
 
         for ($i = 0; $i < rand(3, 5); $i++) {
-            $project = (new CreateProject())->execute(
+            $project = (new CreateProject)->execute(
                 name: $projectNames[array_rand($projectNames)],
                 description: $this->faker->optional()->sentence(),
                 isPublic: $this->faker->boolean(),
@@ -188,7 +188,7 @@ class SetupDummyAccount extends Command
         $this->info('☐ Add messages to project ' . $project->name);
 
         for ($i = 0; $i < rand(3, 5); $i++) {
-            $message = (new CreateMessage())->execute(
+            $message = (new CreateMessage)->execute(
                 projectId: $project->id,
                 title: $this->faker->sentence(),
                 body: $this->faker->paragraph(15),
@@ -203,7 +203,7 @@ class SetupDummyAccount extends Command
         $this->info('☐ Add comments to message ' . $message->title);
 
         for ($i = 0; $i < rand(3, 5); $i++) {
-            (new AddCommentToMessage())->execute(
+            (new AddCommentToMessage)->execute(
                 messageId: $message->id,
                 body: $this->faker->paragraph(15)
             );
@@ -214,7 +214,7 @@ class SetupDummyAccount extends Command
     {
         $this->info('☐ Create first user of the account');
 
-        $user = (new CreateAccount())->execute([
+        $user = (new CreateAccount)->execute([
             'email' => 'blank@blank.com',
             'password' => 'blank123',
             'first_name' => 'Dwight',

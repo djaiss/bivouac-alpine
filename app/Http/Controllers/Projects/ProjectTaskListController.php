@@ -38,7 +38,7 @@ class ProjectTaskListController extends Controller
             'title' => 'required|string|max:255',
         ]);
 
-        $taskList = (new CreateTaskList())->execute(
+        $taskList = (new CreateTaskList)->execute(
             name: $validated['title'] ?? '',
         );
 
@@ -68,7 +68,7 @@ class ProjectTaskListController extends Controller
             'title' => 'required|string|max:255',
         ]);
 
-        (new UpdateTaskList())->execute(
+        (new UpdateTaskList)->execute(
             taskList: $request->taskList,
             name: $validated['title'],
         );
@@ -90,7 +90,7 @@ class ProjectTaskListController extends Controller
 
     public function destroy(Request $request): RedirectResponse
     {
-        (new DestroyTaskList())->execute(
+        (new DestroyTaskList)->execute(
             taskList: $request->taskList,
         );
 

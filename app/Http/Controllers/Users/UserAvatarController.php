@@ -11,7 +11,7 @@ class UserAvatarController extends Controller
 {
     public function update(Request $request): RedirectResponse
     {
-        $user = (new RegenerateAvatar())->execute($request->user);
+        $user = (new RegenerateAvatar)->execute($request->user);
 
         notify()->success(__('Changes saved.'));
 
