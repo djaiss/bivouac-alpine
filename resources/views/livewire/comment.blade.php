@@ -65,17 +65,17 @@
   @endif
 
   <!-- post a comment box -->
-  <div x-data="{ add: false }">
+  <div x-data="{ add: false, description: '' }">
     <div class="flex cursor-pointer items-center rounded-lg bg-white px-4 py-4 shadow hover:bg-gray-50" x-show="! add" @click="add = true">
       <x-heroicon-o-chat-bubble-left-ellipsis class="mr-2 h-5 w-5 text-gray-500" />
 
       <p>{{ __('Add a comment') }}</p>
     </div>
 
-    <form class="rounded-lg bg-white px-4 py-4 shadow" x-show="add" wire:submit="save">
+    <form class="rounded-lg bg-white px-4 py-4 shadow" x-show="add" wire:submit="save" x-cloak>
       <p class="mb-3 font-bold">{{ __('Add a comment') }}</p>
 
-      <livewire:textarea-markdown wire:model="value" :minHeight="'min-h-[100px]'" />
+      <livewire:textarea-markdown wire:model="description" :minHeight="'min-h-[100px]'" />
 
       <!-- actions -->
       <div class="mt-4 flex justify-start">

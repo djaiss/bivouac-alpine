@@ -16,6 +16,8 @@ class TextareaMarkdown extends Component
 
     public string $previewBody = '';
 
+    public string $xModel = 'description';
+
     public string $minHeight = 'min-h-[400px]';
 
     public function mount(string $body = ''): void

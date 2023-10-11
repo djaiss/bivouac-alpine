@@ -17,7 +17,7 @@
                   id="body"
                   name="body"
                   type="text"
-                  x-model="description"
+                  x-model="{{ $xModel }}"
                   wire:model="body"
                   required
                   :minHeight="$minHeight"

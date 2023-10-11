@@ -4,7 +4,7 @@
     <x-project.header :data="$header" />
 
     <!-- body -->
-    <div class="grid grid-cols-[3fr_1fr] gap-4 px-4">
+    <div class="grid grid-cols-[3fr_1fr] gap-4">
       <!-- left -->
       <div>
         <!-- message -->

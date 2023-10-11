@@ -12,7 +12,7 @@ use Livewire\Component;
 
 class ManageMessageComments extends Component
 {
-    public string $value = '';
+    public string $description = '';
 
     #[Locked]
     public int $messageId = 0;
@@ -34,7 +34,7 @@ class ManageMessageComments extends Component
     {
         $comment = (new AddCommentToMessage)->execute(
             messageId: $this->messageId,
-            body: $this->value,
+            body: $this->description,
         );
 
         $message = $comment->commentable;
@@ -54,12 +54,12 @@ class ManageMessageComments extends Component
             'reactions' => collect(),
         ]);
 
-        $this->value = '';
+        $this->description = '';
     }
 
     public function cancel(): void
     {
-        $this->value = '';
+        $this->description = '';
     }
 
     public function destroy(int $commentId): void

@@ -29,7 +29,10 @@ class ManageTaskReactions extends Component
 
     public function save(string $emoji): void
     {
-        $reaction = (new AddReactionToTask)->execute($emoji, $this->taskId);
+        $reaction = (new AddReactionToTask)->execute(
+            emoji: $emoji,
+            taskId: $this->taskId
+        );
 
         $this->reactions->push([
             'id' => $reaction->id,
