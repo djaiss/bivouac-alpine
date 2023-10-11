@@ -8,6 +8,7 @@ use App\Models\Comment;
 use App\Models\Message;
 use App\Models\Project;
 use App\Models\Reaction;
+use App\ViewModels\ReactionViewModel;
 use Illuminate\Support\Facades\DB;
 
 class ProjectMessageViewModel
@@ -75,15 +76,7 @@ class ProjectMessageViewModel
                 'body' => StringHelper::parse($comment->body),
                 'body_raw' => $comment->body,
                 'created_at' => $comment->created_at->format('Y-m-d H:i:s'),
-                'reactions' => $comment->reactions->map(fn (Reaction $reaction) => [
-                    'id' => $reaction->id,
-                    'emoji' => $reaction->emoji,
-                    'author' => [
-                        'id' => $reaction->user->id,
-                        'name' => $reaction->user->name,
-                        'avatar' => $reaction->user->avatar,
-                    ],
-                ]),
+                'reactions' => $comment->reactions->map(fn (Reaction $reaction) => ReactionViewModel::dto($reaction)),
             ]);
 
         $reactions = $message->reactions()

@@ -89,7 +89,7 @@
 
       <!-- message footer -->
       <div class="rounded-b-lg bg-gray-50 p-3">
-        {{-- <Reactions :reactions="task.reactions" :url="task.url" /> --}}
+        <livewire:projects.manage-task-reactions wire:key="{{ $task['id'] }}" :taskId="$task['id']" :reactions="$task['reactions']" />
       </div>
     </div>
 

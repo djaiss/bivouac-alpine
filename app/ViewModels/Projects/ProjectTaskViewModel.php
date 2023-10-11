@@ -3,8 +3,10 @@
 namespace App\ViewModels\Projects;
 
 use App\Helpers\StringHelper;
+use App\Models\Reaction;
 use App\Models\Task;
 use App\Models\User;
+use App\ViewModels\ReactionViewModel;
 
 class ProjectTaskViewModel
 {
@@ -18,6 +20,11 @@ class ProjectTaskViewModel
                 'avatar' => $user->avatar,
             ]);
 
+        $reactions = $task->reactions()
+            ->with('user')
+            ->get()
+            ->map(fn (Reaction $reaction) => ReactionViewModel::dto($reaction));
+
         return [
             'id' => $task->id,
             'title' => $task->title,
@@ -25,6 +32,7 @@ class ProjectTaskViewModel
             'description_raw' => $task->description,
             'is_completed' => $task->is_completed,
             'assignees' => $assignees,
+            'reactions' => $reactions,
         ];
     }
 }

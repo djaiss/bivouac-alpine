@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Models;
 
+use App\Models\Reaction;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -27,5 +28,17 @@ class TaskTest extends TestCase
         $task->users()->attach($user);
 
         $this->assertTrue($task->users()->exists());
+    }
+
+    /** @test */
+    public function it_has_many_reactions(): void
+    {
+        $task = Task::factory()->create();
+        Reaction::factory()->create([
+            'reactionable_id' => $task->id,
+            'reactionable_type' => Task::class,
+        ]);
+
+        $this->assertTrue($task->reactions()->exists());
     }
 }
