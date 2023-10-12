@@ -6,18 +6,18 @@
       <nav class="flex py-3 text-gray-700">
         <ol class="inline-flex items-center space-x-1 md:space-x-3">
           <li class="inline-flex items-center">
-            <x-link class="text-sm" href="{{ route('dashboard') }}" wire:navigate>{{ __('Home') }}</x-link>
+            <x-link class="text-sm" href="{{ route('dashboard') }}">{{ __('Home') }}</x-link>
           </li>
           <li>
             <div class="flex items-center">
               <x-heroicon-s-chevron-right class="mr-2 h-4 w-4 text-gray-400" />
-              <x-link class="text-sm" href="{{ route('settings.index') }}" wire:navigate>{{ __('Account settings') }}</x-link>
+              <x-link class="text-sm" href="{{ route('settings.index') }}">{{ __('Account settings') }}</x-link>
             </div>
           </li>
           <li>
             <div class="flex items-center">
               <x-heroicon-s-chevron-right class="mr-2 h-4 w-4 text-gray-400" />
-              <span class="ml-1 text-sm text-gray-500 dark:text-gray-400 md:ml-2">{{ __('Manage users') }}</span>
+              <span class="text-sm text-gray-500 dark:text-gray-400">{{ __('Manage offices') }}</span>
             </div>
           </li>
         </ol>
@@ -35,7 +35,7 @@
           </h2>
 
           <div>
-            <x-primary-link wire:navigate :href="route('settings.office.create')">{{ __('Add an office') }}</x-primary-link>
+            <x-primary-link :href="route('settings.office.create')">{{ __('Add an office') }}</x-primary-link>
           </div>
         </div>
 
@@ -56,9 +56,9 @@
 
               <!-- menu -->
               <ul>
-                <li class="mr-2 inline"><x-link class="text-sm" href="{{ route('settings.office.edit', ['office' => $office['id']]) }}" wire:navigate>{{ __('Edit') }}</x-link>
+                <li class="mr-2 inline"><x-link class="text-sm" href="{{ route('settings.office.edit', ['office' => $office['id']]) }}">{{ __('Edit') }}</x-link>
                 </li>
-                <li class="inline"><x-link class="text-sm" href="{{ route('settings.office.delete', ['office' => $office['id']]) }}" wire:navigate>{{ __('Delete') }}</x-link>
+                <li class="inline"><x-link class="text-sm" href="{{ route('settings.office.delete', ['office' => $office['id']]) }}">{{ __('Delete') }}</x-link>
                 </li>
               </ul>
             </li>

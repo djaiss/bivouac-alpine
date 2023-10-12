@@ -7,6 +7,7 @@ use App\Http\Controllers\Projects\ProjectCommentController;
 use App\Http\Controllers\Projects\ProjectController;
 use App\Http\Controllers\Projects\ProjectMemberController;
 use App\Http\Controllers\Projects\ProjectMessageController;
+use App\Http\Controllers\Projects\ProjectResourceController;
 use App\Http\Controllers\Projects\ProjectTaskController;
 use App\Http\Controllers\Projects\ProjectTaskListController;
 use App\Http\Controllers\Settings\SettingsController;
@@ -58,6 +59,16 @@ Route::middleware('auth', 'verified')->group(function (): void {
         Route::get('projects/{project}/edit', [ProjectController::class, 'edit'])->name('project.edit');
         Route::put('projects/{project}', [ProjectController::class, 'update'])->name('project.update');
         Route::delete('projects/{project}', [ProjectController::class, 'destroy'])->name('project.destroy');
+
+        // resources
+        Route::get('projects/{project}/resources', [ProjectResourceController::class, 'index'])->name('project.resource.index');
+        Route::get('projects/{project}/resources/create', [ProjectResourceController::class, 'create'])->name('project.resource.create');
+        Route::post('projects/{project}/resources', [ProjectResourceController::class, 'store'])->name('project.resource.store');
+        Route::middleware(['projectResource'])->group(function (): void {
+            Route::get('projects/{project}/resources/{resource}', [ProjectResourceController::class, 'edit'])->name('project.resource.edit');
+            Route::put('projects/{project}/resources/{resource}', [ProjectResourceController::class, 'update'])->name('project.resource.update');
+            Route::delete('projects/{project}/resources/{resource}', [ProjectResourceController::class, 'destroy'])->name('project.resource.destroy');
+        });
 
         // members
         Route::get('projects/{project}/members', [ProjectMemberController::class, 'index'])->name('project.member.index');

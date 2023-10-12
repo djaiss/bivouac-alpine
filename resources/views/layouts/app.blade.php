@@ -64,7 +64,7 @@
               <li class="group flex items-center px-4 py-2 hover:bg-slate-900 hover:text-white">
                 <x-heroicon-s-briefcase class="h-4 w-4 transition ease-in-out group-hover:fill-current group-hover:text-blue-500" />
                 <span class="ml-2">
-                  <a href="{{ route('project.index') }}" wire:navigate>{{ __('Projects') }}</a>
+                  <a hx-boost="true" href="{{ route('project.index') }}">{{ __('Projects') }}</a>
                 </span>
               </li>
 
@@ -79,7 +79,7 @@
                 <li class="group flex items-center px-4 py-2 hover:bg-slate-900 hover:text-white" v-if="user.permissions !== 'user'">
                   <x-heroicon-s-cog-8-tooth class="h-4 w-4 transition ease-in-out group-hover:fill-current group-hover:text-blue-500" />
                   <span class="ml-2">
-                    <a href="{{ route('settings.index') }}" wire:navigate.hover>{{ __('Account settings') }}</a>
+                    <a hx-boost="true" href="{{ route('settings.index') }}">{{ __('Account settings') }}</a>
                   </span>
                 </li>
               @endif

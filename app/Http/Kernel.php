@@ -37,7 +37,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            //\App\Http\Middleware\Language::class,
+            \App\Http\Middleware\Language::class,
         ],
 
         'api' => [
@@ -74,5 +74,6 @@ class Kernel extends HttpKernel
         'comment' => \App\Http\Middleware\CheckComment::class,
         'taskList' => \App\Http\Middleware\CheckTaskList::class,
         'task' => \App\Http\Middleware\CheckTask::class,
+        'projectResource' => \App\Http\Middleware\CheckProjectResource::class,
     ];
 }

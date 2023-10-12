@@ -104,14 +104,12 @@ class ProjectViewModelTest extends TestCase
             'name' => 'Dunder',
             'description' => 'Dunder Mifflin',
         ]);
-        $projectResource = ProjectResource::factory()->create([
-            'project_id' => $project->id,
-            'label' => 'Dunder',
-            'link' => 'https://slack.com',
-        ]);
         $array = ProjectViewModel::show($project);
 
         $this->assertCount(3, $array);
+        $this->assertArrayHasKey('description', $array);
+        $this->assertArrayHasKey('project_resources', $array);
+        $this->assertArrayHasKey('url', $array);
 
         $this->assertEquals(
             '<p>Dunder Mifflin</p>
@@ -120,15 +118,14 @@ class ProjectViewModelTest extends TestCase
         );
 
         $this->assertEquals(
-            [
-                0 => [
-                    'id' => $projectResource->id,
-                    'label' => 'Dunder',
-                    'link' => 'https://slack.com',
-                ],
-            ],
-            $array['project_resources']->toArray()
+            env('APP_URL') . '/projects/' . $project->id . '/resources/create',
+            $array['url']['resource']['create']
         );
+        $this->assertEquals(
+            env('APP_URL') . '/projects/' . $project->id . '/resources',
+            $array['url']['resource']['index']
+        );
+
     }
 
     /** @test */
@@ -150,26 +147,6 @@ class ProjectViewModelTest extends TestCase
                 'short_description' => 'Great description',
                 'description' => 'Dunder Mifflin',
                 'is_public' => true,
-            ],
-            $array
-        );
-    }
-
-    /** @test */
-    public function it_gets_the_dto_resource(): void
-    {
-        $projectResource = ProjectResource::factory()->create([
-            'label' => 'Dunder',
-            'link' => 'https://slack.com',
-        ]);
-        $array = ProjectViewModel::dtoResource($projectResource);
-
-        $this->assertCount(3, $array);
-        $this->assertEquals(
-            [
-                'id' => $projectResource->id,
-                'label' => 'Dunder',
-                'link' => 'https://slack.com',
             ],
             $array
         );

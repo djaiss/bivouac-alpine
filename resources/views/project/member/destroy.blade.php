@@ -23,7 +23,7 @@
           <li>
             <div class="flex items-center">
               <x-heroicon-s-chevron-right class="mr-2 h-4 w-4 text-gray-400" />
-              <span class="ml-1 text-sm text-gray-500 dark:text-gray-400 md:ml-2">{{ __('Remove the member from the project') }}</span>
+              <span class="text-sm text-gray-500 dark:text-gray-400">{{ __('Remove the member from the project') }}</span>
             </div>
           </li>
         </ol>

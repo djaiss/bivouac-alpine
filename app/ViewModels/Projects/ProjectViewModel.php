@@ -63,12 +63,18 @@ class ProjectViewModel
         $description = $project->description ? Str::markdown($project->description, ['html_input' => 'strip']) : null;
 
         $projectResources = $project->projectResources()->get()
-            ->map(fn (ProjectResource $projectResource) => self::dtoResource($projectResource));
+            ->map(fn (ProjectResource $projectResource) => ProjectResourceViewModel::dto($projectResource));
 
         return [
-            'project_id' => $project->id,
             'description' => $description,
             'project_resources' => $projectResources,
+            'url' => [
+                'resource' => [
+                    'index' => route('project.resource.index', ['project' => $project->id]),
+                    'create' => route('project.resource.create', ['project' => $project->id]),
+                    'store' => route('project.resource.store', ['project' => $project->id]),
+                ],
+            ],
         ];
     }
 
@@ -80,15 +86,6 @@ class ProjectViewModel
             'short_description' => $project->short_description,
             'description' => $project->description,
             'is_public' => $project->is_public,
-        ];
-    }
-
-    public static function dtoResource(ProjectResource $projectResource): array
-    {
-        return [
-            'id' => $projectResource->id,
-            'label' => $projectResource->label,
-            'link' => $projectResource->link,
         ];
     }
 }

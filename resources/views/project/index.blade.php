@@ -1,35 +1,12 @@
 <x-app-layout>
-  <div class="mx-auto mb-6 max-w-7xl space-y-6 px-12 pt-6 sm:px-6 lg:px-8">
-    <div class="bg-white shadow sm:rounded-lg">
-      <!-- menu -->
-      <div class="px-4">
-        <div class="flex items-center justify-between text-center font-medium text-gray-500 dark:text-gray-400">
-          <ul class="-mb-px flex flex-wrap">
-            <li class="mr-2">
-              <a class="inline-block rounded-t-lg border-b-2 border-transparent p-4 hover:border-blue-300 hover:text-blue-600 dark:hover:text-gray-300" href="#">
-                {{ __('Your projects') }}
-              </a>
-            </li>
-            <li class="mr-2">
-              <a class="active inline-block rounded-t-lg border-b-2 border-blue-600 p-4 text-blue-600 dark:border-blue-500 dark:text-blue-500" href="#">
-                {{ __('Starred projects') }}
-              </a>
-            </li>
-            <li class="mr-2">
-              <a class="inline-block rounded-t-lg border-b-2 border-transparent p-4 hover:border-blue-300 hover:text-blue-600 dark:hover:text-gray-300" href="#">
-                {{ __('All projects') }}
-              </a>
-            </li>
-          </ul>
-
-          <div>
-            <x-primary-link wire:navigate :href="route('project.create')">{{ __('Create project') }}</x-primary-link>
-          </div>
-        </div>
-      </div>
+  <!-- menu -->
+  <div class="mx-auto max-w-5xl sm:px-6 lg:px-8 pt-6 mb-3">
+    <div class="flex justify-end text-center font-medium text-gray-500 dark:text-gray-400">
+      <x-primary-link hx-boost="true" :href="route('project.create')">{{ __('Create project') }}</x-primary-link>
     </div>
   </div>
 
+  <!-- body -->
   <div class="pb-12">
     <div class="mx-auto flex max-w-5xl sm:px-6 lg:px-8">
       <div class="w-full">
@@ -48,7 +25,7 @@
                           <x-icon-lock />
                         @endif
 
-                        <x-link href="{{ route('project.show', ['project' => $project['id']]) }}" wire:navigate>
+                        <x-link href="{{ route('project.show', ['project' => $project['id']]) }}">
                           {{ $project['name'] }}
                         </x-link>
                       </div>

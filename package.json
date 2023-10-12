@@ -26,8 +26,8 @@
     "vite": "^4.0.0"
   },
   "dependencies": {
-    "@alpinejs/focus": "^3.13.0",
-    "alpinejs": "^3.13.0",
+    "alpinejs": "^3.13.1",
+    "htmx.org": "^1.9.6",
     "prettier": "^3.0.3"
   }
 }
