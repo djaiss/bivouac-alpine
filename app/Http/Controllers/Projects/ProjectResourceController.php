@@ -32,7 +32,7 @@ class ProjectResourceController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(Request $request): View
     {
         $validated = $request->validate([
             'label' => 'required|string|max:255',
@@ -49,7 +49,6 @@ class ProjectResourceController extends Controller
             'view' => ProjectResourceViewModel::index($request->project),
         ]);
     }
-
     public function edit(Request $request): View
     {
         return view('project.resource.edit', [
@@ -57,7 +56,7 @@ class ProjectResourceController extends Controller
         ]);
     }
 
-    public function update(Request $request)
+    public function update(Request $request): View
     {
         $validated = $request->validate([
             'label' => 'required|string|max:255',
@@ -75,7 +74,7 @@ class ProjectResourceController extends Controller
         ]);
     }
 
-    public function destroy(Request $request)
+    public function destroy(Request $request): View
     {
         (new DestroyProjectResource)->execute(
             projectResource: $request->projectResource,

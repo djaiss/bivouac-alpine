@@ -17,6 +17,7 @@
                     id="label"
                     name="label"
                     type="text"
+                    autofocus
                     :value="old('label')" />
 
       <x-input-error class="mt-2" :messages="$errors->get('label')" />

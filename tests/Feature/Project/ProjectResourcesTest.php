@@ -12,7 +12,28 @@ use Tests\TestCase;
 class ProjectResourcesTest extends TestCase
 {
     /** @test */
-    public function component_exists_on_the_page(): void
+    public function we_can_list_resources(): void
+    {
+        $user = User::factory()->create();
+        $project = Project::factory()->create([
+            'organization_id' => $user->organization_id,
+            'is_public' => true,
+        ]);
+        ProjectResource::factory()->create([
+            'project_id' => $project->id,
+            'label' => 'Wrinkly fingers? Try this one weird trick',
+            'link' => 'https://slack.com',
+        ]);
+
+        $this->actingAs($user)
+            ->get('/projects/' . $project->id.'/resources')
+            ->assertStatus(200)
+            ->assertSee('https://slack.com')
+            ->assertSee('Wrinkly fingers? Try this one weird trick');
+    }
+
+    /** @test */
+    public function we_can_see_the_screen_to_add_a_resource(): void
     {
         $user = User::factory()->create();
         $project = Project::factory()->create([
@@ -21,8 +42,10 @@ class ProjectResourcesTest extends TestCase
         ]);
 
         $this->actingAs($user)
-            ->get('/projects/' . $project->id)
-            ->assertSeeLivewire(ManageKeyResources::class);
+            ->get('/projects/' . $project->id . '/resources/create')
+            ->assertStatus(200)
+            ->assertSee('URL/link')
+            ->assertSee('Label');
     }
 
     /** @test */
@@ -34,20 +57,41 @@ class ProjectResourcesTest extends TestCase
             'is_public' => true,
         ]);
 
-        Livewire::actingAs($user)
-            ->test(ManageKeyResources::class, ['data' => [
-                'project_id' => $project->id,
-                'project_resources' => collect(),
-            ]])
-            ->set('label', 'Wrinkly fingers? Try this one weird trick')
-            ->set('link', 'https://slack.com')
-            ->call('save');
+        $this->actingAs($user)
+            ->post('/projects/' . $project->id . '/resources', [
+                'label' => 'This is a fake name',
+                'link' => 'https://slack.com',
+            ])
+            ->assertStatus(200);
 
         $this->assertDatabaseHas('project_resources', [
+            'project_id' => $project->id,
+            'label' => 'This is a fake name',
+            'link' => 'https://slack.com',
+        ]);
+    }
+
+    /** @test */
+    public function we_can_see_the_screen_to_edit_a_resource(): void
+    {
+        $user = User::factory()->create();
+        $project = Project::factory()->create([
+            'organization_id' => $user->organization_id,
+            'is_public' => true,
+        ]);
+        $projectResource = ProjectResource::factory()->create([
             'project_id' => $project->id,
             'label' => 'Wrinkly fingers? Try this one weird trick',
             'link' => 'https://slack.com',
         ]);
+
+        $this->actingAs($user)
+            ->get('/projects/' . $project->id . '/resources/'.$projectResource->id.'/edit')
+            ->assertStatus(200)
+            ->assertSee('Wrinkly fingers? Try this one weird trick')
+            ->assertSee('https://slack.com')
+            ->assertSee('URL/link')
+            ->assertSee('Label');
     }
 
     /** @test */
@@ -64,19 +108,17 @@ class ProjectResourcesTest extends TestCase
             'link' => 'https://slack.com',
         ]);
 
-        Livewire::actingAs($user)
-            ->test(ManageKeyResources::class, ['data' => [
-                'project_id' => $project->id,
-                'project_resources' => collect(),
-            ]])
-            ->set('label', 'Random text')
-            ->set('link', 'https://slack.com/test')
-            ->call('update', $projectResource->id);
+        $this->actingAs($user)
+            ->put('/projects/' . $project->id . '/resources/' . $projectResource->id, [
+                'label' => 'This is a fake name',
+                'link' => 'https://microsoft.com',
+            ])
+            ->assertStatus(200);
 
         $this->assertDatabaseHas('project_resources', [
             'project_id' => $project->id,
-            'label' => 'Random text',
-            'link' => 'https://slack.com/test',
+            'label' => 'This is a fake name',
+            'link' => 'https://microsoft.com',
         ]);
     }
 
@@ -94,12 +136,9 @@ class ProjectResourcesTest extends TestCase
             'link' => 'https://slack.com',
         ]);
 
-        Livewire::actingAs($user)
-            ->test(ManageKeyResources::class, ['data' => [
-                'project_id' => $project->id,
-                'project_resources' => collect(),
-            ]])
-            ->call('destroy', $projectResource->id);
+        $this->actingAs($user)
+            ->delete('/projects/' . $project->id . '/resources/' . $projectResource->id)
+            ->assertStatus(200);
 
         $this->assertDatabaseMissing('project_resources', [
             'id' => $projectResource->id,

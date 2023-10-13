@@ -65,7 +65,7 @@ Route::middleware('auth', 'verified')->group(function (): void {
         Route::get('projects/{project}/resources/create', [ProjectResourceController::class, 'create'])->name('project.resource.create');
         Route::post('projects/{project}/resources', [ProjectResourceController::class, 'store'])->name('project.resource.store');
         Route::middleware(['projectResource'])->group(function (): void {
-            Route::get('projects/{project}/resources/{resource}', [ProjectResourceController::class, 'edit'])->name('project.resource.edit');
+            Route::get('projects/{project}/resources/{resource}/edit', [ProjectResourceController::class, 'edit'])->name('project.resource.edit');
             Route::put('projects/{project}/resources/{resource}', [ProjectResourceController::class, 'update'])->name('project.resource.update');
             Route::delete('projects/{project}/resources/{resource}', [ProjectResourceController::class, 'destroy'])->name('project.resource.destroy');
         });

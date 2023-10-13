@@ -18,7 +18,6 @@
                     name="label"
                     type="text"
                     autofocus
-                    required
                     :value="old('label', $view['label'])" />
 
       <x-input-error class="mt-2" :messages="$errors->get('label')" />
