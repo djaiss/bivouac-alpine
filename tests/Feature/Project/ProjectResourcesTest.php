@@ -2,11 +2,9 @@
 
 namespace Tests\Feature\Project;
 
-use App\Livewire\Projects\ManageKeyResources;
 use App\Models\Project;
 use App\Models\ProjectResource;
 use App\Models\User;
-use Livewire\Livewire;
 use Tests\TestCase;
 
 class ProjectResourcesTest extends TestCase
@@ -26,7 +24,7 @@ class ProjectResourcesTest extends TestCase
         ]);
 
         $this->actingAs($user)
-            ->get('/projects/' . $project->id.'/resources')
+            ->get('/projects/' . $project->id . '/resources')
             ->assertStatus(200)
             ->assertSee('https://slack.com')
             ->assertSee('Wrinkly fingers? Try this one weird trick');
@@ -86,7 +84,7 @@ class ProjectResourcesTest extends TestCase
         ]);
 
         $this->actingAs($user)
-            ->get('/projects/' . $project->id . '/resources/'.$projectResource->id.'/edit')
+            ->get('/projects/' . $project->id . '/resources/' . $projectResource->id . '/edit')
             ->assertStatus(200)
             ->assertSee('Wrinkly fingers? Try this one weird trick')
             ->assertSee('https://slack.com')

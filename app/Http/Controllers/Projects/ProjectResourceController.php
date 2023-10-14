@@ -4,15 +4,9 @@ namespace App\Http\Controllers\Projects;
 
 use App\Http\Controllers\Controller;
 use App\Services\CreateProjectResource;
-use App\Services\DestroyCommentOfMessage;
-use App\Services\DestroyProject;
 use App\Services\DestroyProjectResource;
-use App\Services\UpdateCommentOfMessage;
 use App\Services\UpdateProjectResource;
-use App\ViewModels\Projects\ProjectMessageCommentViewModel;
 use App\ViewModels\Projects\ProjectResourceViewModel;
-use App\ViewModels\Projects\ProjectViewModel;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -49,6 +43,7 @@ class ProjectResourceController extends Controller
             'view' => ProjectResourceViewModel::index($request->project),
         ]);
     }
+
     public function edit(Request $request): View
     {
         return view('project.resource.edit', [

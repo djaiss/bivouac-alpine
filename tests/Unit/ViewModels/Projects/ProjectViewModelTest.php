@@ -4,7 +4,6 @@ namespace Tests\Unit\ViewModels\Projects;
 
 use App\Models\Organization;
 use App\Models\Project;
-use App\Models\ProjectResource;
 use App\Models\User;
 use App\ViewModels\Projects\ProjectViewModel;
 use Carbon\Carbon;
@@ -125,7 +124,6 @@ class ProjectViewModelTest extends TestCase
             env('APP_URL') . '/projects/' . $project->id . '/resources',
             $array['url']['resource']['index']
         );
-
     }
 
     /** @test */

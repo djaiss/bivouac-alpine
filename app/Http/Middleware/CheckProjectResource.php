@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Message;
 use App\Models\ProjectResource;
 use Closure;
 use Illuminate\Database\Eloquent\ModelNotFoundException;

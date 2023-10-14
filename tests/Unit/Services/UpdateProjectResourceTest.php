@@ -3,12 +3,8 @@
 namespace Tests\Unit\Services;
 
 use App\Jobs\UpdateProjectLastUpdatedAt;
-use App\Models\Comment;
-use App\Models\Message;
 use App\Models\Project;
 use App\Models\ProjectResource;
-use App\Models\User;
-use App\Services\DestroyProjectResource;
 use App\Services\UpdateProjectResource;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Queue;

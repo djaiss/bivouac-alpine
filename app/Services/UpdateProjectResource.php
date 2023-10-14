@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Jobs\UpdateProjectLastUpdatedAt;
-use App\Models\Comment;
 use App\Models\ProjectResource;
 
 class UpdateProjectResource extends BaseService

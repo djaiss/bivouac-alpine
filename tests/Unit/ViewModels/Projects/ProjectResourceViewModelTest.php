@@ -2,18 +2,10 @@
 
 namespace Tests\Unit\ViewModels\Projects;
 
-use App\Models\Comment;
-use App\Models\Message;
 use App\Models\Project;
 use App\Models\ProjectResource;
-use App\Models\Reaction;
-use App\Models\TaskList;
-use App\Models\User;
-use App\ViewModels\Projects\ProjectMessageViewModel;
 use App\ViewModels\Projects\ProjectResourceViewModel;
-use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
 class ProjectResourceViewModelTest extends TestCase
@@ -38,7 +30,7 @@ class ProjectResourceViewModelTest extends TestCase
             [
                 'resource' => [
                     'create' => env('APP_URL') . '/projects/' . $project->id . '/resources/create',
-                ]
+                ],
             ],
             $array['url']
         );

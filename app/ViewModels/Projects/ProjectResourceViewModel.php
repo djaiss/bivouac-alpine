@@ -2,15 +2,8 @@
 
 namespace App\ViewModels\Projects;
 
-use App\Helpers\DateHelper;
-use App\Helpers\StringHelper;
-use App\Models\Comment;
-use App\Models\Message;
 use App\Models\Project;
 use App\Models\ProjectResource;
-use App\Models\Reaction;
-use App\ViewModels\ReactionViewModel;
-use Illuminate\Support\Facades\DB;
 
 class ProjectResourceViewModel
 {

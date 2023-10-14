@@ -14,8 +14,7 @@ class TextareaMarkdown extends Component
     public function __construct(
         public string $body,
         public string $placeholder,
-    )
-    {
+    ) {
         $this->placeholder = $placeholder ?? __('Write something...');
     }
 
