@@ -11,7 +11,7 @@
         </h2>
 
         <div>
-          <x-primary-link wire:navigate.hover :href="route('project.message.create', ['project' => $view['project_id']])">{{ __('Add a message') }}</x-primary-link>
+          <x-primary-link :href="route('project.message.create', ['project' => $view['project_id']])">{{ __('Add a message') }}</x-primary-link>
         </div>
       </div>
 

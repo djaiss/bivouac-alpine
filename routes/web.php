@@ -16,6 +16,7 @@ use App\Http\Controllers\Settings\SettingsOfficeController;
 use App\Http\Controllers\Settings\SettingsOrganizationController;
 use App\Http\Controllers\Settings\SettingsRoleController;
 use App\Http\Controllers\Settings\SettingsUserController;
+use App\Http\Controllers\TextareaMarkdownController;
 use App\Http\Controllers\Users\UserAvatarController;
 use App\Http\Controllers\Users\UserController;
 use Illuminate\Support\Facades\Route;
@@ -39,6 +40,10 @@ Route::middleware('auth', 'verified')->group(function (): void {
     Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // preview markdown
+    Route::post('markdown/preview', [TextareaMarkdownController::class, 'preview'])->name('markdown.preview');
+    Route::post('markdown/write', [TextareaMarkdownController::class, 'write'])->name('markdown.write');
 
     // users
     Route::get('users/{user}', [UserController::class, 'show'])->name('user.show');
