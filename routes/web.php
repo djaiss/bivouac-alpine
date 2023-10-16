@@ -92,7 +92,7 @@ Route::middleware('auth', 'verified')->group(function (): void {
             Route::get('projects/{project}/messages/{message}', [ProjectMessageController::class, 'show'])->name('project.message.show');
             Route::get('projects/{project}/messages/{message}/delete', [ProjectMessageController::class, 'delete'])->name('project.message.delete');
             Route::get('projects/{project}/messages/{message}/edit', [ProjectMessageController::class, 'edit'])->name('project.message.edit');
-            Route::put('projects/{project}/messages/{message}', [ProjectMessageController::class, 'update'])->name('project.message.update');
+            Route::post('projects/{project}/messages/{message}/update', [ProjectMessageController::class, 'update'])->name('project.message.update');
             Route::delete('projects/{project}/messages/{message}', [ProjectMessageController::class, 'destroy'])->name('project.message.destroy');
 
             Route::middleware(['comment'])->group(function (): void {

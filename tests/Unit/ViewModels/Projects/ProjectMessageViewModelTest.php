@@ -174,6 +174,36 @@ class ProjectMessageViewModelTest extends TestCase
     }
 
     /** @test */
+    public function it_gets_the_edit_view(): void
+    {
+        $message = Message::factory()->create([
+            'title' => 'this is a title',
+            'body' => 'this is a test',
+        ]);
+
+        $array = ProjectMessageViewModel::edit($message);
+
+        $this->assertCount(2, $array);
+        $this->assertArrayHasKey('message', $array);
+        $this->assertArrayHasKey('project', $array);
+        $this->assertEquals(
+            [
+                'message' => [
+                    'id' => $message->id,
+                    'title' => 'this is a title',
+                    'body' => '<p>this is a test</p>',
+                    'body_raw' => 'this is a test',
+                ],
+                'project' => [
+                    'id' => $message->project_id,
+                    'name' => $message->project->name,
+                ],
+            ],
+            $array
+        );
+    }
+
+    /** @test */
     public function it_gets_the_delete_view(): void
     {
         $message = Message::factory()->create([

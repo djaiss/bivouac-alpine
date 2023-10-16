@@ -117,10 +117,16 @@ class ProjectMessageViewModel
     public static function edit(Message $message): array
     {
         return [
-            'id' => $message->id,
-            'title' => $message->title,
-            'body' => StringHelper::parse($message->body),
-            'body_raw' => $message->body,
+            'message' => [
+                'id' => $message->id,
+                'title' => $message->title,
+                'body' => StringHelper::parse($message->body),
+                'body_raw' => $message->body,
+            ],
+            'project' => [
+                'id' => $message->project_id,
+                'name' => $message->project->name,
+            ],
         ];
     }
 

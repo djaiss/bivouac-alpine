@@ -11,7 +11,9 @@ class TextareaMarkdownController extends Controller
     public function write(Request $request): View
     {
         return view('components.markdown.write', [
-            'preview' => $request->input('body'),
+            'body' => $request->input('body'),
+            'placeholder' => $request->input('placeholder'),
+            'class' => $request->input('class'),
         ]);
     }
 
@@ -21,6 +23,9 @@ class TextareaMarkdownController extends Controller
 
         return view('components.markdown.preview', [
             'preview' => $preview,
+            'body' => $request->input('body'),
+            'placeholder' => $request->input('placeholder'),
+            'class' => $request->input('class'),
         ]);
     }
 }

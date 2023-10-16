@@ -91,7 +91,7 @@ class ProjectMessagesTest extends TestCase
         ]);
 
         $this->actingAs($user)
-            ->put('/projects/' . $project->id . '/messages/' . $message->id, [
+            ->post('/projects/' . $project->id . '/messages/' . $message->id.'/update', [
                 'title' => 'test',
                 'body' => 'test',
             ])

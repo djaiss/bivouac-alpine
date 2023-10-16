@@ -68,7 +68,6 @@ class ProjectMessageController extends Controller
     public function edit(Request $request): View
     {
         return view('project.message.edit', [
-            'header' => ProjectViewModel::header($request->project),
             'view' => ProjectMessageViewModel::edit($request->message),
         ]);
     }

@@ -6,11 +6,11 @@
       <nav class="flex py-3 text-gray-700">
         <ol class="inline-flex items-center space-x-1 md:space-x-3">
           <li class="inline-flex items-center">
-            <x-link class="text-sm" href="{{ route('dashboard') }}" wire:navigate>{{ __('Home') }}</x-link>
+            <x-link class="text-sm" href="{{ route('dashboard') }}">{{ __('Home') }}</x-link>
           </li>
           <li class="inline-flex items-center">
             <x-heroicon-s-chevron-right class="mr-2 h-4 w-4 text-gray-400" />
-            <x-link class="text-sm" href="{{ route('project.message.index', ['project' => $header['id']]) }}" wire:navigate>{{ $header['name'] }}</x-link>
+            <x-link class="text-sm" href="{{ route('project.message.index', ['project' => $view['project']['id']]) }}">{{ $view['project']['name'] }}</x-link>
           </li>
           <li>
             <div class="flex items-center">
@@ -25,9 +25,9 @@
 
   <div class="pb-12">
     <div class="mx-auto max-w-6xl overflow-hidden">
-      <form class="grid grid-cols-[2fr_1fr] gap-4 px-4" method="POST" action="{{ route('project.message.update', ['project' => $header['id'], 'message' => $view['id']]) }}">
+      <form method="post" action="{{ route('project.message.update', ['project' => $view['project']['id'], 'message' => $view['message']['id']]) }}" class="grid grid-cols-[2fr_1fr] gap-4 px-4">
         @csrf
-        @method('PUT')
+        @method('put')
 
         <!-- left -->
         <div>
@@ -40,7 +40,7 @@
                             id="title"
                             name="title"
                             type="text"
-                            :value="old('title', $view['title'])"
+                            :value="old('title', $view['message']['title'])"
                             required
                             autofocus />
 
@@ -49,7 +49,7 @@
 
             <!-- Description -->
             <div class="mb-4">
-              <livewire:textarea-markdown :body="$view['body_raw']" />
+              <x-textarea-markdown class="block w-full min-h-[350px]" body="{{ $view['message']['body_raw'] }}" placeholder="{{ __('What would you like to share today?') }}" :minHeight="'min-h-[380px]'" />
 
               <x-input-error class="mt-2" :messages="$errors->get('body')" />
             </div>
@@ -60,7 +60,7 @@
         <div>
           <div class="rounded-lg shadow">
             <div class="flex items-center justify-between rounded-t-lg border-b bg-white px-6 py-4">
-              <x-link class="text-sm font-medium text-blue-700 underline hover:rounded-sm hover:bg-blue-700 hover:text-white" href="{{ route('project.message.show', ['project' => $header['id'], 'message' => $view['id']]) }}" wire:navigate>
+              <x-link class="text-sm font-medium text-blue-700 underline hover:rounded-sm hover:bg-blue-700 hover:text-white" href="{{ route('project.message.show', ['project' => $view['project']['id'], 'message' => $view['message']['id']]) }}">
                 {{ __('Back') }}
               </x-link>
 

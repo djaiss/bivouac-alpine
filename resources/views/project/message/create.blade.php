@@ -45,7 +45,7 @@
 
             <!-- Description -->
             <div class="mb-4">
-              <x-textarea-markdown class="block w-full" :minHeight="'min-h-[380px]'" />
+              <x-textarea-markdown class="block w-full min-h-[350px]" body="" placeholder="{{ __('What would you like to share today?') }}" :minHeight="'min-h-[380px]'" />
 
               <x-input-error class="mt-2" :messages="$errors->get('body')" />
             </div>
